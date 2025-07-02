@@ -1,16 +1,14 @@
-import './Home.css';
+import '../styles/Home.css';
 import logo from '../assets/img/logo.png';
 //import patinador from '../assets/img/foto_portada.jpg';
 import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
 import eventosImg from '../assets/img/festibal1.jpg';
 //import patinadora from '../assets/img/arias_patinadora.jpg';
 import campeon from '../assets/img/campeon.jpg';
-import accion_1 from '../assets/img/accion1.jpg'
-import accion_2 from '../assets/img/accion2.jpg'
-import accion_4 from '../assets/img/accion4.jpg'
-import aliados1 from '../assets/img/logo_federacion_colombiana_de_patinaje.jpg';
-import aliados2 from '../assets/img/logo_indeportes.jpg';
-import aliados3 from '../assets/img/world_skate_logo.png';
+import accion_1 from '../assets/img/accion1.jpg';
+import accion_2 from '../assets/img/accion2.jpg';
+import accion_4 from '../assets/img/accion4.jpg';
+import Aliados from '../components/Aliados';
 import seleccion1 from '../assets/img/seleccion1.jpg';
 import artistico1 from '../assets/img/artistico1.jpg';
 import premiacion1 from '../assets/img/premiacion1.jpg';
@@ -56,6 +54,7 @@ export default function Home() {
     }, []);
     
 
+    
 
   return (
 
@@ -346,7 +345,7 @@ export default function Home() {
 
 
 
-      {/* Aliados */}
+      {/* Aliados 
       <section className="aliados">
 
         <h1>Nuestros Aliados</h1>
@@ -354,7 +353,13 @@ export default function Home() {
         <a href="https://www.worldskate.org/"><img src={aliados3} alt="Aliado 3" /></a>
         <a href="https://www.indeportes-tolima.gov.co/"><img src={aliados2} alt="Aliado 2" /></a>
 
+      </section>*/}
+
+      <section className="aliados" id="aliados">
+        <h1>Nuestros Aliados</h1>
+        <Aliados />
       </section>
+
 
 
 

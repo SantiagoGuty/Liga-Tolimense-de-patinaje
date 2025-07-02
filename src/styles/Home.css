@@ -13,6 +13,8 @@ html, body {
 .page-wrapper {
   min-height: 100vh;
   display: flex;
+  overflow-x: hidden;
+
   flex-direction: column;
   width: 100%;
   margin: 0;
@@ -700,13 +702,11 @@ html, body {
   
 
 .aliados {
+  overflow-x: hidden;
+  padding: 3rem 1rem;
+  background-color: #fff; /* or #f9f9f9 */
   text-align: center;
-  background-color: white !important;
-  color: #2c0c0d;
-  margin-top: 50px;
-  border-radius: 1px;
 }
-  
 
 .aliados h1 {
   font-weight: bold;
@@ -716,6 +716,7 @@ html, body {
   text-transform: uppercase; /* optional: makes it look sportier */
   letter-spacing: 1px;        /* optional: slight spacing */
 }
+
 
 
 .aliados img {
@@ -732,6 +733,42 @@ html, body {
   vertical-align: middle;
   background-color: white;
   transition: 0.3s ease-in-out;
+}
+
+
+.aliados-scroller {
+  overflow: hidden;
+  background-color: #fff;
+  padding: 2rem 0;
+}
+
+.scroll-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.scroll-track:hover {
+  animation-play-state: paused;
+}
+
+.scroll-track img {
+  height: 100px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.scroll-track img:hover {
+  transform: scale(1.2);
+}
+
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 
