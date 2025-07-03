@@ -1,54 +1,32 @@
-# React + TypeScript + Vite
+# La Liga Tolimense de Patinaje - Official Web Application 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Overview
 
-Currently, two official plugins are available:
+This repository contains the frontend development for the official web application of La Liga Tolimense de Patinaje. This application aims to be a central digital platform for the league, providing information, managing memberships, and eventually including a unique digital entry control system for the skating rink.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Note: This project is currently in active frontend development.**
 
-## Expanding the ESLint configuration
+## Current Status
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The primary focus right now is on building out the user interface and frontend logic. The following areas are under active development:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+* **Core UI/UX:** Designing and implementing the look and feel, navigation, and user experience.
+* **Static Content Display:** Showing news, events, and league rules.
+* **User Flow Skeletons:** Setting up the basic structure for user accounts, subscriptions, and future features.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Planned Features (Future Development)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The full vision for this application includes:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+* **User Account Management:** Secure login and profiles for athletes, parents, coaches, and administrators.
+* **Online Subscriptions & Courses:** Ability to purchase memberships and register for courses/events directly through the site.
+* **Digital ID & Entry Control System:** A unique QR code-based system for athletes to gain validated access to the skating rink.
+* **Backend Integration:** Connecting the frontend to a PostgreSQL database via a backend API.
+* **Cloud Deployment:** Hosting the full application on AWS.
+
+## Technology Stack 
+
+* **React.js (with Vite):** For building a fast and dynamic user interface.
+* **TypeScript:** To ensure code quality and maintainability.
+* **CSS:** For all styling and responsive design.
+* **PostgreSQL:** Database management for account systems and QR code-based digital ID access control system for the skating rink
