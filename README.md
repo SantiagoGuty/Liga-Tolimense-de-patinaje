@@ -4,7 +4,10 @@
 
 This repository contains the frontend development for the official web application of La Liga Tolimense de Patinaje. This application aims to be a central digital platform for the league, providing information, managing memberships, and eventually including a unique digital entry control system for the skating rink.
 
-**Note: This project is currently in active frontend development.**
+![image](https://github.com/user-attachments/assets/c82edd6a-bdde-42dd-8dba-0493b8ca3ec9)
+
+
+**Note: This project is currently in active development.**
 
 ## Current Status
 
