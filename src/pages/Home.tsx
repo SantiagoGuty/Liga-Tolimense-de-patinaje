@@ -1,5 +1,4 @@
 import '../styles/Home.css';
-import logo from '../assets/img/logo.png';
 //import patinador from '../assets/img/foto_portada.jpg';
 import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
 import eventosImg from '../assets/img/festibal1.jpg';
@@ -8,23 +7,25 @@ import campeon from '../assets/img/campeon.jpg';
 import accion_1 from '../assets/img/accion1.jpg';
 import accion_2 from '../assets/img/accion2.jpg';
 import accion_4 from '../assets/img/accion4.jpg';
-import Aliados from '../components/Aliados';
 import seleccion1 from '../assets/img/seleccion1.jpg';
 import artistico1 from '../assets/img/artistico1.jpg';
 import premiacion1 from '../assets/img/premiacion1.jpg';
 
+
+import Aliados from '../components/Aliados';
+import Menu_bar from '../components/Menu_bar';
+import FooterTol from '../components/FooterTol';
+
+
 import { CCarousel, CCarouselCaption, CCarouselItem, CImage } from '@coreui/react'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 
 export default function Home() {
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
   const heroImages = [accion_4, artistico1, accion_2, campeon];
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
-  //const [transitioning, setTransitioning] = useState(false);
  
   {/* Images automatic slide in home start*/}
   useEffect(() => {
@@ -39,79 +40,13 @@ export default function Home() {
   }, []);
 
 
-  useEffect(() => {
-
-    const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setMenuOpen(false);
-    }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-    };
-    }, []);
-    
-
-    
-
   return (
 
   <div className="page-wrapper" id='inicio'>
 
-    <div className="header">
+    {/*Main menu object*/}
 
-      <div className="logo">
-
-        <img src={logo} alt="Logo" />
-
-      </div>
-
-      {/* Desktop Menu visible in big screens +1024px*/}
-      <nav className="menu-desktop">
-
-        <a href="#inicio">Inicio</a>
-        <a href="#escuela">Escuela</a>
-        <a href="#artistico">Artístico</a>
-        <a href="#carreras">Carreras</a>
-        <a href="#noticias">Noticias</a>
-        <a href="#resoluciones">Resoluciones</a>
-        <a href="#eventos">Eventos</a>
-        <a href="#resultados">Resultados</a>
-        <a href="#recursos">Recursos</a>
-        <a href="#pagos">Pagos</a>
-
-      </nav>
-
-      {/* Mobile Burger */}
-      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-
-        <div className="bar" />
-        <div className="bar" />
-        <div className="bar" />
-
-      </div>
-
-    </div>
-
-    {/* Mobile Menu (Hidden until burger toggled) */}
-    <nav className={`menu-mobile ${menuOpen ? 'open' : ''}`}>
-
-      <a href="#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
-      <a href="#escuela" onClick={() => setMenuOpen(false)}>Escuela</a>
-      <a href="#artistico" onClick={() => setMenuOpen(false)}>Artístico</a>
-      <a href="#carreras" onClick={() => setMenuOpen(false)}>Carreras</a>
-      <a href="#noticias" onClick={() => setMenuOpen(false)}>Noticias</a>
-      <a href="#resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</a>
-      <a href="#eventos" onClick={() => setMenuOpen(false)}>Eventos</a>
-      <a href="#resultados" onClick={() => setMenuOpen(false)}>Resultados</a>
-      <a href="#recursos" onClick={() => setMenuOpen(false)}>Recursos</a>
-      <a href="#pagos" onClick={() => setMenuOpen(false)}>Pagos</a>
-      
-    </nav>
-
-
+    <Menu_bar/> 
 
     <div className='main-content'>
 
@@ -142,6 +77,7 @@ export default function Home() {
         </div>
 
       </div>
+
 
 
     
@@ -345,15 +281,7 @@ export default function Home() {
 
 
 
-      {/* Aliados 
-      <section className="aliados">
-
-        <h1>Nuestros Aliados</h1>
-        <a href="https://fedepatin.org.co/"><img src={aliados1} alt="Aliado 1" /></a>
-        <a href="https://www.worldskate.org/"><img src={aliados3} alt="Aliado 3" /></a>
-        <a href="https://www.indeportes-tolima.gov.co/"><img src={aliados2} alt="Aliado 2" /></a>
-
-      </section>*/}
+      {/* Aliados */}
 
       <section className="aliados" id="aliados">
         <h1>Nuestros Aliados</h1>
@@ -361,30 +289,9 @@ export default function Home() {
       </section>
 
 
-
-
       {/* Footer */}
-      <footer className="footer">
+      <FooterTol/>
 
-        <div className='footer_horizontal'>
-
-          <a href="#inicio">
-
-            <img src={logo} alt="Logo" />
-
-          </a>
-
-          <p>Contáctanos<br />
-            Teléfono: (321) 3979355<br />
-            Dirección: Cl. 93 #5-13, Ibagué, Tolima<br />
-            Email: administracion@ligapatinajetolima.com
-          </p>
-
-        </div>
-        
-        <p>Todos los derechos reservados © Tolima 2025</p>
-          
-      </footer>
 
     </div>
 

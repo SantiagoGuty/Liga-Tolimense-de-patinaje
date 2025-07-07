@@ -133,6 +133,7 @@ html, body {
   text-decoration: none;
   width: 100%;
   text-align: center;
+  font-family: 'Barlow Condensed', sans-serif !important;
   border-bottom: 1px solid #444; /* separator line */
   transition: all 0.2s ease;
 }
