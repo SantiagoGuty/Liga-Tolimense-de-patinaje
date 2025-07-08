@@ -1,4 +1,6 @@
-# Logs
+# -------------------------------------
+# 🧪 Logs
+# -------------------------------------
 logs
 *.log
 npm-debug.log*
@@ -7,21 +9,30 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Dependency directories
+# -------------------------------------
+# Dependencies
+# -------------------------------------
 node_modules/
 
-# Production build
+# -------------------------------------
+# Build Output (Vite)
+# -------------------------------------
 dist/
 dist-ssr/
+*.tsbuildinfo
 
-# Environment variables
+# -------------------------------------
+# Environment Variables
+# -------------------------------------
 .env
-.env.*
+.env.*   # include .env.local, .env.development, etc.
 .vite
 
-# Editor settings
+# -------------------------------------
+# Editor Settings
+# -------------------------------------
 .vscode/
-!.vscode/extensions.json
+!.vscode/extensions.json   # keep recommended extensions
 .idea/
 .DS_Store
 *.suo
@@ -30,9 +41,19 @@ dist-ssr/
 *.sln
 *.sw?
 
-# AWS/Amplify (optional)
+# -------------------------------------
+# 🌍 AWS / Amplify 
+# -------------------------------------
 amplify/
 aws-exports.js
 
-# GitHub Actions workflows (optional to ignore)
+# -------------------------------------
+# 🔄 GitHub Actions / Workflows
+# -------------------------------------
 .github/
+
+# -------------------------------------
+# 📦 Optional lockfile (uncomment if using yarn only)
+# -------------------------------------
+# package-lock.json
+# pnpm-lock.yaml
