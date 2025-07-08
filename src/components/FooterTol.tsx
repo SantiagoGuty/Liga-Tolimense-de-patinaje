@@ -1,4 +1,4 @@
-import '../styles/Home.css';
+import '../styles/footer.css';
 import logo from '../assets/img/logo.png';
 
 
