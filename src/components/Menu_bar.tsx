@@ -56,6 +56,8 @@ export default function Menu_bar() {
         <a href="#resultados">Resultados</a>
         <a href="#recursos">Recursos</a>
         <a href="#pagos">Pagos</a>
+        <a href="#inicia_sesion">Inicia sesion</a>
+
 
       </nav>
 

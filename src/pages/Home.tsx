@@ -154,6 +154,10 @@ export default function Home() {
                 ideal para niños y adultos sin experiencia previa.
               </p>
 
+              <div className='nivel-leer-mas'>
+                <a href="/noticia-3">Leer más</a>
+              </div>
+
             </div>
           </div>
 
@@ -173,6 +177,10 @@ export default function Home() {
                 a selección Tolima.
               </p>
 
+              <div className='nivel-leer-mas'>
+                <a href="/noticia-3">Leer más</a>
+              </div>
+
             </div>
           </div>
 
@@ -190,6 +198,9 @@ export default function Home() {
                 Un espacio seguro y motivador para adultos que desean aprender, retomar o mantenerse activos
                 mediante el patinaje. Adaptamos el ritmo según tus necesidades y objetivos personales.
               </p>
+              <div className='nivel-leer-mas'>
+                <a href="/noticia-3">Leer más</a>
+              </div>
 
             </div>
           </div>
@@ -218,57 +229,57 @@ export default function Home() {
 
 
 
-      {/*Eventos*/}
-      <section className="eventos" id="eventos">
-      
-        <h2>Próximos eventos</h2>
+<section id="eventos" className="eventos">
 
-        <div className="noticias-carousel-wrapper eventos-carousel-wrapper">
+<div className='eventos-title'>
+  <h1>Eventos</h1>
+</div>
 
-          <CCarousel controls indicators transition="crossfade" interval={5000}>
-
-            <CCarouselItem>
-
-              <CImage className="noticia-img" src={accion_1} alt="Evento 1" />
-              
-              <CCarouselCaption>
-
+  {/* Carousel content stays here */}
+  <div className="noticias-carousel-wrapper eventos-carousel-wrapper">
+    <CCarousel controls indicators transition="crossfade" interval={5000}>
+          <CCarouselItem>
+            <div className="event-slide">
+              <div className="event-text-area">
                 <h5>Interclubes Medellin 2025</h5>
                 <p>La selección tolimense acaba de terminar una jornada histórica en Cartagena...</p>
+                <a href="/event-detail" className="read-more-btn">Leer más</a>
+              </div>
+              <div className="event-image-area">
+                <CImage className="noticia-img" src={accion_1} alt="Evento 1" />
+              </div>
+            </div>
+          </CCarouselItem>
 
-              </CCarouselCaption>
 
-            </CCarouselItem>
+          <CCarouselItem>
+            <div className="event-slide">
+              <div className="event-text-area">
+                <h5>Interligas</h5>
+                <p>La awo selección tolimense acaba de terminar una jornada histórica en Cartagena...</p>
+                <a href="/event-detail" className="read-more-btn">Leer más</a>
+              </div>
+              <div className="event-image-area">
+                <CImage className="noticia-img" src={noticiasImg} alt="Evento 1" />
+              </div>
+            </div>
+          </CCarouselItem>
 
-            <CCarouselItem>
-
-              <CImage className="noticia-img" src={accion_2} alt="Evento 2" />
-              
-              <CCarouselCaption>
-
-                <h5>Festibal juvenil Honda 2025</h5>
-                <p>Prepárate para competir en el evento más esperado del año en Ibagué.</p>
-
-              </CCarouselCaption>
-
-            </CCarouselItem>
-
-            <CCarouselItem>
-                  
-              <CImage className="noticia-img" src={noticiasImg} alt="Evento 3" />
-              
-              <CCarouselCaption>
-
-                <h5>Interligas Ibague 2025</h5>
-                <p>No te quedes por fuera del próximo torneo de patinaje del 2025.</p>
-
-              </CCarouselCaption>
-              
-            </CCarouselItem>
-
-          </CCarousel>
-        </div>
-      </section>
+          <CCarouselItem>
+            <div className="event-slide">
+              <div className="event-text-area">
+                <h5>Remate en franks</h5>
+                <p>La selección tolimense acaba de terminar una jornada histórica en Cartagena...</p>
+                <a href="/event-detail" className="read-more-btn">Leer más</a>
+              </div>
+              <div className="event-image-area">
+                <CImage className="noticia-img" src={accion_1} alt="Evento 1" />
+              </div>
+            </div>
+          </CCarouselItem>
+        </CCarousel>
+      </div>
+    </section>
 
 
       {/* Links */}
