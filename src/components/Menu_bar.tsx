@@ -47,15 +47,28 @@ export default function Menu_bar() {
       <nav className="menu-desktop">
 
         <a href="/">Inicio</a>
-        <a href="#escuela">Escuela</a>
-        <a href="#artistico">Artístico</a>
-        <a href="#carreras">Carreras</a>
+         <div className="dropdown">
+          <a href="#cursos">Cursos ▾</a>
+          <div className="dropdown-content">
+            <a href="#novato">Novato</a>
+            <a href="#avanzado">Avanzado</a>
+            <a href="#adultos">Adultos</a>
+          </div>
+        </div>
+
+        <div className="dropdown">
+          <a href="#modalidades">Modalidades ▾</a>
+          <div className="dropdown-content">
+            <a href="#carreras">Carreras</a>
+            <a href="#artistico">Artístico</a>
+            <a href="#hockey">Hockey</a>
+        </div>
+        </div>
         <a href="/Noticias">Noticias</a>
-        <a href="#resoluciones">Resoluciones</a>
         <a href="/Eventos">Eventos</a>
-        <a href="#resultados">Resultados</a>
-        <a href="#recursos">Recursos</a>
-        <a href="#pagos">Pagos</a>
+        <a href="/resoluciones">Resoluciones</a>
+        <a href="/guias">Guias</a>
+        <a href="#membresia">Membresia</a>
         <a href="#inicia_sesion">Inicia sesion</a>
 
 
@@ -84,18 +97,31 @@ export default function Menu_bar() {
 
     <nav className={`menu-mobile ${menuOpen ? 'open' : ''}`}>
 
-      <a href="/#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
-      <a href="#escuela" onClick={() => setMenuOpen(false)}>Escuela</a>
-      <a href="#artistico" onClick={() => setMenuOpen(false)}>Artístico</a>
-      <a href="#carreras" onClick={() => setMenuOpen(false)}>Carreras</a>
+  <a href="/#inicio" onClick={() => setMenuOpen(false)}>Inicio</a>
+
+      <details>
+        <summary>Modalidades</summary>
+        <a href="#carreras" onClick={() => setMenuOpen(false)}>Carreras</a>
+        <a href="#artistico" onClick={() => setMenuOpen(false)}>Artístico</a>
+        <a href="#hockey" onClick={() => setMenuOpen(false)}>Hockey</a>
+      </details>
+
+      <details>
+        <summary>Cursos</summary>
+        <a href="#registro" onClick={() => setMenuOpen(false)}>Registrate ya!</a>
+        <a href="#novato" onClick={() => setMenuOpen(false)}>Novato</a>
+        <a href="#avanzado" onClick={() => setMenuOpen(false)}>Avanzado</a>
+        <a href="#adultos" onClick={() => setMenuOpen(false)}>Adultos</a>
+      </details>
+
       <a href="#noticias" onClick={() => setMenuOpen(false)}>Noticias</a>
-      <a href="#resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</a>
       <a href="/Eventos" onClick={() => setMenuOpen(false)}>Eventos</a>
-      <a href="#resultados" onClick={() => setMenuOpen(false)}>Resultados</a>
-      <a href="#recursos" onClick={() => setMenuOpen(false)}>Recursos</a>
-      <a href="#pagos" onClick={() => setMenuOpen(false)}>Pagos</a>
-      
+      <a href="#resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</a>
+      <a href="#guias" onClick={() => setMenuOpen(false)}>Guias</a>
+      <a href="#membresia" onClick={() => setMenuOpen(false)}>Membresia</a>
+      <a href="#inicia_sesion" onClick={() => setMenuOpen(false)}>Inicia Sesión</a>
     </nav>
+
     </>
 
 
