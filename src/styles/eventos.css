@@ -1,0 +1,325 @@
+
+.eventos {
+  background-color: w hite;
+  padding: 2rem 0 1rem 0; /* Reduce top and bottom spacing */
+  padding-bottom: 0px;
+}
+
+
+.eventos-title h1 {
+  color: #6a1b1a;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 35px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 700 !important; /* bold */
+  text-transform: uppercase; /* optional: makes it look sportier */
+  letter-spacing: 1px;        /* optional: slight spacing */
+}
+
+
+.eventos-title {
+  text-align: center;
+  color: #3a0d0c;
+}
+
+
+.eventos-carousel-wrapper .event-slide {
+  display: flex;
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.eventos-carousel-wrapper .event-image-area {
+  width: 65%;
+  position: relative;
+}
+
+.eventos-carousel-wrapper .event-image-area img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.eventos-carousel-wrapper .event-text-area {
+  width: 35%;
+  background-color: #3a0d0c;
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Desktop arrows (if you have special desktop positioning) */
+.eventos-carousel-wrapper .carousel-control-prev {
+  left: 35%;
+}
+.eventos-carousel-wrapper .carousel-control-next {
+  right: 0;
+}
+
+
+.event-image-area img,
+.noticia-img {
+  border-radius: 0 !important;
+}
+
+
+.event-text-area {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  width: 35%;
+  background-color: #3a0d0c;/* rich brown tone */
+  padding: 2rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.event-text-area h5 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Barlow Condensed', sans-serif !important;
+
+  
+}
+
+.event-text-area p {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-image-area {
+  width: 65%;
+  position: relative;
+}
+
+.event-image-area img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+
+}
+
+
+.carousel-indicators {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  justify-content: center !important;
+  gap: 12px;
+  z-index: 10;
+}
+
+
+
+.carousel-indicators > * {
+  all: unset !important;
+  width: 30px !important;
+  height: 30px !important;
+  position: relative !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+}
+
+.carousel-indicators > *::before {
+  content: '' !important;
+  width: 26px !important;
+  height: 26px !important;
+  background-color: yellow !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 2px !important;
+  left: 2px !important;
+}
+
+.carousel-indicators > *::after {
+  content: '' !important;
+  width: 12px !important;
+  height: 12px !important;
+  background-color: white !important;
+  border-radius: 50% !important;
+  position: absolute !important;
+  top: 9px !important;
+  left: 9px !important;
+}
+
+.carousel-indicators > [aria-current="true"]::before {
+  background-color: #6a1b1a !important;
+}
+
+.read-more-btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background-color: #f6c200;
+  color: #2c0c0d;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.read-more-btn:hover {
+  background-color: #6a1b1a;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+
+.event-caption-box {
+  background-color: rgba(42, 16, 16, 0.85); /* solid semi-dark */
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.event-caption-box h5 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.event-caption-box p {
+  color: #eee;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.carousel-control-prev {
+  left: 35% !important;  /* Start where image begins */
+  z-index: 11;
+}
+
+.carousel-control-next {
+  right: 0 !important;
+  z-index: 11;
+}
+
+
+
+@media (max-width:1024px) {
+  .eventos-title h1 {
+    font-size: 32px;
+    margin-bottom: 20px !important;
+  }
+
+  /* each slide stacks, no overflow */
+  .event-slide {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* image area goes full-width, auto height */
+  .event-image-area {
+    width: 100% !important;
+    height: auto !important;
+    order: 1;
+  }
+  .event-image-area img {
+    width: 100%;
+    height: auto !important;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* text area beneath image */
+  .event-text-area {
+    width: 100% !important;
+    order: 2;
+    position: relative;
+    z-index: 2;
+    background-color: #3a0d0c;
+    padding: 1.5rem;
+  }
+
+  /* keep “Leer más” on top */
+  .read-more-btn {
+    position: relative;
+    z-index: 3;
+    margin-bottom: 1.5rem;
+  }
+  /* 1) Slide auto-height so text can show */
+  .eventos-carousel-wrapper .event-slide {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* 2) Image: full width, capped height */
+  .eventos-carousel-wrapper .event-image-area {
+    width: 100% !important;
+    max-height: 300px !important;  /* adjust to taste */
+    overflow: hidden;
+  }
+  .eventos-carousel-wrapper .event-image-area img {
+    width: 100%;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* 3) Text sits immediately below */
+  .eventos-carousel-wrapper .event-text-area {
+    width: 100% !important;
+    padding: 1rem !important;
+    background: #3a0d0c;
+    color: #fff;
+    order: 2;
+  }
+  
+
+  /* 4) True middle for arrows + remove any icon rotation */
+  .eventos-carousel-wrapper .carousel-control-prev,
+  .eventos-carousel-wrapper .carousel-control-next {
+    position: absolute;
+    top: 40% !important;
+    transform: translateY(-50%) !important;
+    width: 36px;
+    height: 36px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  /* flush to edges */
+  .eventos-carousel-wrapper .carousel-control-prev { left: 0 !important;  }
+  .eventos-carousel-wrapper .carousel-control-next { right:20px !important; }
+  /* un-skew the chevrons */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    transform: none !important;
+  }
+
+  /* 5) Dots just above the “Leer más” button */
+  .eventos-carousel-wrapper .carousel-indicators {
+    position: absolute !important;
+    top: 250px !important;       /* tweak this number */
+    left: 35% !important;
+    gap: 10px !important;
+    z-index: 4;
+    bottom: 140px !important;  /* adjust until it’s clear of the button */
+    transform: translateX(-50%) !important;
+  }
+}
+
+  
+

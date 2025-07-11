@@ -1,13 +1,11 @@
 import '../styles/Home.css';
 //import patinador from '../assets/img/foto_portada.jpg';
-import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
+//import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
 import eventosImg from '../assets/img/festibal1.jpg';
 //import patinadora from '../assets/img/arias_patinadora.jpg';
 import campeon from '../assets/img/campeon.jpg';
-import patinadores_infantiles from '../assets/img/patinadores_infantiles.jpg';
-import arias_y_ninos from '../assets/img/arias_y_ninos_1.jpg';
 
-import accion_1 from '../assets/img/accion1.jpg';
+
 import accion_2 from '../assets/img/accion2.jpg';
 import accion_4 from '../assets/img/accion4.jpg';
 import seleccion1 from '../assets/img/seleccion1.jpg';
@@ -15,14 +13,13 @@ import artistico1 from '../assets/img/artistico1.jpg';
 import premiacion1 from '../assets/img/premiacion1.jpg';
 
 
-import Aliados from '../components/Aliados';
 import Menu_bar from '../components/Menu_bar';
+import Aliados from '../components/Aliados';
 import FooterTol from '../components/FooterTol';
+import EventosCarousel from '../components/EventosCarousel';
 
 
-import { CCarousel, CCarouselCaption, CCarouselItem, CImage } from '@coreui/react'
 import { useEffect, useState } from 'react';
-
 
 
 export default function Home() {
@@ -136,8 +133,10 @@ export default function Home() {
 
       <section className="cursos">
 
-        <h1>¡Únete a nuestros cursos!</h1>
-        <p>Desde tus primeras lecciones hasta proyección profesional ¡no importa tu edad!</p>
+        <div className="cursos_titulos">
+          <h1>¡Únete a nuestros cursos!</h1>
+          <p>Desde tus primeras lecciones hasta proyección profesional ¡no importa tu edad!</p>
+        </div>
         
         <div className="niveles">
 
@@ -231,60 +230,12 @@ export default function Home() {
 
 
 
-
-<section id="eventos" className="eventos">
-
-<div className='eventos-title'>
-  <h1>Eventos</h1>
-</div>
-
-  {/* Carousel content stays here */}
-  <div className="noticias-carousel-wrapper eventos-carousel-wrapper">
-
-    <CCarousel controls indicators transition="crossfade" interval={6000}>
-
-          <CCarouselItem>
-            <div className="event-slide">
-              <div className="event-text-area">
-                <h5>3er Festibal Departametal de escuelas y novatos </h5>
-                <p>La selección tolimense acaba de terminar una jornada histórica en Medellin...</p>
-                <a href="/event-detail" className="read-more-btn">Leer más</a>
-              </div>
-              <div className="event-image-area">
-                <CImage className="noticia-img" src={patinadores_infantiles} alt="Evento 1" />
-              </div>
-            </div>
-          </CCarouselItem>
+      {/* Aliados */}
 
 
-          <CCarouselItem>
-            <div className="event-slide">
-              <div className="event-text-area">
-                <h5>Interligas Ibague 2025</h5>
-                <p>La  selección tolimense se prepara para defender la casa...</p>
-                <a href="/event-detail" className="read-more-btn">Leer más</a>
-              </div>
-              <div className="event-image-area">
-                <CImage className="noticia-img" src={arias_y_ninos} alt="Evento 1" />
-              </div>
-            </div>
-          </CCarouselItem>
+      <EventosCarousel/>
 
-          <CCarouselItem>
-            <div className="event-slide">
-              <div className="event-text-area">
-                <h5>Contrarreloj Guarne</h5>
-                <p>La selección tolimense acaba de terminar una jornada histórica en Guarne...</p>
-                <a href="/event-detail" className="read-more-btn">Leer más</a>
-              </div>
-              <div className="event-image-area">
-                <CImage className="noticia-img" src={accion_1} alt="Evento 1" />
-              </div>
-            </div>
-          </CCarouselItem>
-        </CCarousel>
-      </div>
-    </section>
+
 
 
       {/* Links */}
@@ -294,7 +245,6 @@ export default function Home() {
         <button className="guias">Guías</button>
 
       </section>
-
 
 
       {/* Aliados */}

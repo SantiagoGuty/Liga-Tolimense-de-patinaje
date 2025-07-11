@@ -50,6 +50,7 @@ export default function Menu_bar() {
          <div className="dropdown">
           <a href="#cursos">Cursos ▾</a>
           <div className="dropdown-content">
+            <a href="#registro">¡Regístrate ya!</a>
             <a href="#novato">Novato</a>
             <a href="#avanzado">Avanzado</a>
             <a href="#adultos">Adultos</a>
@@ -108,7 +109,7 @@ export default function Menu_bar() {
 
       <details>
         <summary>Cursos</summary>
-        <a href="#registro" onClick={() => setMenuOpen(false)}>Registrate ya!</a>
+        <a href="#registro" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</a>
         <a href="#novato" onClick={() => setMenuOpen(false)}>Novato</a>
         <a href="#avanzado" onClick={() => setMenuOpen(false)}>Avanzado</a>
         <a href="#adultos" onClick={() => setMenuOpen(false)}>Adultos</a>

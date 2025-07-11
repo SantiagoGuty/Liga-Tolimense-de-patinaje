@@ -247,6 +247,10 @@ html, body {
   margin-top: 40px;
 }
 
+.cursos_titulos {
+  padding: 20px;
+}
+
 
 .cursos h1 {
   color: white;
@@ -584,221 +588,44 @@ html, body {
     padding: 1rem 2rem;
   }
 
-}
-
-
-.eventos {
-  background-color: white;
-  padding: 2rem 0 1rem 0; /* Reduce top and bottom spacing */
-  padding-bottom: 0px;
-}
-
-
-.eventos-title h1 {
-  color: #6a1b1a;
-  font-size: 50px;
-  font-weight: bold;
-  margin-bottom: 35px !important;
-  font-family: 'Barlow Condensed', sans-serif !important;
-  font-weight: 700 !important; /* bold */
-  text-transform: uppercase; /* optional: makes it look sportier */
-  letter-spacing: 1px;        /* optional: slight spacing */
-}
-
-
-.eventos-title {
-  text-align: center;
-  color: #3a0d0c;
-}
-
-
-.eventos-carousel-wrapper {
-  position: relative;
-  z-index: 0;
-  margin-top: 0; /* 🚫 Avoid offset due to the wave above */
-}
-
-.event-slide {
-  display: flex;
-  height: 400px;
-  width: 100%;
-  overflow: hidden;
-  border-radius: 0 !important;
-}
-
-
-.event-image-area img,
-.noticia-img {
-  border-radius: 0 !important;
-}
-
-
-.event-text-area {
-  border-top-left-radius: 0 !important;
-  border-bottom-left-radius: 0 !important;
-  width: 35%;
-  background-color: #3a0d0c;/* rich brown tone */
-  padding: 2rem;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-}
-
-.event-text-area h5 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  font-family: 'Barlow Condensed', sans-serif !important;
-
   
-}
-
-.event-text-area p {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.event-image-area {
-  width: 65%;
-  position: relative;
-}
-
-.event-image-area img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-
-}
-
-
-.carousel-indicators {
-  position: absolute !important;
-  bottom: 20px !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  display: flex !important;
-  justify-content: center !important;
-  gap: 12px;
-  z-index: 10;
-}
-
-
-
-.carousel-indicators > * {
-  all: unset !important;
-  width: 30px !important;
-  height: 30px !important;
-  position: relative !important;
-  cursor: pointer !important;
-  display: inline-block !important;
-}
-
-.carousel-indicators > *::before {
-  content: '' !important;
-  width: 26px !important;
-  height: 26px !important;
-  background-color: yellow !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  top: 2px !important;
-  left: 2px !important;
-}
-
-.carousel-indicators > *::after {
-  content: '' !important;
-  width: 12px !important;
-  height: 12px !important;
-  background-color: white !important;
-  border-radius: 50% !important;
-  position: absolute !important;
-  top: 9px !important;
-  left: 9px !important;
-}
-
-.carousel-indicators > [aria-current="true"]::before {
-  background-color: #6a1b1a !important;
-}
-
-.read-more-btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  background-color: #f6c200;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-align: center;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.read-more-btn:hover {
-  background-color: #e5b100;
-  color: #fff;
-  color: #3a0d0c;
-  transform: translateY(-2px);
-}
-
-
-.event-caption-box {
-  background-color: rgba(42, 16, 16, 0.85); /* solid semi-dark */
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.event-caption-box h5 {
-  color: #fff;
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-}
-
-.event-caption-box p {
-  color: #eee;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.carousel-control-prev {
-  left: 35% !important;  /* Start where image begins */
-  z-index: 11;
-}
-
-.carousel-control-next {
-  right: 0 !important;
-  z-index: 11;
-}
-
-
-.eventos-wave {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  overflow: hidden;
-  z-index: 10;
-}
-
-
-
-@media (max-width: 768px) {
-  .event-slide {
-    flex-direction: column;
-    height: auto;
+  .nivel {
+    flex-direction: column;        /* Stack vertically */
+    height: auto;                  /* Let content dictate height */
   }
 
-  .event-text-area,
-  .event-image-area {
+  .nivel-button {
+    width: 100%;                   /* Full width */
+    height: auto;                  /* Allow it to grow naturally */
+    padding: 1rem 0;
+  }
+
+  .nivel-info {
     width: 100%;
+    padding: 1.5rem;
+    text-align: center;
   }
 
-  .carousel-indicators {
-    right: 50% !important;
-    transform: translateX(50%) !important;
+  .nivel-info p {
+    font-size: 1rem;
+    max-width: 100%;
   }
+
+  .nivel-button span {
+    font-size: 2.5rem;             /* Slightly smaller on mobile */
+  }
+
+  .links {
+    flex-direction: column; /* Stack items vertically */
+    height: auto;           /* Allow height to grow with content */
+    font-size: 2rem;        /* Slightly smaller font for mobile */
+  }
+
+  .resoluciones, .guias {
+    width: 100%;            /* Full width buttons */
+    padding: 2rem;          /* Better tap targets */
+    font-size: 2.5rem;      /* Adjust font size */
+  }
+  /* eventos title */
+
 }
