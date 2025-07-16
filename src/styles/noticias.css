@@ -1,4 +1,3 @@
-/* Make sure anchor scrolling leaves room for your fixed header */
 #noticias {
   scroll-margin-top: 120px;
 }
@@ -13,7 +12,7 @@
 .noticias > h1 {
   color: #6a1b1a;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: 3.5rem;
+  font-size: 3.6rem;
   font-weight: 700;
   text-align: center;
   margin: 3rem 0 2rem;
