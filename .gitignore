@@ -8,10 +8,18 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+
+# -------------------------------------
+# TypeScript build artefacts
+# -------------------------------------
+*.tsbuildinfo
 tsconfig.app.json
 tsconfig.node.json
-eslint.config.js
 
+# -------------------------------------
+# Linting
+# -------------------------------------
+eslint.config.js
 
 # -------------------------------------
 # Dependencies
@@ -23,20 +31,19 @@ node_modules/
 # -------------------------------------
 dist/
 dist-ssr/
-*.tsbuildinfo
 
 # -------------------------------------
 # Environment Variables
 # -------------------------------------
 .env
-.env.*   # include .env.local, .env.development, etc.
+.env.*       # include .env.local, .env.development, etc.
 .vite
 
 # -------------------------------------
 # Editor Settings
 # -------------------------------------
 .vscode/
-!.vscode/extensions.json   # keep recommended extensions
+!.vscode/extensions.json    # keep your recommended extensions file
 .idea/
 .DS_Store
 *.suo
@@ -46,18 +53,48 @@ dist-ssr/
 *.sw?
 
 # -------------------------------------
-# 🌍 AWS / Amplify 
+# Amplify front‑end exports (do NOT track)
 # -------------------------------------
-amplify/
 aws-exports.js
 
 # -------------------------------------
-# 🔄 GitHub Actions / Workflows
+# GitHub Actions / Workflows
 # -------------------------------------
 .github/
 
 # -------------------------------------
-# 📦 Optional lockfile (uncomment if using yarn only)
+# Optional lockfile (uncomment if you only use yarn)
 # -------------------------------------
 # package-lock.json
 # pnpm-lock.yaml
+
+# -------------------------------------
+# 🌍 AWS / Amplify “infra‑as‑code”
+# -------------------------------------
+# Ignore all of amplify/, then un‑ignore just the infra definitions + team info
+amplify/*
+!amplify/backend/
+!amplify/team-provider-info.json
+!amplify/cli.json
+
+# Now ignore Amplify’s local state, logs, mocks, etc.
+amplify/.config/
+amplify/#current-cloud-backend/
+amplify/logs/
+amplify/mock-data/
+amplify/mock-api-resources/
+amplify/backend/.temp/
+amplify/backend/amplify-meta.json
+
+# -------------------------------------
+# Other auto‑generated/mobile configs
+# -------------------------------------
+build/
+awsconfiguration.json
+amplifyconfiguration.json
+amplifyconfiguration.dart
+amplify-build-config.json
+amplify-gradle-config.json
+amplifytools.xcconfig
+.secret-*
+**.sample

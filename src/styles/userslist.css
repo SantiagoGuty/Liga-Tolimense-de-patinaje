@@ -1,0 +1,60 @@
+/* src/styles/UsersList.css */
+
+.users-list-page {
+  /* 1) space for the 120px‑tall fixed header, plus your 1rem inner padding */
+  padding: 130px 1rem 1rem;
+
+  /* 2) rest of your styling */
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.users-list-page h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+  text-align: center;
+  color: #333;
+}
+
+.users-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.users-list li {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background 0.2s;
+}
+
+.users-list li:last-child {
+  border-bottom: none;
+}
+
+.users-list li:hover {
+  background: #f9f9f9;
+}
+
+.users-list strong {
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.users-list small {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.users-list-page p {
+  text-align: center;
+  color: #555;
+  font-style: italic;
+  padding: 1rem 0;
+}

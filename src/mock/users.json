@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "correo": "juan@example.com",
+    "telefono": "3001234567",
+    "fechaNacimiento": "1990-05-10",
+    "sexo": "Masculino",
+    "cedula": "1234567890",
+    "contrasena": "Password123!",
+    "fotoPerfil": "",
+    "estatus": "Valido",
+    "permiso": "usuario comun"
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "resourceName": "avatarStorage",
+  "policyUUID": "76c95722",
+  "bucketName": "ligapatinajetolima8e11dd5918ec4ca9b828ffdcb2c0e",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

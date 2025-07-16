@@ -1,0 +1,26 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ligapatinajetolima-dev-d19c4-authRole",
+      "UnauthRoleArn": "arn:aws:iam::665591908016:role/amplify-ligapatinajetolima-dev-d19c4-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::665591908016:role/amplify-ligapatinajetolima-dev-d19c4-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-ligapatinajetolima-dev-d19c4-deployment",
+      "UnauthRoleName": "amplify-ligapatinajetolima-dev-d19c4-unauthRole",
+      "StackName": "amplify-ligapatinajetolima-dev-d19c4",
+      "StackId": "arn:aws:cloudformation:us-east-1:665591908016:stack/amplify-ligapatinajetolima-dev-d19c4/5be96a40-6243-11f0-a133-0ecbebe41cc7",
+      "AmplifyAppId": "d2kyjpfyeakeyn"
+    },
+    "categories": {
+      "auth": {
+        "ligapatinajetolima3bd9e30b": {}
+      },
+      "storage": {
+        "avatarStorage": {}
+      },
+      "api": {
+        "ligapatinajetolima": {}
+      }
+    }
+  }
+}

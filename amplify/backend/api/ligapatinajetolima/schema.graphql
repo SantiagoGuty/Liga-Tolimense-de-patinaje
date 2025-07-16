@@ -1,0 +1,20 @@
+type User @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  nombre: String!
+  apellido: String!
+  correo: String!
+  telefono: String
+  fechaNacimiento: AWSDate
+  sexo: String
+  cedula: String
+  permiso: String
+  estatus: String
+  qrCodeUrl: String
+}
+
+type ScanEvent @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  userId: ID!
+  createdAt: AWSDateTime!
+}
+

@@ -1,0 +1,11 @@
+{
+  "AppSyncApiName": "ligapatinajetolima",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authligapatinajetolima3bd9e30b",
+      "Outputs.UserPoolId"
+    ]
+  }
+}

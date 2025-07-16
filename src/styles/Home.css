@@ -13,6 +13,8 @@ html, body {
 .page-wrapper {
   min-height: 100vh;
   display: flex;
+  padding-top: 120px;    /* ← match the .header height */
+
   overflow-x: hidden;
 
   flex-direction: column;
@@ -540,7 +542,7 @@ html, body {
 [id]::before {
   content: "";
   display: block;
-  height: 120px; /* height of your .header */
+  height: 113px; /* height of your .header */
   margin-top: -120px;
   visibility: hidden;
 }

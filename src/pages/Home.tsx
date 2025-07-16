@@ -45,7 +45,6 @@ export default function Home() {
   <div className="page-wrapper" id='inicio'>
 
     {/*Main menu object*/}
-
     <Menu_bar/> 
 
     <div className='main-content'>
@@ -231,10 +230,7 @@ export default function Home() {
 
 
       {/* Aliados */}
-
-
       <EventosCarousel/>
-
 
 
 
@@ -248,7 +244,6 @@ export default function Home() {
 
 
       {/* Aliados */}
-
       <section className="aliados" id="aliados">
         <h1>Nuestros Aliados</h1>
         <Aliados />

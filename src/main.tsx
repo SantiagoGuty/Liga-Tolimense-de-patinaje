@@ -1,12 +1,24 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+// src/main.tsx
+import React from 'react';
+
+import { createRoot } from 'react-dom/client';
+import { Amplify } from 'aws-amplify'; // Corrected named import
+import awsExports from './aws-exports'; // <--- THIS LINE NEEDS TO BE SEPARATE
+import '@aws-amplify/ui-react/styles.css';
 import '@coreui/coreui/dist/css/coreui.min.css';
-import './index.css'
-import App from './App.tsx'
+import './index.css';
+import App from './App';
 
+Amplify.configure(awsExports);
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+const container = document.getElementById('root');
+if (!container) {
+  throw new Error('Failed to find root element');
+}
+
+const root = createRoot(container);
+root.render(
+  <React.StrictMode>
     <App />
-  </StrictMode>,
-)
+  </React.StrictMode>
+);
