@@ -13,8 +13,6 @@ lerna-debug.log*
 # TypeScript build artefacts
 # -------------------------------------
 *.tsbuildinfo
-tsconfig.app.json
-tsconfig.node.json
 
 # -------------------------------------
 # Linting
@@ -98,3 +96,9 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 **.sample
+
+# -------------------------------------
+# Keep TS project refs
+# -------------------------------------
+!tsconfig.app.json
+!tsconfig.node.json
