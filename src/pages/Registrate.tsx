@@ -1,5 +1,5 @@
 // src/pages/Registrate.tsx
-import { useState } from 'react'; // <-- ADD THIS LINE
+import { useState } from 'react'; 
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import type { FormEvent, ChangeEvent } from 'react'
