@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/Noticias.css'
 
 import Menu_bar from '../components/Menu_bar'

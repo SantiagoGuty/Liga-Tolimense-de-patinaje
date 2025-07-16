@@ -1,5 +1,5 @@
 // src/pages/Registrate.tsx
-import React, { useState } from 'react'
+import { useState } from 'react'; // <-- ADD THIS LINE
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import type { FormEvent, ChangeEvent } from 'react'
@@ -7,8 +7,22 @@ import { register } from '../services/userService'
 import { useNavigate } from 'react-router-dom'
 import '../styles/Registrate.css'
 
+// Add a type definition for your form state
+type FormData = {
+  nombre: string;
+  apellido: string;
+  correo: string;
+  telefono: string;
+  fechaNacimiento: string;
+  sexo: string;
+  cedula: string;
+  contrasena: string;
+  fotoPerfil: string;
+};
+
 export default function Registrate() {
-  const [form, setForm] = useState({
+  // Use the type definition here to fix the implicit 'any' error
+  const [form, setForm] = useState<FormData>({
     nombre: '',
     apellido: '',
     correo: '',
@@ -43,7 +57,7 @@ export default function Registrate() {
   }
 
   return (
-  
+
     <div className='base'>
 
     <Menu_bar/>
@@ -117,9 +131,7 @@ export default function Registrate() {
 
     <FooterTol/>
 
-
     </div>
 
-    
   )
 }
