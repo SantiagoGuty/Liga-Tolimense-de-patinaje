@@ -1,0 +1,167 @@
+html, body {
+  overflow-x: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.logos-container {
+  background-color: white;
+  position: relative;
+  padding: 2rem 0;
+  overflow: hidden;
+}
+
+.logos-wrapper {
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+/* Animate full length of duplicated logos */
+.logos-slide {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-20%);
+  }
+}
+
+.logos-slide a {
+  display: inline-block;
+  padding: 0 50px;
+  height: 250px; /* 💡 lock height here */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.logos-slide img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+  padding: 5px;
+  display: block;
+}
+
+
+
+.logos-slide img:hover {
+  transform: scale(1.05);
+}
+
+/* Gradient overlays */
+.logos-container::before,
+.logos-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logos-container::before {
+  left: 0;
+  background: linear-gradient(to right, white, rgba(255, 255, 255, 0));
+}
+
+.logos-container::after {
+  right: 0;
+  background: linear-gradient(to left, white, rgba(255, 255, 255, 0));
+}
+
+/* Pause animation on hover */
+.logos-container:hover .logos-slide {
+  animation-play-state: paused;
+}
+
+
+
+.aliados {
+  overflow-x: hidden;
+  padding: 3rem 1rem;
+  background-color: #fff; /* or #f9f9f9 */
+  text-align: center;
+}
+
+.aliados h1 {
+  font-weight: bold;
+  margin-bottom: 70px !important;
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-weight: 700 !important; /* bold */
+  text-transform: uppercase; /* optional: makes it look sportier */
+  letter-spacing: 1px;        /* optional: slight spacing */
+}
+
+
+
+.aliados img {
+  height: 30vh !important;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: white;
+}
+
+
+.aliados img:hover{
+  height: 32vh !important;
+  display: inline-block;
+  vertical-align: middle;
+  background-color: white;
+  transition: 0.3s ease-in-out;
+}
+
+
+.aliados-scroller {
+  overflow: hidden;
+  background-color: #fff;
+  padding: 2rem 0;
+}
+
+.scroll-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
+}
+
+.scroll-track:hover {
+  animation-play-state: paused;
+}
+
+.scroll-track img {
+  height: 100px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.scroll-track img:hover {
+  transform: scale(1.2);
+}
+
+@keyframes scrollLeft {
+  
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+}
