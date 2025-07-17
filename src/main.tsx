@@ -1,5 +1,5 @@
 // src/main.tsx
-import React from 'react';
+import * as React from 'react';
 
 import { createRoot } from 'react-dom/client';
 import { Amplify } from 'aws-amplify'; // Corrected named import
