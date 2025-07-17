@@ -5,7 +5,7 @@ import FooterTol from '../components/FooterTol';
 import type { FormEvent, ChangeEvent } from 'react'
 import { register } from '../services/userService'
 import { useNavigate } from 'react-router-dom'
-import '../styles/Registrate.css'
+import '../styles/registrate.css'
 
 // Add a type definition for your form state
 type FormData = {

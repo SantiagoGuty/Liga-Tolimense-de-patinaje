@@ -1,7 +1,7 @@
 
 
 
-import '../styles/Noticias.css'
+import '../styles/noticias.css'
 import Menu_bar from '../components/Menu_bar'
 import FooterTol from '../components/FooterTol'
 

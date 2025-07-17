@@ -4,7 +4,7 @@ import { generateClient } from 'aws-amplify/api';
 
 import { listUsers } from '../graphql/queries'; // Your generated GraphQL query
 import type { User } from '../API'; // Your generated GraphQL types
-import '../styles/UsersList.css';
+import '../styles/userslists.css';
 import Menu_bar  from '../components/Menu_bar'
 import FooterTol from '../components/FooterTol'
 

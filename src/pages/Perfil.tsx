@@ -20,7 +20,7 @@ import type {
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 
-import '../styles/Perfil.css';
+import '../styles/perfil.css';
 
 const client = generateClient();
 

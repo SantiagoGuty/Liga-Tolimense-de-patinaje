@@ -1,4 +1,4 @@
-import '../styles/Home.css';
+import '../styles/home.css';
 //import patinador from '../assets/img/foto_portada.jpg';
 //import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
 import eventosImg from '../assets/img/festibal1.jpg';

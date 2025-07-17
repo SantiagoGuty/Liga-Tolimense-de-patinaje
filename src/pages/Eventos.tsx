@@ -1,4 +1,4 @@
-import '../styles/Home.css';
+import '../styles/home.css';
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 
