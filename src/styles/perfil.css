@@ -6,10 +6,7 @@
 }
 
 /* push everything down under the fixed header */
-.main-content {
-  padding-top: 140px; /* same height as your .header */
-  padding-bottom: 50px; /* so footer never overlaps */
-}
+
 
 /* the actual profile “card” */
 .profile-card {

@@ -1,3 +1,6 @@
+/* File: src/styles/home.css */
+
+
 /* General Layout */
 
 
@@ -10,12 +13,13 @@ html, body {
 }
 
 [id]::before {
-  content: "";
-  display: block;
-  height: 113px; /* height of your .header */
-  margin-top: -120px;
-  visibility: hidden;
+  content: none !important;
+  display: none !important;
+  margin: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
 }
+
 
 .page-wrapper {
   min-height: 100vh;
@@ -70,6 +74,7 @@ html, body {
 
 .main-content {
   flex: 1;
+  margin-top: 120px;
 }
 
 .logo img {
