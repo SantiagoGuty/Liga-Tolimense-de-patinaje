@@ -1,7 +1,7 @@
 import aliado1 from '../assets/img/fedepatin.jpg';
 import aliado2 from '../assets/img/indeportes.png';
 import aliado3 from '../assets/img/world_skate.png';
-import '../styles/Aliados.css';
+import '../styles/aliados.css';
 
 const aliados = [
   { img: aliado1, url: 'https://fedepatin.org.co/' },
