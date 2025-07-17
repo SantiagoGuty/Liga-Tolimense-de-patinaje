@@ -32,21 +32,20 @@ export default function Menu_bar() {
           <Link to="/">Inicio</Link>
 
           <div className="dropdown">
-            <Link to="#cursos">Cursos ▾</Link>
+            <Link to="/cursos">Cursos ▾</Link>
             <div className="dropdown-content">
-              <a href="#registro">¡Regístrate ya!</a>
-              <a href="#novato">Novato</a>
-              <a href="#avanzado">Avanzado</a>
-              <a href="#adultos">Adultos</a>
+              <a href="/Registrate">¡Regístrate ya!</a>
+              <a href="/novato">Novato</a>
+              <a href="/avanzado">Avanzado</a>
+              <a href="/adultos">Adultos</a>
             </div>
           </div>
 
           <div className="dropdown">
-            <Link to="#modalidades">Modalidades ▾</Link>
+            <Link to="/modalidades">Modalidades ▾</Link>
             <div className="dropdown-content">
-              <a href="#carreras">Carreras</a>
-              <a href="#artistico">Artístico</a>
-              <a href="#hockey">Hockey</a>
+              <a href="/carreras">Carreras</a>
+              <a href="/artistico">Artístico</a>
             </div>
           </div>
 
@@ -86,25 +85,24 @@ export default function Menu_bar() {
 
       <details>
         <summary>Modalidades</summary>
-        <Link to="#carreras" onClick={() => setMenuOpen(false)}>Carreras</Link>
-        <Link to="#artistico" onClick={() => setMenuOpen(false)}>Artístico</Link>
-        <Link to="#hockey" onClick={() => setMenuOpen(false)}>Hockey</Link>
+        <Link to="/carreras" onClick={() => setMenuOpen(false)}>Carreras</Link>
+        <Link to="/artistico" onClick={() => setMenuOpen(false)}>Artístico</Link>
       </details>
 
       <details>
         <summary>Cursos</summary>
-        <Link to="#registro" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</Link>
-        <Link to="#novato" onClick={() => setMenuOpen(false)}>Novato</Link>
-        <Link to="#avanzado" onClick={() => setMenuOpen(false)}>Avanzado</Link>
-        <Link to="#adultos" onClick={() => setMenuOpen(false)}>Adultos</Link>
+        <Link to="/Registrate" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</Link>
+        <Link to="/novato" onClick={() => setMenuOpen(false)}>Novato</Link>
+        <Link to="/avanzado" onClick={() => setMenuOpen(false)}>Avanzado</Link>
+        <Link to="/adultos" onClick={() => setMenuOpen(false)}>Adultos</Link>
       </details>
 
       <Link to="/Noticias" onClick={() => setMenuOpen(false)}>Noticias</Link>
       <Link to="/Eventos" onClick={() => setMenuOpen(false)}>Eventos</Link>
-      <Link to="#resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
-      <Link to="#guias" onClick={() => setMenuOpen(false)}>Guias</Link>
-      <Link to="#membresia" onClick={() => setMenuOpen(false)}>Membresia</Link>
-      <Link to="#inicia_sesion" onClick={() => setMenuOpen(false)}>Inicia Sesión</Link>
+      <Link to="/resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
+      <Link to="/guias" onClick={() => setMenuOpen(false)}>Guias</Link>
+      <Link to="/membresia" onClick={() => setMenuOpen(false)}>Membresia</Link>
+      <Link to="/inicia_sesion" onClick={() => setMenuOpen(false)}>Inicia Sesión</Link>
     </nav>
 
     </>

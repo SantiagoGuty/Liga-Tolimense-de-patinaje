@@ -1,4 +1,4 @@
-import '../styles/home.css';
+import '../styles/Home.css';
 //import patinador from '../assets/img/foto_portada.jpg';
 //import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
 import eventosImg from '../assets/img/festibal1.jpg';
@@ -251,10 +251,12 @@ export default function Home() {
 
 
       {/* Footer */}
-      <FooterTol/>
 
 
     </div>
+
+          <FooterTol/>
+
 
   </div>
 

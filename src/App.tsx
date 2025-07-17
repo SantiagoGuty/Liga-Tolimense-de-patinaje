@@ -5,6 +5,9 @@ import Registrate from './pages/Registrate';
 import IniciaSesion from './pages/IniciaSesion';
 import Perfil from './pages/Perfil';
 import UsersList from './pages/UsersList';
+import Novato from './pages/Novato';
+import Avanzado from './pages/Avanzado';
+import Adultos from './pages/Adultos';
 
 
 
@@ -35,6 +38,18 @@ const router = createBrowserRouter([
   {
     path: '/perfil',
     element: <Perfil/>
+  },
+  {
+    path: '/novato',
+    element: <Novato/>
+  },
+  {
+    path: '/avanzado',
+    element: <Avanzado/>
+  },
+  {
+    path: '/adultos',
+    element: <Adultos/>
   },
   {
     path: '/usuarios',
