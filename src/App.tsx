@@ -8,10 +8,15 @@ import UsersList from './pages/UsersList';
 import Novato from './pages/Novato';
 import Avanzado from './pages/Avanzado';
 import Adultos from './pages/Adultos';
+import Artistico from './pages/Artistico';
+import Carreras from './pages/Carreras';
+import Guias from './pages/Guias';
+import Resoluciones from './pages/Resoluciones';
 
 
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 
 
 const router = createBrowserRouter([
@@ -50,6 +55,22 @@ const router = createBrowserRouter([
   {
     path: '/adultos',
     element: <Adultos/>
+  },
+  {
+    path: '/artistico',
+    element: <Artistico/>
+  },
+  {
+    path: '/carreras',
+    element: <Carreras/>
+  },
+  {
+    path: '/guias',
+    element: <Guias/>
+  },
+  {
+    path: '/resoluciones',
+    element: <Resoluciones/>
   },
   {
     path: '/usuarios',

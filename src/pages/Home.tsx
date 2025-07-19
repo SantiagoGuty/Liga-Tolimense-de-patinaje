@@ -20,6 +20,7 @@ import EventosCarousel from '../components/EventosCarousel';
 
 
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function Home() {
@@ -155,9 +156,9 @@ export default function Home() {
                 ideal para niños y adultos sin experiencia previa.
               </p>
 
-              <div className='nivel-leer-mas'>
-                <a href="/noticia-3">Leer más</a>
-              </div>
+                <div className="nivel-leer-mas">
+                  <Link to="/Novato">Leer más</Link>
+                </div>
 
             </div>
           </div>
@@ -178,9 +179,9 @@ export default function Home() {
                 a selección Tolima.
               </p>
 
-              <div className='nivel-leer-mas'>
-                <a href="/noticia-3">Leer más</a>
-              </div>
+                <div className="nivel-leer-mas">
+                  <Link to="/avanzado">Leer más</Link>
+                </div>
 
             </div>
           </div>
@@ -199,9 +200,9 @@ export default function Home() {
                 Un espacio seguro y motivador para adultos que desean aprender, retomar o mantenerse activos
                 mediante el patinaje. Adaptamos el ritmo según tus necesidades y objetivos personales.
               </p>
-              <div className='nivel-leer-mas'>
-                <a href="/noticia-3">Leer más</a>
-              </div>
+                <div className="nivel-leer-mas">
+                  <Link to="/Adultos">Leer más</Link>
+                </div>
 
             </div>
           </div>
@@ -221,8 +222,9 @@ export default function Home() {
             
         <div className="registro-right">
 
-          <button className="registro-btn">¡Regístrate ya!</button>
-        
+          <a href='/registrate'>
+            <button className="registro-btn">¡Regístrate ya!</button>
+          </a>
         </div>
 
       </section>

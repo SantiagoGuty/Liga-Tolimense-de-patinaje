@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { login } from '../services/userService'
+import Menu_bar from '../components/Menu_bar';
+import FooterTol from '../components/FooterTol';
 
 import { useNavigate } from 'react-router-dom'
 
@@ -21,6 +23,9 @@ export default function IniciaSesion() {
   }
 
   return (
+    <>
+
+    <Menu_bar/>
     <form onSubmit={handleLogin}>
       {error && <p style={{color:'red'}}>{error}</p>}
       <input placeholder="Correo"     onChange={e=>setCorreo(e.target.value)} />
@@ -28,5 +33,8 @@ export default function IniciaSesion() {
              onChange={e=>setContrasena(e.target.value)} />
       <button type="submit">Iniciar sesión</button>
     </form>
+
+    <FooterTol/>
+    </>
   )
 }
