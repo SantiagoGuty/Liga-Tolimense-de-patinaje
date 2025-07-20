@@ -1,0 +1,124 @@
+/* src/styles/noticia.css */
+
+/* Overall page background and text color to match site theme */
+body {
+  background-color: wheat;   /* dark site background */
+  color: #eee;                 /* light text for non-article areas */
+  font-family: 'Georgia', serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Wrapper offset so content sits below fixed header */
+.noticia-page {
+  padding-top: 140px;
+  padding-bottom: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #6a1b1a;
+}
+
+/* Main article container */
+.noticia-detail {
+  width: 98%;
+  background-color: #ffffff;   /* white for readability */
+  color: #333333;             /* dark text inside article */
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  padding: 3rem 2rem;
+  margin: 0 1rem;
+}
+
+/* Back link styling (make sure Link has className="back-link") */
+.noticia-detail .back-link {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #6a1b1a;
+  font-family: 'Arial', sans-serif;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+.noticia-detail .back-link:hover {
+  color: #f6c200;
+}
+
+/* Article title */
+.noticia-detail h1 {
+  margin: 0 0 1rem;
+  font-size: 4rem;
+  line-height: 1.2;
+  color: #2c0c0d;
+  text-align: center;
+
+  font-weight: 700 !important; /* bold */
+  text-transform: uppercase; /* optional: makes it look sportier */
+  letter-spacing: 1px;        /* optional: slight spacing */
+  font-family: 'Karantina', cursive;
+}
+
+/* Optional meta line below title (e.g., date/author) */
+.noticia-detail .noticia-meta {
+  font-family: 'Arial', sans-serif;
+  font-size: 0.9rem;
+  color: #777777;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Featured image */
+.noticia-img {
+  display: block;
+  margin: 1.5rem auto;    /* vertical margin + auto left/right to center */
+  width: auto;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+
+/* Article content: single column justified text */
+.noticia-content {
+  font-size: 1.5rem;
+  line-height: 1.75;
+  text-align: justify;
+}
+.noticia-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* Blockquote styling */
+.noticia-content blockquote {
+  margin: 2rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 4px solid #6a1b1a;
+  background-color: #f9f9f9;
+  font-style: italic;
+  color: #444;
+}
+
+/* Inline links */
+.noticia-content a {
+  color: #2c0c0d;
+  text-decoration: underline;
+}
+.noticia-content a:hover {
+  color: #f6c200;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .noticia-detail {
+    padding: 2rem 1rem;
+    width: 95%;
+  }
+  .noticia-detail h1 {
+    font-size: 2rem;
+  }
+  .noticia-content {
+    font-size: 1rem;
+  }
+  .noticia-detail .back-link {
+    font-size: 0.85rem;
+  }
+}

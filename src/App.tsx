@@ -12,6 +12,8 @@ import Artistico from './pages/Artistico';
 import Carreras from './pages/Carreras';
 import Guias from './pages/Guias';
 import Resoluciones from './pages/Resoluciones';
+import ErrorPage from './pages/ErrorPage';        
+import Noticia from './pages/Noticia';
 
 
 
@@ -23,10 +25,16 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Home/>,
+    errorElement: <ErrorPage />,   // ← now you’ve imported it
+
   },
   {
-    path: '/Noticias',
-    element: <Noticias/>
+    path: '/noticias',
+    element: <Noticias/>,
+  },
+  {
+    path: '/noticias/:slug',
+    element: <Noticia/>,
   },
   {
     path: '/Eventos',

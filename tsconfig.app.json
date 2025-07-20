@@ -24,5 +24,5 @@
     // "erasableSyntaxOnly": true, // This flag is related to verbatimModuleSyntax; best to remove it for now.
     // "verbatimModuleSyntax": true // This is the line to remove or set to false
   },
-  "include": ["src", "src/global.d.ts"]
+  "include": ["src", "src/global.d.ts","src/custom.d.ts"]
 }

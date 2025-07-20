@@ -12,13 +12,29 @@
   height: auto;
   object-fit: cover;
 }
-.novato-page .novato-banner .banner-title {
+.novato-page .novato-banner .banner-artistico {
   position:absolute;
   bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-size: 10rem;
+  font-weight: 700 !important; /* bold */
+  text-transform: uppercase; /* optional: makes it look sportier */
+  letter-spacing: 1px;        /* optional: slight spacing */
+  font-family: 'Karantina', cursive;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.banner-title-artistico {
+  position:absolute;
+  bottom: 4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 8rem;
   font-weight: 700 !important; /* bold */
   text-transform: uppercase; /* optional: makes it look sportier */
   letter-spacing: 1px;        /* optional: slight spacing */

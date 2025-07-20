@@ -11,30 +11,31 @@ export default function Carreras() {
       {/* Banner Section */}
       <section className="novato-banner">
         <img src={novatoBanner} alt="Banner Novato" className="banner-img" />
-        <h1 className="banner-title">Carreras</h1>
+        <h1 className="banner-title-artistico">Patinaje Carreras</h1>
       </section>
 
       {/* About Section */}
       <section className="novato-about">
-        <h2>¿Como es el curso para Novatos?</h2>
+        <h2>¿Qué es el Patinaje Carreras?</h2>
         <p>
-          El curso para Novatos está diseñado para quienes toman sus primeras patinadas. Aquí crearás una base
-          sólida desarrollando tu equilibrio, postura y control del patín. Trabajaremos paso a paso,
-          combinando ejercicios de deslizamiento y frenado para asegurar tu confianza en cada movimiento.
+            El patinaje de carreras es una disciplina de alta velocidad donde se combinan técnica, resistencia y estrategia. 
+            En Tolima ofrecemos un programa integral que parte desde la correcta postura y arranque, avanza al trabajo de 
+            trazado de curvas y rectas, y culmina en entrenamiento de velocidad y resistencia en circuito. Durante las sesiones, 
+            practicarás arranques explosivos, mantenimiento de la cadencia en cada vuelta y ejercicios de fuerza para mejorar tu 
+            potencia y eficiencia sobre las ruedas.
         </p>
+
+        <h2>¡Únete Hoy!</h2>
         <p>
-          Durante las sesiones, aprenderás a desplazarte con seguridad, mantener el centro de gravedad y
-          realizar tus primeros giros. Nuestro objetivo es que al finalizar el curso conozcas las técnicas
-          fundamentales que te permitirán avanzar al siguiente nivel sin miedo.
-        </p>
-        <p>
-          Ideal para niños y adultos sin experiencia previa. ¡Ven y descubre lo divertido que puede ser
-          empezar a patinar con un grupo de instructores expertos y compañeros entusiastas!
+            Tanto si nunca has subido a unos patines de ruedas como si ya compites, nuestra liga de carreras te brinda entrenadores 
+            certificados, pista profesional y un ambiente de superación constante. Participa en entrenamientos grupales, recibe 
+            asesoría personalizada y prepárate para competir en eventos locales y regionales. ¡Inscríbete ahora y conviértete en  
+            velocista sobre ruedas!
         </p>
         <a href="/Registrate">
-          <button className="btn-registrarse novato-btn">
+            <button className="btn-registrarse novato-btn">
             ¡Regístrate ahora!
-          </button>
+            </button>
         </a>
       </section>
 

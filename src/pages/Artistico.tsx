@@ -1,4 +1,5 @@
-import '../styles/Artistico.css';
+import '../styles/artistico.css';
+
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import novatoBanner from '../assets/img/festibal1.jpg';
@@ -11,25 +12,21 @@ export default function Artistico() {
       {/* Banner Section */}
       <section className="novato-banner">
         <img src={novatoBanner} alt="Banner Novato" className="banner-img" />
-        <h1 className="banner-title">Artistico</h1>
+        <h1 className="banner-title-artistico">Patinaje Artístico</h1>
       </section>
 
       {/* About Section */}
       <section className="novato-about">
-        <h2>¿Como es el curso para Novatos?</h2>
+        <h2>¿Qué es el Patinaje Artístico?</h2>
         <p>
-          El curso para Novatos está diseñado para quienes toman sus primeras patinadas. Aquí crearás una base
-          sólida desarrollando tu equilibrio, postura y control del patín. Trabajaremos paso a paso,
-          combinando ejercicios de deslizamiento y frenado para asegurar tu confianza en cada movimiento.
+          El patinaje artístico combina la elegancia y la técnica sobre ruedas. En Tolima ofrecemos un programa
+          completo que abarca desde los fundamentos básicos hasta las rutinas coreografiadas para competencias.
+          Aprenderás piruetas, saltos y secuencias artísticas mientras mejoras tu fuerza, flexibilidad y expresión
         </p>
+        <h2>¡Únete Hoy!</h2>
         <p>
-          Durante las sesiones, aprenderás a desplazarte con seguridad, mantener el centro de gravedad y
-          realizar tus primeros giros. Nuestro objetivo es que al finalizar el curso conozcas las técnicas
-          fundamentales que te permitirán avanzar al siguiente nivel sin miedo.
-        </p>
-        <p>
-          Ideal para niños y adultos sin experiencia previa. ¡Ven y descubre lo divertido que puede ser
-          empezar a patinar con un grupo de instructores expertos y compañeros entusiastas!
+          No importa tu nivel, en Tolima encontrarás el apoyo y la estructura para alcanzar tus metas en
+          el patinaje artístico. ¡Ven y sé parte de nuestra comunidad!
         </p>
         <a href="/Registrate">
           <button className="btn-registrarse novato-btn">
