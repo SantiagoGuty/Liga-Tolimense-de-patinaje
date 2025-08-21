@@ -1,5 +1,3 @@
-import noticias from '../data/noticias';
-import { Link } from 'react-router-dom';
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import NoticiasSection from '../components/NoticiasSection';
