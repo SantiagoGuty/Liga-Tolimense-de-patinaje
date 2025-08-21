@@ -5,30 +5,47 @@ import { Link } from 'react-router-dom';
 import '../styles/menu.css';
 import logo from '../assets/img/logo.png';
 
+
+
 export default function Menu_bar() {
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLElement>(null); // NEW
+
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+   const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      const clickedInsideHeader = headerRef.current?.contains(target);
+      const clickedInsideMobile = mobileMenuRef.current?.contains(target); // NEW
+      if (menuOpen && !clickedInsideHeader && !clickedInsideMobile) {
         setMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [menuOpen]);
+
+
+  useEffect(() => {
+    const onEsc = (e: KeyboardEvent) => e.key === 'Escape' && setMenuOpen(false);
+    document.addEventListener('keydown', onEsc);
+    return () => document.removeEventListener('keydown', onEsc);
   }, []);
 
   return (
     <>
-      <div className="header" ref={menuRef}>
+      <div className="header" ref={headerRef}>
         <div className="logo">
           <Link to="/"><img src={logo} alt="Logo" /></Link>
         </div>
 
         {/* Desktop Menu */}
+
         <nav className="menu-desktop">
-          {/* Client‑side navigation using <Link> */}
+
+        {/* Client‑side navigation using <Link> */}
           <Link to="/">Inicio</Link>
 
           <div className="dropdown">
@@ -79,23 +96,25 @@ export default function Menu_bar() {
 
     </div>
 
-    <nav className={`menu-mobile ${menuOpen ? 'open' : ''}`}>
+    <nav
+        ref={mobileMenuRef}
+        className={`menu-mobile ${menuOpen ? 'open' : ''}`}
+      >
+        <Link to="/#inicio" onClick={() => setMenuOpen(false)}>Inicio</Link>
 
-  <Link to="/#inicio" onClick={() => setMenuOpen(false)}>Inicio</Link>
+        <details>
+          <summary>Modalidades</summary>
+          <Link to="/carreras"  onClick={() => setMenuOpen(false)}>Carreras</Link>
+          <Link to="/artistico" onClick={() => setMenuOpen(false)}>Artístico</Link>
+        </details>
 
-      <details>
-        <summary>Modalidades</summary>
-        <Link to="/carreras" onClick={() => setMenuOpen(false)}>Carreras</Link>
-        <Link to="/artistico" onClick={() => setMenuOpen(false)}>Artístico</Link>
-      </details>
-
-      <details>
-        <summary>Cursos</summary>
-        <Link to="/Registrate" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</Link>
-        <Link to="/novato" onClick={() => setMenuOpen(false)}>Novato</Link>
-        <Link to="/avanzado" onClick={() => setMenuOpen(false)}>Avanzado</Link>
-        <Link to="/adultos" onClick={() => setMenuOpen(false)}>Adultos</Link>
-      </details>
+        <details>
+          <summary>Cursos</summary>
+          <Link to="/Registrate" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</Link>
+          <Link to="/novato"     onClick={() => setMenuOpen(false)}>Novato</Link>
+          <Link to="/avanzado"   onClick={() => setMenuOpen(false)}>Avanzado</Link>
+          <Link to="/adultos"    onClick={() => setMenuOpen(false)}>Adultos</Link>
+        </details>
 
       <Link to="/Noticias" onClick={() => setMenuOpen(false)}>Noticias</Link>
       <Link to="/Eventos" onClick={() => setMenuOpen(false)}>Eventos</Link>

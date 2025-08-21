@@ -542,6 +542,10 @@ html, body {
 
 
 }
+
+.aliados h1{
+  color: #111;
+}
   
 
 
@@ -563,8 +567,9 @@ html, body {
   }
 
 
-  .hero{
-    text-align: center;
+  .hero {
+    flex-direction: column-reverse;   /* put title (right) on top, image (left) below */
+    height: 450px;                    /* keep same height */
   }
 
   .hero-right h2{
@@ -581,14 +586,71 @@ html, body {
     height: auto;
   }
 
-  .registro-left, .registro-right {
+  .hero-right,
+  .hero-left {
     width: 100%;
-    height: 50vh;
   }
 
+  .hero-right {
+    height: 40%;                      /* title area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+    .hero-right h2 {
+    font-size: 36px !important;       /* adjust as you like */
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .hero-left {
+    height: 60%;                      /* image area */
+    overflow: hidden;
+    position: relative;
+  }
+
+    .hero-slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+.registro-split {
+    flex-direction: column;   /* stack */
+    height: 450px;            /* keep a consistent height; adjust if you like */
+  }
+
+  .registro-left,
+  .registro-right {
+    width: 100%;
+  }
+
+  .registro-left {
+    height: 60%;              /* image area */
+    overflow: hidden;
+  }
+
+  .registro-right {
+    height: 40%;              /* CTA area */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #53b5e4; /* keep brand color */
+    padding: 0 1rem;
+  }
+
+  /* Button: full-width-ish, centered, touch friendly */
   .registro-btn {
-    font-size: 2.5rem;
+    width: min(92%, 560px);
+    border-radius: 14px;
+    font-size: clamp(1.75rem, 6vw, 3rem);
     padding: 1rem 2rem;
+    line-height: 1.1;
+    white-space: normal;      /* allow the "ya!" to wrap nicely */
   }
 
   
