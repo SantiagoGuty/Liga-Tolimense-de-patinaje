@@ -8,9 +8,7 @@ import campeon from '../assets/img/campeon.jpg';
 
 import accion_2 from '../assets/img/accion2.jpg';
 import accion_4 from '../assets/img/accion4.jpg';
-import seleccion1 from '../assets/img/seleccion1.jpg';
 import artistico1 from '../assets/img/artistico1.jpg';
-import premiacion1 from '../assets/img/premiacion1.jpg';
 
 
 import Menu_bar from '../components/Menu_bar';
