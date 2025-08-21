@@ -1,6 +1,6 @@
 
 .eventos {
-  background-color: w hite;
+  background-color: white;
   padding: 2rem 0 1rem 0; /* Reduce top and bottom spacing */
   padding-bottom: 0px;
 }
@@ -262,6 +262,13 @@
     overflow: visible !important;
   }
 
+  .eventos-carousel-wrapper .event-slide {
+  display: flex;
+  align-items: stretch;          /* both sides same height */
+  overflow: hidden;
+  background: #3a0d0c;           /* hides any subpixel seam */
+}
+
   /* 2) Image: full width, capped height */
   .eventos-carousel-wrapper .event-image-area {
     width: 100% !important;
@@ -323,3 +330,34 @@
 
   
 
+
+
+@media (min-width: 1025px) {
+  .eventos-carousel-wrapper .carousel-control-prev,
+  .eventos-carousel-wrapper .carousel-control-next {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+    width: 44px !important;      /* was 15% */
+    height: 44px !important;
+    padding: 0 !important;
+    background: transparent !important; /* no overlay/gradient */
+    border: 0 !important;
+    border-radius: 50%;
+    opacity: 1;                  /* keep icon visible */
+  }
+
+  /* sit just inside the image, not on the seam */
+  .eventos-carousel-wrapper .carousel-control-prev {
+    left: calc(35% + 8px) !important;
+  }
+  .eventos-carousel-wrapper .carousel-control-next {
+    right: 8px !important;
+  }
+
+  /* keep the two halves perfectly flush */
+  .eventos-carousel-wrapper .event-slide { align-items: stretch; background:#3a0d0c; }
+  .eventos-carousel-wrapper .event-text-area { box-sizing: border-box; }
+  .eventos-carousel-wrapper .event-image-area { margin-left: -0.5px; } /* hairline guard */
+  .eventos-carousel-wrapper .event-image-area img { display: block; }
+}

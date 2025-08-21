@@ -2,6 +2,8 @@ import noticias from '../data/noticias';
 import { Link } from 'react-router-dom';
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
+import NoticiasSection from '../components/NoticiasSection';
+
 
 import '../styles/noticias.css';
 
@@ -18,21 +20,9 @@ export default function Noticias() {
         </div>
       </section>
 
-      {/* Cards grid */}
-      <section className="noticias-list">
-        <div className="news-cards-container">
-          {noticias.map(({ slug, title, excerpt, image }) => (
-            <article key={slug} className="news-card">
-              <img src={image} alt={title} />
-              <div className="news-card-content">
-                <h3>{title}</h3>
-                <p>{excerpt}</p>
-                    <Link to={`/noticias/${slug}`} className="read-more">Leer más</Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+     <section className="noticias-list">
+        <NoticiasSection wrap={false} />
+     </section>
 
       <FooterTol />
     </>

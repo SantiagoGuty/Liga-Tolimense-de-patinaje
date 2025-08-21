@@ -25,6 +25,7 @@ El ambiente en la pista fue electrizante: cientos de espectadores alentaron a lo
 
 De cara a los próximos eventos, la liga ya planea una serie de exhibiciones y clínicas gratuitas para jóvenes talentos en Ibagué, buscando inspirar a la próxima generación de patinadores.`
   },
+
   {
     slug: 'curso-ibague',
     title: 'Nuevo curso de patinaje en Ibagué',
@@ -38,6 +39,7 @@ Las plazas son limitadas y se recomienda reservar con anticipación. El kit de b
 
 Para más información, los interesados pueden comunicarse al (321) 397-9355 o visitar la oficina administrativa en la calle 93 #5-13. ¡No pierdas la oportunidad de ser parte de esta experiencia sobre ruedas!`
   },
+  
   {
     slug: 'convocatoria-2025',
     title: 'Convocatoria abierta',

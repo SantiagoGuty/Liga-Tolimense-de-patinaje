@@ -17,6 +17,7 @@ import Menu_bar from '../components/Menu_bar';
 import Aliados from '../components/Aliados';
 import FooterTol from '../components/FooterTol';
 import EventosCarousel from '../components/EventosCarousel';
+import NoticiasSection from '../components/NoticiasSection';
 
 
 import { useEffect, useState } from 'react';
@@ -82,55 +83,11 @@ export default function Home() {
 
     
       {/* Noticias */}
-      <div className="noticias" id="noticias">
-
-        <h1>Noticias</h1>
-
-        <div className="news-cards-container">
-
-          <div className="news-card">
-
-            <img src={seleccion1} alt="Noticia 1" />
-            
-            <div className="news-card-content">
-
-                <h3>¡Tolima abraza el oro!</h3>
-                <p>La selección tolimense acaba de terminar una jornada histórica en Cartagena...</p>
-                <a href="/noticia-1">Leer más</a>
-
-            </div>
-          </div>
-
-          <div className="news-card">
-
-              <img src={premiacion1} alt="Noticia 2" />
-
-              <div className="news-card-content">
-
-                <h3>Nuevo curso de patinaje en Ibagué</h3>
-                <p>Inscripciones abiertas para todas las edades y niveles.</p>
-                <a href="/noticia-2">Leer más</a>
-
-              </div>
-          </div>
-
-          <div className="news-card">
-            
-            <img src={artistico1} alt="Noticia 3" />
-
-            <div className="news-card-content">
-
-              <h3>Convocatoria abierta</h3>
-              <p>La Liga Tolimense invita a clubes a participar en la copa regional 2025.</p>
-              <a href="/noticia-3">Leer más</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
+      <NoticiasSection title="Noticias" limit={3} />
 
 
 
+      {/* Cursos */}
       <section className="cursos">
 
         <div className="cursos_titulos">
