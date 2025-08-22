@@ -76,9 +76,12 @@ body {
   border-radius: 0.25rem;
 }
 
+.noticia-detail { box-sizing: border-box; }
+
 
 /* Article content: single column justified text */
 .noticia-content {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.5rem;
   line-height: 1.75;
   text-align: justify;
@@ -112,17 +115,47 @@ body {
 
 /* Responsive tweaks */
 @media (max-width: 768px) {
+  .noticia-page {
+    padding-top: 120px; /* matches your fixed header height */
+  }
+
   .noticia-detail {
-    padding: 2rem 1rem;
-    width: 95%;
+    width: 100%;
+    margin: 0;
+    padding: 1rem 0.75rem;     /* much tighter */
+    border-radius: 8px;
   }
+
   .noticia-detail h1 {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+    line-height: 1.15;
+    margin: 0.75rem 0 0.75rem;
+    text-align: center;          /* optional: easier to read on mobile */
   }
+
+  /* Image: full width, keep aspect ratio; cap height so it never dominates */
+  .noticia-img {
+    display: block;
+    width: 100%;
+    height: auto;              /* ← proportioned to device */
+    max-height: 60vh;          /* ~60% of the viewport height */
+    object-fit: cover;         /* tasteful crop if image is very tall */
+    margin: 0.5rem 0 1rem;
+    border-radius: 0.25rem;
+  }
+
+  /* Article text: less padding, comfortable size */
   .noticia-content {
-    font-size: 1rem;
+    padding: 0 1rem 1.2rem;    /* ↓ from 4rem sides + top */
+    font-size: 1.05rem;
+    line-height: 1.65;
+    text-align: left;          /* change to 'justify' if you prefer */
   }
+
+  .noticia-content p { margin-bottom: 1rem; }
+
   .noticia-detail .back-link {
-    font-size: 0.85rem;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 }
