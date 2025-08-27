@@ -1,31 +1,48 @@
 /* File: src/styles/adultos.css */
 
 /* Banner styling */
-.adultos-page .adultos-banner {
-  position: relative;
-  width: 100%;
-  max-height: 500px;
-  overflow: hidden;
+
+.adultos-page {
+  padding-top: 120px; /* same as .header height */
 }
+
+.adultos-page .adultos-banner {
+  height: clamp(280px, 42vh, 520px); /* responsive height */
+  max-height: none;                  /* remove 500px cap that clips content */
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+/* 3) Make the image fill the banner area proportionally */
 .adultos-page .adultos-banner .banner-img {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 100%;          /* fill the banner height */
+  object-fit: cover;     /* preserve proportions, crop gently if needed */
+  object-position: center 35%; /* nudge focus a bit down; adjust to taste */
+  display: block;
 }
+
 .adultos-page .adultos-banner .banner-title {
   position: absolute;
-  bottom: 4rem;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
+  bottom: 1.25rem;
+
+  /* look & feel */
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  z-index: 2;
+  text-shadow: 2px 2px 4px #2c0c0d; /* Horizontal offset, vertical offset, blur radius, shadow color */
+
+
   font-size: 10rem;
-  font-weight: 700;
+  line-height: .9;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-family: 'Karantina', cursive;
+  font-family: 'Barlow Condensed', sans-serif !important;
   text-align: center;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
 }
 
 /* About section styling */
@@ -74,15 +91,18 @@
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
+  .adultos-page .adultos-banner {
+    height: clamp(220px, 38vh, 360px);
+  }
+
   .adultos-page .adultos-banner .banner-title {
-    font-size: 4.5rem;
+    font-size: clamp(2.4rem, 12vw, 4rem); /* scale down on phones */
+    bottom: 0.75rem;
+    padding: 0 .25rem;
   }
-  .adultos-page .adultos-about h2 {
-    font-size: 2rem;
-  }
-  .adultos-page .adultos-about p {
-    font-size: 1rem;
-  }
+
+  /* optional: tighten copy below banner if you want */
+  .adultos-page .adultos-about h2 { font-size: 2rem; }
+  .adultos-page .adultos-about p  { font-size: 1rem; }
 }

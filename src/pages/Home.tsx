@@ -99,8 +99,9 @@ export default function Home() {
                 
             <div className="nivel-button">
 
-              <span>Novato</span>
-
+              <a href='/Novato'>
+                <span>Novato</span>
+              </a>
             </div>
           
             <div className="nivel-info">
@@ -122,8 +123,10 @@ export default function Home() {
 
             <div className="nivel-button">
 
-              <span>Avanzado</span>
-            
+              <a href="/Avanzado">
+                <span>Avanzado</span>
+              </a>
+
             </div>
 
             <div className="nivel-info">
@@ -145,8 +148,9 @@ export default function Home() {
 
             <div className="nivel-button">
 
-              <span>Adultos</span>
-
+              <a href='/Adultos'>
+                <span>Adultos</span>
+              </a>
             </div>
 
             <div className="nivel-info">

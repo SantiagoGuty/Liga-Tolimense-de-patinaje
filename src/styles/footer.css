@@ -1,5 +1,6 @@
 .footer {
-  margin-top: auto;
+  margin-top: 0px;
+  border-top-width: 0px;
   background-color: #2c0c0d !important;
   color: white !important;
   display: flex;

@@ -26,7 +26,7 @@ html, body {
 .logos-slide {
   display: flex;
   width: max-content;
-  animation: scroll 40s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 @keyframes scroll {
@@ -164,4 +164,13 @@ html, body {
     transform: translateX(-50%);
   }
 
+}
+
+
+@media (max-width: 768px){
+  .logos-slide {
+    display: flex;
+    width: max-content;
+    animation: scroll 10s linear infinite;
+  }
 }

@@ -210,6 +210,67 @@
 }
 
 
+/* Base keeps your current styles … */
+
+/* ========== VARIANTS ========== */
+.eventos.eventos--home .event-slide {
+  min-height: 360px;                 /* default/home size */
+}
+
+.eventos.eventos--page .event-slide {
+  min-height: 520px;                 /* bigger on the Eventos page */
+  gap: 2rem;
+}
+
+.eventos.eventos--home .event-text-area h5 {
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.eventos.eventos--page .event-text-area h5 {
+  font-size: 2rem;                   /* bigger title */
+  line-height: 1.1;
+}
+
+.eventos.eventos--home .event-text-area p {
+  font-size: 1rem;
+}
+
+.eventos.eventos--page .event-text-area p {
+  font-size: 1.125rem;               /* slightly larger body */
+}
+
+.eventos.eventos--home .noticia-img {
+  height: 320px;                     /* or whatever you had */
+  object-fit: cover;
+}
+
+.eventos.eventos--page .noticia-img {
+  height: 420px;                     /* bigger image on page */
+  object-fit: cover;
+}
+
+.eventos.eventos--page .read-more-btn {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 10px;
+}
+
+/* Optional: remove extra spacing when the internal title is hidden */
+.eventos.eventos--page .eventos-title { display: none; }
+
+/* Responsive tweaks */
+@media (max-width: 1024px) {
+  .eventos.eventos--page .event-slide {
+    min-height: 440px;
+  }
+  .eventos.eventos--page .noticia-img {
+    height: 360px;
+  }
+}
+
+
+
 
 @media (max-width:1024px) {
   .eventos-title h1 {

@@ -73,7 +73,6 @@ export default function Menu_bar() {
           <Link to="/iniciasesion">Iniciar sesión</Link>
           <Link to="/registrate">Crear usuario</Link>
           <Link to="/perfil">Perfil</Link>
-          <Link to="/usuarios">Lista</Link>
         </nav>
   {/* Mobile Burger */}
       <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
