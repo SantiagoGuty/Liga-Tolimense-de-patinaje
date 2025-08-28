@@ -23,7 +23,9 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -49,7 +51,9 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -75,7 +79,9 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -93,6 +99,10 @@ export const createScanEvent = /* GraphQL */ `mutation CreateScanEvent(
   createScanEvent(input: $input, condition: $condition) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename
@@ -109,6 +119,10 @@ export const updateScanEvent = /* GraphQL */ `mutation UpdateScanEvent(
   updateScanEvent(input: $input, condition: $condition) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename
@@ -125,6 +139,10 @@ export const deleteScanEvent = /* GraphQL */ `mutation DeleteScanEvent(
   deleteScanEvent(input: $input, condition: $condition) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename

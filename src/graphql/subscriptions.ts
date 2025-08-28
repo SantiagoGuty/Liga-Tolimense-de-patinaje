@@ -23,7 +23,9 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser(
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -49,7 +51,9 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser(
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -75,7 +79,9 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser(
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -90,6 +96,10 @@ export const onCreateScanEvent = /* GraphQL */ `subscription OnCreateScanEvent($
   onCreateScanEvent(filter: $filter) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename
@@ -103,6 +113,10 @@ export const onUpdateScanEvent = /* GraphQL */ `subscription OnUpdateScanEvent($
   onUpdateScanEvent(filter: $filter) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename
@@ -116,6 +130,10 @@ export const onDeleteScanEvent = /* GraphQL */ `subscription OnDeleteScanEvent($
   onDeleteScanEvent(filter: $filter) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename

@@ -20,7 +20,9 @@ export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
     cedula
     permiso
     estatus
-    qrCodeUrl
+    qrKey
+    qrPayload
+    avatarKey
     createdAt
     updatedAt
     owner
@@ -45,7 +47,9 @@ export const listUsers = /* GraphQL */ `query ListUsers(
       cedula
       permiso
       estatus
-      qrCodeUrl
+      qrKey
+      qrPayload
+      avatarKey
       createdAt
       updatedAt
       owner
@@ -60,6 +64,10 @@ export const getScanEvent = /* GraphQL */ `query GetScanEvent($id: ID!) {
   getScanEvent(id: $id) {
     id
     userId
+    timestamp
+    scannerSub
+    scannerName
+    location
     createdAt
     updatedAt
     __typename
@@ -78,6 +86,10 @@ export const listScanEvents = /* GraphQL */ `query ListScanEvents(
     items {
       id
       userId
+      timestamp
+      scannerSub
+      scannerName
+      location
       createdAt
       updatedAt
       __typename
@@ -89,4 +101,39 @@ export const listScanEvents = /* GraphQL */ `query ListScanEvents(
 ` as GeneratedQuery<
   APITypes.ListScanEventsQueryVariables,
   APITypes.ListScanEventsQuery
+>;
+export const scanEventsByUserIdAndTimestamp = /* GraphQL */ `query ScanEventsByUserIdAndTimestamp(
+  $userId: ID!
+  $timestamp: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelScanEventFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  scanEventsByUserIdAndTimestamp(
+    userId: $userId
+    timestamp: $timestamp
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      userId
+      timestamp
+      scannerSub
+      scannerName
+      location
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ScanEventsByUserIdAndTimestampQueryVariables,
+  APITypes.ScanEventsByUserIdAndTimestampQuery
 >;

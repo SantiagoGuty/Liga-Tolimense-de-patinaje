@@ -1,3 +1,4 @@
+// src/App.tsx
 import Eventos from './pages/Eventos';
 import Home from './pages/Home';
 import Noticias from './pages/Noticias';
@@ -12,87 +13,74 @@ import Artistico from './pages/Artistico';
 import Carreras from './pages/Carreras';
 import Guias from './pages/Guias';
 import Resoluciones from './pages/Resoluciones';
-import ErrorPage from './pages/ErrorPage';        
+import ErrorPage from './pages/ErrorPage';
 import Noticia from './pages/Noticia';
-
+import ProtectedRoute from './layout/ProtectedRoute';
+import CrearPerfil from './pages/CrearPerfil';
+import EditarPerfil from './pages/EditarPerfil';
 
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-
-
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home/>,
-    errorElement: <ErrorPage />,   // ← now you’ve imported it
+  // Root + error boundary (handles 404s too)
+  { path: '/', element: <Home />, errorElement: <ErrorPage /> },
 
-  },
-  {
-    path: '/noticias',
-    element: <Noticias/>,
-  },
-  {
-    path: '/noticias/:slug',
-    element: <Noticia/>,
-  },
-  {
-    path: '/Eventos',
-    element: <Eventos/>
-  },
-  {
-    path: '/Registrate',
-    element: <Registrate/>
-  },
-  {
-    path: '/IniciaSesion',
-    element: <IniciaSesion/>
-  },
-  {
-    path: '/perfil',
-    element: <Perfil/>
-  },
-  {
-    path: '/novato',
-    element: <Novato/>
-  },
-  {
-    path: '/avanzado',
-    element: <Avanzado/>
-  },
-  {
-    path: '/adultos',
-    element: <Adultos/>
-  },
-  {
-    path: '/artistico',
-    element: <Artistico/>
-  },
-  {
-    path: '/carreras',
-    element: <Carreras/>
-  },
-  {
-    path: '/guias',
-    element: <Guias/>
-  },
-  {
-    path: '/resoluciones',
-    element: <Resoluciones/>
-  },
-  {
-    path: '/usuarios',
-    element: <UsersList/>
-  }
+  // Public pages
+  { path: 'noticias', element: <Noticias /> },
+  { path: 'noticias/:slug', element: <Noticia /> },
+  { path: 'eventos', element: <Eventos /> },
+  { path: 'registrate', element: <Registrate /> },
+  { path: 'iniciasesion', element: <IniciaSesion /> },
+  { path: 'novato', element: <Novato /> },
+  { path: 'avanzado', element: <Avanzado /> },
+  { path: 'adultos', element: <Adultos /> },
+  { path: 'artistico', element: <Artistico /> },
+  { path: 'carreras', element: <Carreras /> },
+  { path: 'guias', element: <Guias /> },
+  { path: 'resoluciones', element: <Resoluciones /> },
 
-])
+  // Protected pages
+  {
+    path: 'perfil',
+    element: (
+      <ProtectedRoute>
+        <Perfil />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: 'crear-perfil',
+    element: (
+      <ProtectedRoute>
+        <CrearPerfil />
+      </ProtectedRoute>
+    ),
+  },
 
-function App() {
-  return(
-    <>
-      <RouterProvider router={router}/>
-    </>
-  )
+  // (Optional) Admin-only list — wrap in your own AdminRoute if needed
+  // Or at least ProtectedRoute so only signed-in users see it.
+  {
+    path: 'usuarios',
+    element: (
+      <ProtectedRoute>
+        <UsersList />
+      </ProtectedRoute>
+    ),
+  },
+
+  { path: 'editar-perfil',
+  element: (
+    <ProtectedRoute>
+      <EditarPerfil />
+    </ProtectedRoute>
+  ),
+},
+
+  // Fallback (optional if you rely on root errorElement)
+  { path: '*', element: <ErrorPage /> },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;

@@ -1,147 +1,251 @@
-/* src/styles/Perfil.css */
+/* src/styles/perfil.css */
 
-/* ensure your page wrapper has white behind the burgundy card */
-.page-wrapper {
-  background: #fff;
+/* ---- Page layout ---- */
+
+.profile-page {
+  background: #fff; /* keep page background clean under fixed header/footer */
 }
 
-/* push everything down under the fixed header */
+.profile-page .main-content {
+  margin-top: 120px; /* matches your fixed header height */
+  padding: 1rem;
+}
 
+/* ---- Card ---- */
 
-/* the actual profile “card” */
 .profile-card {
-  max-width: 600px;
+  max-width: 960px;
   margin: 0 auto 3rem;
-  padding: 2rem;
-  background-color: #3a0d0c;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  padding: clamp(1rem, 2vw, 2rem);
+  background-color: #3a0d0c;  /* brand burgundy */
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
   color: #fff;
   font-family: 'Barlow Condensed', sans-serif;
 }
 
-/* rest of CSS from before – avatar, title, fields, etc. */
+/* ---- Header: title + avatar + actions ---- */
 
-/* Page title */
-.profile__title {
-  text-align: center;
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
+.profile__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;  /* center avatar & title */
+  gap: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-/* Avatar + upload link */
+.profile__title {
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+/* Avatar circle (bigger, centered) */
 .profile__avatar {
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 1.5rem;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  border: 4px solid #f6c200;
+  border: 6px solid #f6c200;    /* gold ring */
   overflow: hidden;
   background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .profile__avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.profile__no-avatar {
-  text-align: center;
-  color: #ddd;
-}
-.btn--link {
-  background: none;
-  border: none;
-  color: #f6c200;
-  text-decoration: underline;
-  margin-top: 0.25rem;
-  cursor: pointer;
-  font-size: 0.9rem;
+
+.profile__initials {
+  color: #3a0d0c;
+  font-weight: 800;
+  font-size: 3rem;
 }
 
-/* Details list */
-.profile__details ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.profile__details li {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-.profile__details .label {
-  font-weight: 600;
-}
-.profile__details .value {
-  text-align: right;
-}
-
-/* Form layout */
-.profile__form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-@media (min-width: 600px) {
-  .profile__form {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-.profile__field {
-  display: flex;
-  flex-direction: column;
-}
-.profile__field.full-width {
-  grid-column: 1 / -1;
-}
-.profile__field label {
-  margin-bottom: 0.3rem;
-  color: #ddd;
-}
-.profile__field input,
-.profile__field select {
-  padding: 0.6rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #f5f5f5;
-  color: #2c0c0d;
-  font-size: 1rem;
-}
-
-/* Buttons row */
+/* Actions row under avatar */
 .profile__actions {
-  grid-column: 1 / -1;
-  text-align: center;
-  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 0.75rem 0 1rem 0;
 }
+
+/* ---- Buttons ---- */
+
 .btn {
   padding: 0.6rem 1.4rem;
-  margin: 0 0.5rem;
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
 .btn--primary {
   background-color: #f6c200;
   color: #2c0c0d;
 }
-.btn--primary:hover {
+
+.btn--primary:hover:not(:disabled) {
   background-color: #e5b100;
   transform: translateY(-2px);
 }
+
 .btn--secondary {
   background-color: #6a1b1a;
   color: #fff;
 }
-.btn--secondary:hover {
+
+.btn--secondary:hover:not(:disabled) {
   background-color: #581917;
   transform: translateY(-2px);
+}
+
+/* ---- Details list (read-only profile) ---- */
+
+.profile__details ul {
+  list-style: none;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+}
+
+.profile__details li {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* label | value */
+  gap: 1rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.profile__details li:last-child {
+  border-bottom: none;
+}
+
+.profile__details .label {
+  color: #f6c200; /* gold labels for contrast */
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+.profile__details .value {
+  color: #fff;
+  text-align: left;
+  font-size: 1.05rem;
+  opacity: 0.95;
+  word-break: break-word;
+}
+
+/* ---- Edit form (EditarPerfil) ---- */
+
+.profile__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  margin-top: 1rem;
+}
+
+.profile__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__field.full-width {
+  grid-column: 1 / -1;
+}
+
+.profile__field label {
+  margin-bottom: 0.35rem;
+  color: #f6c200;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.profile__field input,
+.profile__field select,
+.profile__field textarea {
+  padding: 0.65rem 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  color: #2c0c0d;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.06);
+}
+
+.profile__field input:focus,
+.profile__field select:focus,
+.profile__field textarea:focus {
+  box-shadow: 0 0 0 3px rgba(246, 194, 0, 0.35); /* gold focus ring */
+}
+
+.btn--danger { background-color: #b82a2a; color: #fff; }
+.btn--danger:hover { background-color: #922222; transform: translateY(-2px); }
+
+
+
+/* avatar + qr side-by-side, centered */
+.profile__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 32px);
+  margin-bottom: 0.75rem;
+}
+
+/* QR frame to match your avatar styling */
+.profile__qr {
+  width: 220px;
+  height: 220px;
+  background: #fff;
+  border: 6px solid #f6c200;   /* gold ring */
+  border-radius: 16px;         /* square-ish with soft corners */
+  padding: 8px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__qr img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---- Responsive tweaks ---- */
+
+@media (max-width: 860px) {
+  .profile-card {
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .profile__avatar {
+    width: 180px;
+    height: 180px;
+  }
+
+  .profile__details li {
+    grid-template-columns: 1fr; /* stack label above value */
+    gap: 0.25rem;
+    padding: 0.75rem 0;
+  }
+
+  .profile__form {
+    grid-template-columns: 1fr; /* single column form on mobile */
+  }
 }

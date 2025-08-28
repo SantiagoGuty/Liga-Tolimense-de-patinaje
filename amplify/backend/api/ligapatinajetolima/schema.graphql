@@ -1,4 +1,13 @@
-type User @model @auth(rules: [{ allow: owner }]) {
+# Users can manage their own record (owner).
+# Coaches/Staff can READ and UPDATE status-related fields.
+# Admins can do everything.
+type User
+  @model
+  @auth(rules: [
+    { allow: owner },
+    { allow: groups, groups: ["Coaches", "Staff"], operations: [read, update] },
+    { allow: groups, groups: ["Admins"], operations: [create, read, update, delete] }
+  ]) {
   id: ID!
   nombre: String!
   apellido: String!
@@ -9,12 +18,25 @@ type User @model @auth(rules: [{ allow: owner }]) {
   cedula: String
   permiso: String
   estatus: String
-  qrCodeUrl: String
+
+  # QR metadata
+  qrKey: String
+  qrPayload: String
+
+  # ✅ New: S3 key for profile photo
+  avatarKey: String
 }
 
-type ScanEvent @model @auth(rules: [{ allow: public }]) {
+# Log scans (who/when/where). Only staff can create logs.
+type ScanEvent
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Coaches", "Staff", "Admins"] }
+  ]) {
   id: ID!
-  userId: ID!
-  createdAt: AWSDateTime!
+  userId: ID! @index(name: "byUser", sortKeyFields: ["timestamp"])
+  timestamp: AWSDateTime!        # when the QR was scanned
+  scannerSub: String             # Cognito sub of the staff member
+  scannerName: String            # optional friendly name
+  location: String               # optional "Pista", "Parque Deportivo", etc.
 }
-

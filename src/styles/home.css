@@ -82,11 +82,6 @@ html, body {
 }
 
 
-.logo img:hover {
-  height: 103px;
-  transition: 0.3s ease-in-out;
-
-}
 
   
 .home-container {

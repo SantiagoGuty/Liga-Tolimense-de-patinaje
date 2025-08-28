@@ -1,255 +1,205 @@
 // src/pages/Perfil.tsx
-import { useEffect, useState } from 'react'
-import type { ChangeEvent } from 'react'
-import { useNavigate } from 'react-router-dom';
-
-// CORRECTED IMPORTS FOR AMPLIFY V6 AUTH
-// The function name is getCurrentUser in v6
-import { getCurrentUser, signOut } from 'aws-amplify/auth';
-import { generateClient } from 'aws-amplify/api';
-import type { GraphQLResult } from 'aws-amplify/api';
-
-import { getUser } from '../graphql/queries';
-import { updateUser as updateUserMutation } from '../graphql/mutations';
-import type {
-  GetUserQuery,
-  UpdateUserMutation,
-  User as GQLUser,
-} from '../API';
-
+import { useEffect, useState } from 'react';
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
-
+import { getCurrentUserProfile, updateCurrentUserAvatar, saveCurrentUserQr } from '../services/userProfile';
+import { uploadAvatar, getAvatarUrl } from '../services/storageService';
+import { uploadProtected, getProtectedUrl } from '../services/storageService';
+import { makeQrPngBlob } from '../services/qrService';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../services/authService';
 import '../styles/perfil.css';
 
-const client = generateClient();
-
 export default function Perfil() {
-  const [user, setUser] = useState<GQLUser | null>(null);
-  // add the extra optional property
-  const [editing, setEditing] = useState(false);
-  // 3️⃣ allow fotoPerfil on top of your GraphQL User fields
-  const [form, setForm] = useState<Partial<GQLUser> & { fotoPerfil?: string }>({});
   const nav = useNavigate();
+  const [profile, setProfile] = useState<any>(null);
+  const [error, setError] = useState('');
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [qrUrl, setQrUrl] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [qrBusy, setQrBusy] = useState(false);
 
   useEffect(() => {
-    async function load() {
+    (async () => {
       try {
-        // CORRECTED USAGE
-        const authUser = await getCurrentUser();
-        const sub = authUser.userId; // Use authUser.userId for the Cognito Sub/ID
+        const p = await getCurrentUserProfile();
+        if (!p) { nav('/crear-perfil', { replace: true }); return; }
+        setProfile(p);
 
-        // 2️⃣ perform the query and narrow to GraphQLResult
-        const raw = await client.graphql({
-          query: getUser,
-          variables: { id: sub },
-        });
-
-        if (!('data' in raw)) {
-          throw new Error('Unexpected subscription result');
+        // Avatar
+        if (p.avatarKey) {
+          try { const url = await getAvatarUrl(p.avatarKey); setAvatarUrl(url.toString()); } catch {}
         }
 
-        const result = raw as GraphQLResult<{ getUser: GetUserQuery['getUser'] }>;
-        const fetched = result.data?.getUser;
-        if (!fetched) {
-          nav('/Registrate');
-          return;
+        // QR: if exists -> fetch; else -> generate once
+        if (p.qrKey) {
+          try {
+            const url = await getProtectedUrl(p.qrKey);
+            setQrUrl(url.toString());
+          } catch {}
+        } else {
+          await generateAndSaveQr(p); // create now
         }
-
-        setUser(fetched);
-        setForm(fetched);
-      } catch (error) { // Catch the error to handle navigation
-        console.error("Error loading profile:", error);
-        nav('/IniciaSesion');
+      } catch (e: any) {
+        setError(e.message || 'No se pudo cargar el perfil');
       }
-    }
-    load();
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nav]);
 
-  function onChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
-    const { name, value } = e.target;
-    setForm(f => ({ ...f, [name]: value }));
-  }
-
-  function onFileChange(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      // 3️⃣ cast so TS knows fotoPerfil is allowed
-      setForm(f => ({ ...(f as object), fotoPerfil: url }));
-    }
-  }
-
-  async function handleSave() {
-    if (!user) return;
-
-    const input = {
-      id: user.id,
-      nombre: form.nombre,
-      apellido: form.apellido,
-      correo: form.correo,
-      telefono: form.telefono,
-      fechaNacimiento: form.fechaNacimiento,
-      sexo: form.sexo,
-      cedula: form.cedula,
-      // if you want to persist fotoPerfil to S3/DB, handle that here
-    };
-
+  async function generateAndSaveQr(p: any) {
     try {
-      const raw = await client.graphql({
-        query: updateUserMutation,
-        variables: { input },
-      });
+      setQrBusy(true);
+      // Minimal, non-PII payload
+      const payloadObj = { u: p.id, v: 1 };
+      const payload = JSON.stringify(payloadObj);
 
-      if (!('data' in raw)) throw new Error('Unexpected subscription result');
-      const result = raw as GraphQLResult<{ updateUser: UpdateUserMutation['updateUser'] }>;
-      const updated = result.data?.updateUser;
-      if (!updated) throw new Error('No data returned');
+      const blob = await makeQrPngBlob(payload, 640);
+      const key = `qrcodes/${p.id}.png`;
 
-      setUser(updated);
-      setForm(updated);
-      setEditing(false);
-      alert('Perfil actualizado ✅');
+      await uploadProtected(key, blob, 'image/png');
+      await saveCurrentUserQr(key, payload);
+
+      const url = await getProtectedUrl(key);
+      setQrUrl(url.toString());
+
+      // reflect in local profile state
+      setProfile((prev: any) => ({ ...prev, qrKey: key, qrPayload: payload }));
     } catch (err: any) {
-      alert('Error al actualizar: ' + err.message);
+      setError(err?.message || 'No se pudo generar el código QR');
+    } finally {
+      setQrBusy(false);
     }
   }
 
-  if (!user) return null;
+  async function handlePickFile() {
+    (document.getElementById('avatar-input') as HTMLInputElement)?.click();
+  }
 
-  const fields: Array<[keyof GQLUser, string]> = [
-    ['nombre', 'Nombre'],
-    ['apellido', 'Apellido'],
-    ['correo', 'Correo'],
-    ['telefono', 'Teléfono'],
-    ['fechaNacimiento', 'Fecha de nacimiento'],
-    ['sexo', 'Sexo'],
-    ['cedula', 'Cédula / Tarjeta de identidad'],
-  ];
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError('');
+    try {
+      const key = await uploadAvatar(file);
+      const updated = await updateCurrentUserAvatar(key);
+      setProfile((prev: any) => ({ ...prev, avatarKey: updated.avatarKey }));
+      const url = await getAvatarUrl(updated.avatarKey);
+      setAvatarUrl(url.toString());
+    } catch (err: any) {
+      setError(err?.message || 'No se pudo subir la foto');
+    } finally {
+      setUploading(false);
+      (e.target as HTMLInputElement).value = '';
+    }
+  }
+
+  async function handleLogout() {
+    try { await logout(); }
+    finally { nav('/', { replace: true }); }
+  }
+
+  if (error) return <div style={{ padding: 16, color: 'red' }}>{error}</div>;
+  if (!profile) return null;
+
+  const initials =
+    (profile?.nombre?.[0] || '').toUpperCase() +
+    (profile?.apellido?.[0] || '').toUpperCase();
 
   return (
-    <div className="page-wrapper">
+    <div className="page-wrapper profile-page">
       <Menu_bar />
 
       <div className="main-content">
-        <div className="profile-card">
-          <h1 className="profile__title">
-            {editing ? 'Edita tu perfil' : `Bienvenido, ${user.nombre}`}
-          </h1>
+        <section className="profile-card" aria-labelledby="profile-title">
+          <div className="profile__header">
+            <h1 id="profile-title" className="profile__title">Perfil Liga Tolimense</h1>
 
-          <div className="profile__avatar">
-            {form.fotoPerfil ? (
-              <img src={form.fotoPerfil} alt="Avatar" />
-            ) : (
-              <div className="profile__no-avatar">
-                Sin foto de perfil
-                {!editing && (
-                  <button className="btn btn--link" onClick={() => setEditing(true)}>
-                    Subir foto
-                  </button>
+            {/* Avatar + QR side-by-side */}
+            <div className="profile__media">
+              <div className="profile__avatar" aria-label="Foto de perfil">
+                {avatarUrl ? (
+                  <img src={avatarUrl} alt="Foto de perfil" />
+                ) : (
+                  <div className="profile__initials">{initials || '🙂'}</div>
                 )}
               </div>
-            )}
-          </div>
 
-          {editing ? (
-            <form
-              className="profile__form"
-              onSubmit={e => {
-                e.preventDefault();
-                handleSave();
-              }}
-            >
-              <div className="profile__field full-width">
-                <label htmlFor="fotoPerfil">Foto de perfil</label>
-                <input
-                  id="fotoPerfil"
-                  name="fotoPerfil"
-                  type="file"
-                  accept="image/*"
-                  onChange={onFileChange}
-                />
-              </div>
-
-              {fields.map(([key, label]) => (
-                <div className="profile__field" key={key}>
-                  <label htmlFor={key}>{label}</label>
-                  {key === 'sexo' ? (
-                    <select
-                      id={key}
-                      name={key}
-                      value={(form[key] as string) || ''}
-                      onChange={onChange}
-                    >
-                      <option value="">Selecciona…</option>
-                      <option>Masculino</option>
-                      <option>Femenino</option>
-                      <option>Otro</option>
-                    </select>
-                  ) : (
-                    <input
-                      id={key}
-                      name={key}
-                      type={
-                        key === 'correo'
-                          ? 'email'
-                          : key === 'telefono'
-                            ? 'tel'
-                            : key === 'fechaNacimiento'
-                              ? 'date'
-                              : 'text'
-                      }
-                      value={(form[key] as string) || ''}
-                      onChange={onChange}
-                    />
-                  )}
-                </div>
-              ))}
-
-              <div className="profile__actions">
-                <button type="button" className="btn btn--primary" onClick={handleSave}>
-                  Guardar cambios
-                </button>
-                <button
-                  type="button"
-                  className="btn btn--secondary"
-                  onClick={() => {
-                    setEditing(false);
-                    setForm(user);
-                  }}
-                >
-                  Cancelar
-                </button>
-              </div>
-            </form>
-          ) : (
-            <div className="profile__details">
-              <ul>
-                {fields.map(([key, label]) => (
-                  <li key={key}>
-                    <span className="label">{label}:</span>{' '}
-                    <span className="value">{(user as any)[key]}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="profile__actions">
-                <button className="btn btn--primary" onClick={() => setEditing(true)}>
-                  Editar perfil
-                </button>
-                <button
-                  className="btn btn--secondary"
-                  onClick={async () => {
-                    // CORRECTED USAGE
-                    await signOut();
-                    nav('/IniciaSesion');
-                  }}
-                >
-                  Cerrar sesión
-                </button>
+              <div className="profile__qr" aria-label="Mi código QR">
+                {qrUrl ? (
+                  <img src={qrUrl} alt="Código QR de miembro" />
+                ) : (
+                  <span style={{ color:'#f6c200', fontWeight:800 }}>
+                    {qrBusy ? 'Generando QR…' : 'QR no disponible'}
+                  </span>
+                )}
               </div>
             </div>
-          )}
-        </div>
+
+            {/* Hidden input + actions */}
+            <input
+              id="avatar-input"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </div>
+
+          {/* Details */}
+          <div className="profile__details">
+            <ul>
+              <li><span className="label">Nombre:</span><span className="value">{profile.nombre} {profile.apellido}</span></li>
+              <li><span className="label">Correo:</span><span className="value">{profile.correo}</span></li>
+              <li><span className="label">Teléfono:</span><span className="value">{profile.telefono || '—'}</span></li>
+              <li><span className="label">Fecha de nacimiento:</span><span className="value">{profile.fechaNacimiento || '—'}</span></li>
+              <li><span className="label">Sexo:</span><span className="value">{profile.sexo || '—'}</span></li>
+              <li><span className="label">Cédula:</span><span className="value">{profile.cedula || '—'}</span></li>
+            </ul>
+          </div>
+
+          <div className="profile__actions">
+            <button
+              className="btn btn--primary"
+              type="button"
+              onClick={handlePickFile}
+              disabled={uploading}
+              aria-busy={uploading}
+            >
+              {uploading ? 'Subiendo…' : 'Cambiar foto'}
+            </button>
+
+            <button
+              className="btn btn--secondary"
+              type="button"
+              onClick={() => nav('/editar-perfil')}
+            >
+              Editar perfil
+            </button>
+
+            <button
+              className="btn btn--secondary"
+              type="button"
+              onClick={handleLogout}
+            >
+              Cerrar sesión
+            </button>
+
+            {/* Optional: force re-generate QR */}
+            {!profile.qrKey && (
+              <button
+                className="btn btn--secondary"
+                type="button"
+                onClick={() => generateAndSaveQr(profile)}
+                disabled={qrBusy}
+              >
+                {qrBusy ? 'Generando…' : 'Generar QR'}
+              </button>
+            )}
+          </div>
+        </section>
       </div>
 
       <FooterTol />

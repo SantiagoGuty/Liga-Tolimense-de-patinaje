@@ -1,55 +1,47 @@
-/*import { useState } from 'react'
-import type { FormEvent } from 'react'
-import { login } from '../services/userService'
-import Menu_bar from '../components/Menu_bar';
-import FooterTol from '../components/FooterTol';
-
-import { useNavigate } from 'react-router-dom'
-
-export default function IniciaSesion() {
-  const [correo, setCorreo] = useState('')
-  const [contrasena, setContrasena] = useState('')
-  const [error, setError] = useState('')
-  const nav = useNavigate()
-
-  async function handleLogin(e: FormEvent) {
-    e.preventDefault()
-    try {
-      await login(correo, contrasena)
-      nav('/perfil')
-    } catch (err: any) {
-      setError(err.message || 'Login failed')
-    }
-  }
-
-  return (
-    <>
-
-    <Menu_bar/>
-    <form onSubmit={handleLogin}>
-      {error && <p style={{color:'red'}}>{error}</p>}
-      <input placeholder="Correo"     onChange={e=>setCorreo(e.target.value)} />
-      <input placeholder="Contraseña" type="password"
-             onChange={e=>setContrasena(e.target.value)} />
-      <button type="submit">Iniciar sesión</button>
-    </form>
-
-    <FooterTol/>
-    </>
-  )
-}
-*/
-// File: src/pages/IniciaSesion.tsx (visual-only)
-// =============================================
-// File: src/pages/IniciaSesion.tsx  (visual-only)
-// =============================================
-import '../styles/iniciasesion.css';      // 👈 new, page-specific styles
+// src/pages/IniciaSesion.tsx
+import { useState, type FormEvent } from 'react';
+import '../styles/iniciasesion.css';
 
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import accion_4 from '../assets/img/accion4.jpg';
 
+// Auth + profile services
+import { signinEmailPassword, signinWithGoogle } from '../services/authService';
+import { getCurrentUserProfile } from '../services/userProfile';
+import { useNavigate } from 'react-router-dom';
+
 export default function IniciaSesion() {
+  const [correo, setCorreo] = useState('');
+  const [contrasena, setContrasena] = useState('');
+  const [error, setError] = useState('');
+  const nav = useNavigate();
+
+  async function handleLogin(e: FormEvent) {
+    e.preventDefault();
+    setError('');
+    try {
+      await signinEmailPassword(correo, contrasena);
+
+      // After successful sign-in, decide where to go
+      const profile = await getCurrentUserProfile().catch(() => null);
+      nav(profile ? '/perfil' : '/crear-perfil');
+    } catch (err: any) {
+      setError(err?.message || 'No se pudo iniciar sesión');
+    }
+  }
+
+  async function handleGoogle() {
+    setError('');
+    try {
+      // Redirects to Cognito Hosted UI (Google). After callback, user is signed in.
+      await signinWithGoogle();
+      // On return from Hosted UI, your app will re-mount. ProtectedRoute will handle redirects.
+    } catch (err: any) {
+      setError(err?.message || 'No se pudo iniciar con Google');
+    }
+  }
+
   return (
     <div className="page-wrapper" id="inicia-sesion">
       <Menu_bar />
@@ -63,19 +55,26 @@ export default function IniciaSesion() {
             <h1 className="auth-hero-title">Liga Tolimense de Patinaje</h1>
           </aside>
 
-          {/* Right: login card (visuals only) */}
+          {/* Right: login card (same visuals) */}
           <section className="auth-card">
             <h2 id="auth-title">Inicia sesión</h2>
 
-            {/* Visual-only form: disabled controls, no submit */}
-            <form className="auth-form" onSubmit={(e) => e.preventDefault()} noValidate>
+            {/* Functional form (same layout) */}
+            <form className="auth-form" onSubmit={handleLogin} noValidate>
+              {error && (
+                <p style={{ color: 'crimson', marginTop: 0, marginBottom: '0.75rem' }}>
+                  {error}
+                </p>
+              )}
+
               <label className="auth-field">
                 <span>Correo</span>
                 <input
                   type="email"
                   placeholder="tu@correo.com"
-                  disabled
-                  aria-disabled="true"
+                  value={correo}
+                  onChange={(e) => setCorreo(e.target.value)}
+                  required
                 />
               </label>
 
@@ -84,12 +83,13 @@ export default function IniciaSesion() {
                 <input
                   type="password"
                   placeholder="••••••••"
-                  disabled
-                  aria-disabled="true"
+                  value={contrasena}
+                  onChange={(e) => setContrasena(e.target.value)}
+                  required
                 />
               </label>
 
-              <button type="button" className="auth-btn" disabled aria-disabled="true">
+              <button type="submit" className="auth-btn">
                 Entrar
               </button>
             </form>
@@ -105,13 +105,12 @@ export default function IniciaSesion() {
               <span />
             </div>
 
-            {/* Visual SSO button */}
+            {/* Google SSO (same button, now functional) */}
             <div className="auth-sso">
-              <button type="button" className="sso-btn" disabled aria-disabled="true">
+              <button type="button" className="sso-btn" onClick={handleGoogle}>
                 Continuar con Google
               </button>
             </div>
-
           </section>
         </main>
       </div>
