@@ -1,35 +1,158 @@
-# La Liga Tolimense de Patinaje - Official Web Application 
+# Tolima Skating League — Official Web Application
 
-## Project Overview
+> **Status:** Actively developed (frontend first).
 
-This repository contains the frontend development for the official web application of La Liga Tolimense de Patinaje. This application aims to be a central digital platform for the league, providing information, managing memberships, and eventually including a unique digital entry control system for the skating rink.
+![screenshot](https://github.com/user-attachments/assets/c82edd6a-bdde-42dd-8dba-0493b8ca3ec9)
 
-![image](https://github.com/user-attachments/assets/c82edd6a-bdde-42dd-8dba-0493b8ca3ec9)
+The goal of this project is to provide a modern, responsive web platform for **La Liga Tolimense de Patinaje** that centralizes news, events, guides, resolutions, courses, memberships, and (planned) **digital rink entry control** using **QR credentials**.
+
+---
+
+## Live Preview
+
+**https://main.d2kyjpfyeakeyn.amplifyapp.com/**  
+*(The public domain/url will be updated in the future.)*
+
+---
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture & Routing](#architecture--routing)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Styling & UX Conventions](#styling--ux-conventions)
+- [Internationalization (Planned)](#internationalization-planned)
+- [Roadmap](#roadmap)
+- [Accessibility & Quality](#accessibility--quality)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## Features
+
+### Public sections (implemented)
+- **Responsive UI/UX & navigation**
+  - Fixed top bar for desktop & mobile (animated burger).
+  - Smooth scroll restoration on route changes (to top or to `#anchor`).
+  - Shared banner system that compensates the fixed header height (no content overlap).
+- **Home**
+  - Hero with image slider, latest news block, courses section, events carousel, partners/“aliados”.
+- **News**
+  - `/noticias` list and `/noticias/:slug` detail pages with images and back links.
+- **Courses**
+  - Novato / Avanzado / Adultos pages with unified banners and CTAs.
+- **Modalities**
+  - Patinaje **Carreras** (Speed) and **Artístico** (Artistic).
+- **Guides & Resolutions**
+  - Unified banner visuals and responsive layout.
+- **Partners (Aliados)**
+  - Smooth, infinite marquee powered by `requestAnimationFrame` and masked edges (no visible seams).
+
+### Auth & protected areas (skeleton in place)
+- `ProtectedRoute` guards for:
+  - `/perfil` (Profile)
+  - `/crear-perfil`
+  - `/editar-perfil`
+  - `/usuarios` (admin-only list, if needed)
+- Profile avatar shown in the menu (falls back to initials if no avatar).
+
+### Planned major feature
+- **Digital rink entry control** using **QR code** credentials and validation.
+
+---
+
+## Tech Stack
+
+- **Framework & Tooling:** React + Vite + TypeScript
+- **Routing:** React Router v6 (`createBrowserRouter`, nested routes)
+- **Styling:** Plain CSS (modularized by component/page), responsive-first
+- **Auth (WIP):** AWS Amplify (`aws-amplify/auth`)
+- **Media Storage (WIP):** AWS S3 (avatars/assets)
+- **Backend (planned):** Custom API + **PostgreSQL**
+- **Deployment:** AWS Amplify (temporary preview URL; domain to be updated)
+
+---
+
+## Architecture & Routing
+
+Top-level layout uses a **Root** component with:
+- `ScrollToTop` (restores scroll on route change, scrolls to `#hash` anchors if present)
+- `Outlet` for nested routes
+- Error boundary handles 404s & thrown errors
+
+**Routes (overview):**
+- `/` (Home)
+- `/noticias` · `/noticias/:slug`
+- `/eventos`
+- `/registrate` · `/iniciasesion`
+- `/novato` · `/avanzado` · `/adultos`
+- `/carreras` · `/artistico`
+- `/guias` · `/resoluciones`
+- **Protected:** `/perfil` · `/crear-perfil` · `/editar-perfil` · `/usuarios`
+- Fallback: `*` → Error page
+
+---
 
 
-**Note: This project is currently in active development.**
 
-## Current Status
+## Project Structure
+src/
+  assets/                     # images, icons, media
+  components/
+    Aliados/                  # partners marquee (rAF + CSS masking)
+    EventosCarousel/
+    Menu_bar/                 # top navigation (desktop + mobile)
+    FooterTol/
+    NoticiasSection/
+  data/
+    noticias.ts|json          # static news seed (while backend is not connected)
+  layout/
+    Root.tsx                  # <ScrollToTop/> + <Outlet/>
+    ScrollToTop.tsx
+    ProtectedRoute.tsx
+  pages/
+    Home.tsx
+    Noticias.tsx
+    Noticia.jsx
+    Eventos.tsx
+    Registrate.tsx
+    IniciaSesion.tsx
+    Perfil.tsx
+    CrearPerfil.tsx
+    EditarPerfil.tsx
+    UsersList.tsx
+    Novato.tsx / Avanzado.tsx / Adultos.tsx
+    Carreras.tsx / Artistico.tsx
+    Guias.tsx / Resoluciones.tsx
+    ErrorPage.tsx
+  services/
+    authService.ts            # wraps Amplify auth
+    userProfile.ts            # profile fetch helpers
+    storageService.ts         # avatar/file URLs (S3)
+  styles/
+    index.css                 # global/base styles
+    banner.css                # shared banner block
+    home.css / menu.css / ... # per-page/per-component CSS
+  App.tsx
+  main.tsx
 
-The primary focus right now is on building out the user interface and frontend logic. The following areas are under active development:
 
-* **Core UI/UX:** Designing and implementing the look and feel, navigation, and user experience.
-* **Static Content Display:** Showing news, events, and league rules.
-* **User Flow Skeletons:** Setting up the basic structure for user accounts, subscriptions, and future features.
+## Roadmap
 
-## Planned Features (Future Development)
+Wire up AWS Amplify auth (signup, signin, recovery)
 
-The full vision for this application includes:
+Read/write profile + avatar uploads to S3
 
-* **User Account Management:** Secure login and profiles for athletes, parents, coaches, and administrators.
-* **Online Subscriptions & Courses:** Ability to purchase memberships and register for courses/events directly through the site.
-* **Digital ID & Entry Control System:** A unique QR code-based system for athletes to gain validated access to the skating rink.
-* **Backend Integration:** Connecting the frontend to a PostgreSQL database via a backend API.
-* **Cloud Deployment:** Hosting the full application on AWS.
+Backend integration with PostgreSQL (memberships, courses, registrations, news, events)
 
-## Technology Stack 
+QR-based digital rink entry validation
 
-* **React.js (with Vite):** For building a fast and dynamic user interface.
-* **TypeScript:** To ensure code quality and maintainability.
-* **CSS:** For all styling and responsive design.
-* **PostgreSQL:** Database management for account systems and QR code-based digital ID access control system for the skating rink
+Admin dashboard (users, news, courses, events)
+
+AWS deployment (Amplify or S3 + CloudFront), domain & HTTPS
+
+SEO & analytics
+
