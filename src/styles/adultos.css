@@ -1,57 +1,20 @@
-/* File: src/styles/adultos.css */
+/* File: src/styles/adultos.css
+   Only Adultos page–specific tweaks. The banner layout comes from banner.css.
+*/
 
-/* Banner styling */
-
-.adultos-page {
-  padding-top: 120px; /* same as .header height */
+/* Optional: adjust the crop for this specific banner */
+.adultos-banner .banner-img {
+  object-position: center 40%;
 }
 
-.adultos-page .adultos-banner {
-  height: clamp(280px, 42vh, 520px); /* responsive height */
-  max-height: none;                  /* remove 500px cap that clips content */
-  overflow: hidden;
-  position: relative;
-}
-
-
-
-/* 3) Make the image fill the banner area proportionally */
-.adultos-page .adultos-banner .banner-img {
-  width: 100%;
-  height: 100%;          /* fill the banner height */
-  object-fit: cover;     /* preserve proportions, crop gently if needed */
-  object-position: center 35%; /* nudge focus a bit down; adjust to taste */
-  display: block;
-}
-
-.adultos-page .adultos-banner .banner-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1.25rem;
-
-  /* look & feel */
-  color: #fff;
-  padding: 0.25rem 0.75rem;
-  z-index: 2;
-  text-shadow: 2px 2px 4px #2c0c0d; /* Horizontal offset, vertical offset, blur radius, shadow color */
-
-
-  font-size: 10rem;
-  line-height: .9;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-family: 'Barlow Condensed', sans-serif !important;
-  text-align: center;
-}
-
-/* About section styling */
+/* About section */
 .adultos-page .adultos-about {
   max-width: 1100px;
   margin: 2rem auto;
   padding: 0 1rem;
   text-align: center;
 }
+
 .adultos-page .adultos-about h2 {
   color: #6a1b1a;
   font-size: 3rem;
@@ -61,6 +24,7 @@
   letter-spacing: 1px;
   margin-bottom: 2rem;
 }
+
 .adultos-page .adultos-about p {
   font-size: 1.5rem;
   line-height: 1.6;
@@ -69,22 +33,23 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* Register button styling */
+/* CTA button */
 .adultos-page .adultos-btn {
   display: inline-block;
   margin: 2rem auto 0;
   background-color: #53b5e4;
-  color: white;
+  color: #fff;
   border: none;
   font-size: 2.5rem;
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: bold;
+  font-weight: 700;
   padding: 1.5rem 3rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.2s ease;
   text-align: center;
 }
+
 .adultos-page .adultos-btn:hover {
   background-color: #2f8cb8;
   color: #2c0c0d;
@@ -92,17 +57,6 @@
 }
 
 @media (max-width: 768px) {
-  .adultos-page .adultos-banner {
-    height: clamp(220px, 38vh, 360px);
-  }
-
-  .adultos-page .adultos-banner .banner-title {
-    font-size: clamp(2.4rem, 12vw, 4rem); /* scale down on phones */
-    bottom: 0.75rem;
-    padding: 0 .25rem;
-  }
-
-  /* optional: tighten copy below banner if you want */
   .adultos-page .adultos-about h2 { font-size: 2rem; }
   .adultos-page .adultos-about p  { font-size: 1rem; }
 }

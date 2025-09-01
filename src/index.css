@@ -1,91 +1,72 @@
+/* src/index.css — Global baseline for the whole app */
 
+/* ---------- Root + system smoothing ---------- */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Width of the vertical scrollbar (≈17px on Windows, 0 on macOS/overlay). */
+  --sbw: calc(100vw - 100%);
+
+  color-scheme: light;
+  font-family: "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ---------- Document ---------- */
+html {
+  box-sizing: border-box;
+  overflow-y: auto;                 /* ensure a stable scrollbar track */
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  background: #fff; 
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+
 html, body, #root {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #1e1e1e;
-}
-
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  width: 100%;                      
+  min-height: 100%;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-h2 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  background: #ffffff;
+  color: #111;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  overflow-x: hidden;               /* guard against accidental horizontal scroll */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+#root { display: block; }
+
+/* ---------- Media defaults ---------- */
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-width: 100%;
+}
+img { height: auto; }
+
+/* ---------- Typography ---------- */
+h1, h2, h3 { margin: 0 0 .5rem; font-weight: 800; }
+p { margin: 0 0 1rem; }
+
+/* ---------- Links + form controls ---------- */
+a { color: inherit; text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+
+/* Accessible focus ring (you can tweak color) */
+:focus-visible {
+  outline: 3px solid #53b5e4;
+  outline-offset: 2px;
 }
 
+/* ---------- Fixed-header anchor offset ----------
+   If you navigate to /page#section, this prevents the section
+   from hiding under the fixed top menu (120px header height). */
+[id] { scroll-margin-top: 140px; }  /* match your header + some breathing room */
 
-/* Opcional: aplica Russo One a títulos si deseas */
-h1, h2 h3, h4, p{
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+/* ---------- Optional dark preference ---------- */
+@media (prefers-color-scheme: dark) {
+  body { background: #141414; color: #e9e9e9; }
 }

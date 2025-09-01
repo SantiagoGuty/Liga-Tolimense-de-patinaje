@@ -1,41 +1,41 @@
+import '../styles/banner.css';
 import '../styles/resoluciones.css';
+
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
-import novatoBanner from '../assets/img/festibal1.jpg';
+
+// usa la imagen que prefieras como banner (puedes cambiarla después)
+import bannerImg from '../assets/img/patinaje-carreras.jpg';
 
 export default function Resoluciones() {
   return (
-    <div className="page-wrapper novato-page" id="novato">
+    <div className="page-wrapper page-with-banner resoluciones-page" id="resoluciones">
       <Menu_bar />
 
-      {/* Banner Section */}
-      <section className="novato-banner">
-        <img src={novatoBanner} alt="Banner Novato" className="banner-img" />
+      {/* Banner */}
+      <section className="page-banner resoluciones-banner">
+        <img src={bannerImg} alt="Banner Resoluciones" className="banner-img" />
         <h1 className="banner-title">Resoluciones</h1>
       </section>
 
-      {/* About Section */}
-      <section className="novato-about">
-        <h2>¿Como es el curso para Novatos?</h2>
-        <p>
-          El curso para Novatos está diseñado para quienes toman sus primeras patinadas. Aquí crearás una base
-          sólida desarrollando tu equilibrio, postura y control del patín. Trabajaremos paso a paso,
-          combinando ejercicios de deslizamiento y frenado para asegurar tu confianza en cada movimiento.
+      {/* Contenido */}
+      <section className="resoluciones-content">
+        <h2>Resoluciones vigentes</h2>
+        <p className="intro">
+          Consulta las resoluciones, circulares y lineamientos oficiales de la Liga Tolimense de Patinaje.
+          Pronto publicaremos aquí los documentos más recientes.
         </p>
-        <p>
-          Durante las sesiones, aprenderás a desplazarte con seguridad, mantener el centro de gravedad y
-          realizar tus primeros giros. Nuestro objetivo es que al finalizar el curso conozcas las técnicas
-          fundamentales que te permitirán avanzar al siguiente nivel sin miedo.
-        </p>
-        <p>
-          Ideal para niños y adultos sin experiencia previa. ¡Ven y descubre lo divertido que puede ser
-          empezar a patinar con un grupo de instructores expertos y compañeros entusiastas!
-        </p>
-        <a href="/Registrate">
-          <button className="btn-registrarse novato-btn">
-            ¡Regístrate ahora!
-          </button>
-        </a>
+
+        {/* Lista / cards (deja la estructura; podrás mapear tus datos cuando los tengas) */}
+        <div className="doc-list">
+          {/* Ejemplo de tarjeta vacía de placeholder */}
+          <article className="doc-card empty">
+            <div className="doc-info">
+              <h3>Muy pronto</h3>
+              <p>Estamos preparando la publicación de nuevas resoluciones.</p>
+            </div>
+          </article>
+        </div>
       </section>
 
       <FooterTol />

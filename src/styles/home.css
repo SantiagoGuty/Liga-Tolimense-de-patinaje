@@ -30,7 +30,6 @@ html, body {
   margin: 0;
   background-color: #ffffff;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 
@@ -66,7 +65,6 @@ html, body {
   box-shadow: none !important;
   outline: none !important;
   height: 120px; /* Set a fixed height larger than your logo */
-  width: 100%;
   padding: 0 1rem; /* Prevent logo + menu from touching edge */
   box-sizing: border-box;
 
@@ -482,60 +480,61 @@ html, body {
   border-radius: 10px;
 }
 
-
 .links {
-  
-  display: flex;
+  background: #fff;
   width: 100%;
-  height: 45vh !important;
-  font-size: 50px;
-  justify-content: space-evenly;
-  background-color: white;
-
+  padding: clamp(12px, 2vw, 24px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 24px);
+  align-items: stretch;
 }
 
-  
+/* If you're using <Link> or <a> elements, style them as buttons */
+.links a,
+.links .link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 12px;
+  padding: clamp(14px, 4vw, 48px);
+  font-weight: 700;
+  font-size: clamp(1.25rem, 3.2vw, 3rem);  /* scales down on smaller screens */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+/* Brand colors + hover states preserved */
 .resoluciones {
   background-color: #f6c200;
-  padding: 1rem;
-  width: 50%;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 0px;
-  border: none; 
-  transition: all 0.3s ease;
-
+  color: #fff;
 }
-
-
-.resoluciones:hover {
-  color:#6a1b1a;
+.resoluciones:hover,
+.resoluciones:focus-visible {
   background-color: #e5b100;
+  color: #6a1b1a;
   transform: translateY(-4px);
-
 }
-  
 
 .guias {
   background-color: #6a1b1a;
-  color: white;
-  padding: 1rem;
-  width: 50%;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 0px;
-  border: none; 
-  transition: all 0.3s ease;
-
+  color: #fff;
+}
+.guias:hover,
+.guias:focus-visible {
+  background-color: #2c0c0d;
+  color: #f6c200;
+  transform: translateY(-4px);
 }
 
-  
-.guias:hover {
-  color:#f6c200;
-  background-color: #2c0c0d;
-  transform: translateY(-4px);
-
-
+/* Keyboard focus */
+.links a:focus-visible,
+.links .link-btn:focus-visible {
+  outline: 3px solid #53b5e4;
+  outline-offset: 3px;
 }
 
 .aliados h1{
@@ -685,5 +684,14 @@ html, body {
     width: 100%;            /* Full width buttons */
     padding: 2rem;          /* Better tap targets */
     font-size: 2.5rem;      /* Adjust font size */
+  }
+  .links {
+    grid-template-columns: 1fr;
+    padding: clamp(12px, 3vw, 20px);
+  }
+  .links a,
+  .links .link-btn {
+    font-size: clamp(1.25rem, 6vw, 2.2rem);
+    padding: clamp(16px, 5vw, 28px);
   }
 }

@@ -1,8 +1,5 @@
 import '../styles/home.css';
-//import patinador from '../assets/img/foto_portada.jpg';
-//import noticiasImg from '../assets/img/09052025-_DSC0334.jpg';
 import eventosImg from '../assets/img/festibal1.jpg';
-//import patinadora from '../assets/img/arias_patinadora.jpg';
 import campeon from '../assets/img/campeon.jpg';
 
 
@@ -190,18 +187,17 @@ export default function Home() {
 
 
 
-      {/* Aliados */}
+      {/* Eventos */}
       <EventosCarousel/>
 
 
 
-      {/* Links */}
-      <section className="links">
-
-        <button className="resoluciones">Resoluciones</button>
-        <button className="guias">Guías</button>
-
-      </section>
+     {/* Links */}
+    <section className="links">
+      <Link to="/resoluciones" className="resoluciones">Resoluciones</Link>
+      <Link to="/guias" className="guias">Guías</Link>
+    </section>
+    
 
 
       {/* Aliados */}

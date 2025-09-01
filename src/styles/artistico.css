@@ -1,67 +1,31 @@
-/* File: src/styles/novato.css */
+/* File: src/styles/artistico.css
+   Only Artístico-specific tweaks. Banner layout comes from banner.css.
+*/
 
-/* Banner styling */
-.novato-page .novato-banner {
-  position: relative;
-  width: 100%;
-  max-height: 500px;
-  overflow: hidden;
-}
-.novato-page .novato-banner .banner-img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-.novato-page .novato-banner .banner-artistico {
-  position:absolute;
-  bottom: 4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 10rem;
-  font-weight: 700 !important; /* bold */
-  text-transform: uppercase; /* optional: makes it look sportier */
-  letter-spacing: 1px;        /* optional: slight spacing */
-  font-family: 'Karantina', cursive;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+/* Adjust banner crop (usually a bit higher looks nice for portraits) */
+.artistico-banner .banner-img {
+  object-position: center 35%;
 }
 
-.banner-title-artistico {
-  position:absolute;
-  bottom: 4rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 8rem;
-  font-weight: 700 !important; /* bold */
-  text-transform: uppercase; /* optional: makes it look sportier */
-  letter-spacing: 1px;        /* optional: slight spacing */
-  font-family: 'Karantina', cursive;
-  text-align: center;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-}
-
-/* About section styling */
-.novato-page .novato-about {
+/* About */
+.artistico-page .artistico-about {
   max-width: 1100px;
   margin: 2rem auto;
   padding: 0 1rem;
-  text-align: center; /* Center all text */
+  text-align: center;
 }
 
-.novato-page .novato-about h2 {
+.artistico-page .artistico-about h2 {
   color: #6a1b1a;
   font-size: 3rem;
-  font-family: 'Barlow Condensed', sans-serif !important;
-  font-weight: 700 !important; /* bold */
-  text-transform: uppercase; /* optional: makes it look sportier */
-  letter-spacing: 1px;        /* optional: slight spacing */
-  margin-bottom: 2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.25rem;
 }
-.novato-page .novato-about p {
+
+.artistico-page .artistico-about p {
   font-size: 1.5rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
@@ -69,39 +33,29 @@
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* Register button styling */
-.novato-page .novato-btn {
+/* CTA */
+.artistico-page .artistico-btn {
   display: inline-block;
   margin: 2rem auto 0;
-  background-color: #f6c200;
-  color: #6a1b1a;
+  background: #53b5e4;   /* azul marca */
+  color: #fff;
   border: none;
   font-size: 2.5rem;
-  font-family: 'Barlow Condensed', sans-serif !important;
-  font-weight: bold;
-  padding: 1.5rem 3rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  padding: 1.25rem 2.5rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color .2s ease, transform .2s ease;
   text-align: center;
 }
-.novato-page .novato-btn:hover {
-  background-color: #e5b100;
+.artistico-page .artistico-btn:hover {
+  background: #2f8cb8;
+  color: #2c0c0d;
   transform: translateY(-2px);
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .novato-page .novato-banner .banner-title {
-    font-size: 4.5rem;
-  }
-  .novato-page .novato-about {
-    padding: 0 0.5rem;
-  }
-  .novato-page .novato-about h2 {
-    font-size: 2rem;
-  }
-  .novato-page .novato-about p {
-    font-size: 1rem;
-  }
+  .artistico-page .artistico-about h2 { font-size: 2rem; }
+  .artistico-page .artistico-about p  { font-size: 1rem; }
 }

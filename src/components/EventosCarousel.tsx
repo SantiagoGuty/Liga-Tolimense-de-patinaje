@@ -34,7 +34,7 @@ export default function EventosCarousel({
               <div className="event-text-area">
                 <h5>3er Festibal Departametal de escuelas y novatos</h5>
                 <p>La selección tolimense acaba de terminar una jornada histórica en Medellin...</p>
-                <a href="/event-detail" className="read-more-btn">Leer más</a>
+                <a href="/Eventos" className="read-more-btn">Leer más</a>
               </div>
               <div className="event-image-area">
                 <CImage className="noticia-img" src={patinadores_infantiles} alt="Evento 1" />
@@ -47,7 +47,7 @@ export default function EventosCarousel({
               <div className="event-text-area">
                 <h5>Interligas Ibagué 2025</h5>
                 <p>La selección tolimense se prepara para defender la casa...</p>
-                <a href="/event-detail" className="read-more-btn">Leer más</a>
+                <a href="/Eventos" className="read-more-btn">Leer más</a>
               </div>
               <div className="event-image-area">
                 <CImage className="noticia-img" src={arias_y_ninos} alt="Evento 2" />
@@ -60,7 +60,7 @@ export default function EventosCarousel({
               <div className="event-text-area">
                 <h5>Contrarreloj Guarne</h5>
                 <p>La selección tolimense acaba de terminar una jornada histórica en Guarne...</p>
-                <a href="/event-detail" className="read-more-btn">Leer más</a>
+                <a href="/Eventos" className="read-more-btn">Leer más</a>
               </div>
               <div className="event-image-area">
                 <CImage className="noticia-img" src={accion_1} alt="Evento 3" />

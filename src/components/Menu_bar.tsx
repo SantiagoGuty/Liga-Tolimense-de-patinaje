@@ -181,7 +181,6 @@ export default function Menu_bar() {
         <Link to="/Eventos"      onClick={() => setMenuOpen(false)}>Eventos</Link>
         <Link to="/resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
         <Link to="/guias"        onClick={() => setMenuOpen(false)}>Guías</Link>
-        <Link to="/membresia"    onClick={() => setMenuOpen(false)}>Membresía</Link>
 
         {/* Auth-aware items (mobile) */}
         {!isAuthed && (

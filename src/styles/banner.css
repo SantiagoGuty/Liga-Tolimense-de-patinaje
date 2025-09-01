@@ -1,0 +1,75 @@
+/* File: src/styles/banner.css
+   Generic, reusable banner block used by multiple pages.
+   Works with a fixed header (~120px) and prevents overlap.
+*/
+
+:root {
+  /* Match your fixed header height (Menu_bar) */
+  --header-height: 120px;
+}
+
+/* Add top space so content never hides under the fixed header */
+.page-with-banner {
+  padding-top: var(--header-height);
+}
+
+/* Banner container (taller than before) */
+.page-banner {
+  position: relative;
+  width: 100%;
+  /* ↑ increased overall height a bit on all screens */
+  height: clamp(340px, 50vh, 640px);
+  overflow: hidden;
+  background: #ddd; /* fallback while image loads */
+}
+
+/* Image fills the banner proportionally */
+.page-banner .banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%; /* adjust focus as needed per-page */
+  display: block;
+}
+
+/* Title overlay (slightly smaller than before) */
+.page-banner .banner-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1.25rem;
+
+  margin: 0;             /* prevent default h1 margins from shifting layout */
+  padding: 0.25rem 0.75rem;
+
+  color: #fff;
+  text-shadow: 2px 2px 4px #2c0c0d;
+  z-index: 2;
+
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 0.88;     /* a touch tighter so two lines stack nicely */
+  text-align: center;
+
+  /* ↓ smaller cap so long titles fit; still scales with viewport */
+  font-size: clamp(2.0rem, 9vw, 7rem);
+  /* Optional: keep the title from spanning too wide on huge screens */
+  max-width: min(92vw, 1400px);
+}
+
+/* Small-screen tweaks */
+@media (max-width: 768px) {
+  /* ↑ make mobile banner a bit taller as well */
+  .page-banner {
+    height: clamp(260px, 46vh, 520px);
+  }
+  /* ↓ scale title down a bit more on phones */
+  .page-banner .banner-title {
+    bottom: 1rem;
+    padding: 0 0.25rem;
+    font-size: clamp(1.75rem, 11vw, 3.5rem);
+    line-height: 0.9;
+  }
+}

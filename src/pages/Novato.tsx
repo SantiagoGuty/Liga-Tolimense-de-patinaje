@@ -1,44 +1,44 @@
-import '../styles/novato.css';
+// File: src/pages/Novato.tsx
+import '../styles/banner.css';   // shared banner layout
+import '../styles/novato.css';   // page-specific tweaks
+
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
-import novatoBanner from '../assets/img/festibal1.jpg';
+import novatoBanner from '../assets/img/novatos-patinaje.jpg';
 
 export default function Novato() {
   return (
-    <div className="page-wrapper novato-page" id="novato">
+    <div className="page-wrapper novato-page page-with-banner" id="novato">
       <Menu_bar />
 
-      {/* Banner Section */}
-      <section className="novato-banner">
+      {/* Banner */}
+      <section className="page-banner novato-banner">
         <img src={novatoBanner} alt="Banner Novato" className="banner-img" />
         <h1 className="banner-title">Novatos</h1>
       </section>
 
-      {/* About Section */}
+      {/* About */}
       <section className="novato-about">
-        <h2>¿Como es el curso para Novatos?</h2>
+        <h2>¿Cómo es el curso para Novatos?</h2>
         <p>
-          El curso para Novatos está diseñado para quienes toman sus primeras patinadas. Aquí crearás una base
-          sólida desarrollando tu equilibrio, postura y control del patín. Trabajaremos paso a paso,
-          combinando ejercicios de deslizamiento y frenado para asegurar tu confianza en cada movimiento.
+          El curso para Novatos está diseñado para quienes toman sus primeras patinadas.
+          Construirás una base sólida desarrollando equilibrio, postura y control del patín.
         </p>
         <p>
-          Durante las sesiones, aprenderás a desplazarte con seguridad, mantener el centro de gravedad y
-          realizar tus primeros giros. Nuestro objetivo es que al finalizar el curso conozcas las técnicas
-          fundamentales que te permitirán avanzar al siguiente nivel sin miedo.
+          Aprenderás a desplazarte con seguridad, mantener tu centro de gravedad y realizar
+          tus primeros giros con confianza.
         </p>
         <p>
-          Ideal para niños y adultos sin experiencia previa. ¡Ven y descubre lo divertido que puede ser
-          empezar a patinar con un grupo de instructores expertos y compañeros entusiastas!
+          Ideal para niños y adultos sin experiencia previa. ¡Ven y descubre lo divertido
+          que es empezar a patinar con instructores expertos y compañeros entusiastas!
         </p>
+
         <a href="/Registrate">
-          <button className="btn-registrarse novato-btn">
-            ¡Regístrate ahora!
-          </button>
+          <button className="btn-registrarse novato-btn">¡Regístrate ahora!</button>
         </a>
       </section>
 
       <FooterTol />
     </div>
   );
-}
+} 

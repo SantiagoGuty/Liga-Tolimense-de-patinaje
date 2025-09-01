@@ -1,21 +1,23 @@
 // File: src/pages/Adultos.tsx
-import '../styles/adultos.css';
+import '../styles/banner.css';        // generic banner layout (height, title overlay)
+import '../styles/adultos.css';       // page-specific tweaks
+
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
-import adultoBanner from '../assets/img/profe.jpg'; // Banner image for Adultos
+import adultoBanner from '../assets/img/profe.jpg';
 
 export default function Adultos() {
   return (
-    <div className="page-wrapper adultos-page" id="adultos">
+    <div className="page-wrapper page-with-banner adultos-page" id="adultos">
       <Menu_bar />
 
-      {/* Banner Section */}
-      <section className="adultos-banner">
+      {/* Reusable banner block */}
+      <section className="page-banner adultos-banner">
         <img src={adultoBanner} alt="Banner Adultos" className="banner-img" />
         <h1 className="banner-title">Adultos</h1>
       </section>
 
-      {/* About Section */}
+      {/* About */}
       <section className="adultos-about">
         <h2>¿Cómo es el curso para Adultos?</h2>
         <p>
@@ -31,10 +33,9 @@ export default function Adultos() {
           recreación, fitness o competencias amateur. ¡Únete a nuestra comunidad y vive la pasión por
           el patinaje a cualquier edad!
         </p>
+
         <a href="/Registrate">
-          <button className="btn-registrarse adultos-btn">
-            ¡Regístrate ahora!
-          </button>
+          <button className="btn-registrarse adultos-btn">¡Regístrate ahora!</button>
         </a>
       </section>
 
