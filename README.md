@@ -6,6 +6,9 @@
 
 The goal of this project is to provide a modern, responsive web platform for **La Liga Tolimense de Patinaje** that centralizes news, events, guides, resolutions, courses, memberships, and (planned) **digital rink entry control** using **QR credentials**.
 
+<img width="1918" height="874" alt="image" src="https://github.com/user-attachments/assets/8585719e-3665-4755-9457-9f55925fc478" />
+
+
 ---
 
 ## Live Preview
