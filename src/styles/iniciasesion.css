@@ -151,3 +151,69 @@
   .auth-card { padding: 2rem 1.25rem; }
   .auth-links { flex-direction: column; align-items: stretch; }
 }
+
+/* Registration-specific tweaks layered on top of iniciasesion.css */
+
+#registrate { scroll-margin-top: 140px; }
+
+/* Use the same form width as login, but with a grid */
+.auth-form.reg-grid {
+  width: min(900px, 100%);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .auth-form.reg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .auth-form.reg-grid .auth-btn {
+    grid-column: 1 / -1; /* button full width */
+  }
+}
+
+.form-group { display: flex; flex-direction: column; }
+.form-group.full { grid-column: 1 / -1; }
+
+.form-group label {
+  margin-bottom: .35rem;
+  font-weight: 700;
+  color: #3a0d0c;
+}
+
+.form-group input,
+.form-group select {
+  padding: .9rem 1rem;
+  border: 2px solid #6a1b1a;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fff;
+  color: #2c0c0d;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #f6c200;
+  box-shadow: 0 0 0 3px rgba(246,194,0,.22);
+}
+
+/* Error styles */
+.input-error { border-color: #d22; }
+.error-msg {
+  margin-top: .35rem;
+  font-size: .9rem;
+  color: #d22;
+}
+
+/* File input */
+.file-group input[type="file"] { padding: .5rem; }
+.file-note { margin-top: .25rem; opacity: .85; }
+
+/* General form error */
+.form-error {
+  grid-column: 1 / -1;
+  color: #d22;
+  font-weight: 800;
+}

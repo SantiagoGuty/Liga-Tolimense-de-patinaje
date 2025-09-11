@@ -4,8 +4,10 @@ import { getCurrentUser } from 'aws-amplify/auth';
 
 const client = generateClient();
 
-/** Inline GraphQL ops (keeps this file self-contained).
- *  If you prefer codegen, you can import from ../graphql/*. */
+/**
+ * Inline GraphQL operations.
+ * (If you use codegen, you can swap these for imports from ../graphql/*)
+ */
 const GetUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
@@ -20,6 +22,8 @@ const GetUser = /* GraphQL */ `
       permiso
       estatus
       avatarKey
+      qrKey
+      qrPayload
     }
   }
 `;
@@ -38,6 +42,8 @@ const CreateUser = /* GraphQL */ `
       permiso
       estatus
       avatarKey
+      qrKey
+      qrPayload
     }
   }
 `;
@@ -62,6 +68,7 @@ const UpdateUser = /* GraphQL */ `
   }
 `;
 
+/** Fields you can set when creating the profile */
 export type CreateUserInput = {
   nombre: string;
   apellido: string;
@@ -72,12 +79,33 @@ export type CreateUserInput = {
   cedula?: string;
   permiso?: string;
   estatus?: string;
+  avatarKey?: string;   // allow avatar to be set at creation
+  qrKey?: string;       // optional: if your schema allows setting on create
+  qrPayload?: string;   // optional
 };
+
+/** Update payload (all optional) */
+export type UpdateUserFields = Partial<CreateUserInput> & {
+  // id is resolved from the current user, so not required here
+};
+
+/** Utility: remove undefined keys so we don't send them to GraphQL */
+function pruneUndefined<T extends Record<string, any>>(obj: T): T {
+  const out: Record<string, any> = {};
+  for (const [k, v] of Object.entries(obj)) {
+    if (v !== undefined) out[k] = v;
+  }
+  return out as T;
+}
 
 /** Get the signed-in user's profile by Cognito sub (id). */
 export async function getCurrentUserProfile() {
   const { userId } = await getCurrentUser(); // Cognito sub
-  const res = await client.graphql({ query: GetUser, variables: { id: userId } });
+  const res = await client.graphql({
+    query: GetUser,
+    variables: { id: userId },
+    authMode: 'userPool', // ensure User Pools auth
+  });
   const data = 'data' in res ? (res as any).data : res;
   return data?.getUser ?? null;
 }
@@ -87,20 +115,27 @@ export async function createCurrentUserProfile(input: CreateUserInput) {
   const { userId, signInDetails } = await getCurrentUser();
   const email = input.correo ?? signInDetails?.loginId ?? '';
 
-  const payload = {
-    id: userId, // enforce one profile per user
+  const payload = pruneUndefined({
+    id: userId,                 // enforce one profile per user
     nombre: input.nombre,
     apellido: input.apellido,
     correo: email,
-    telefono: input.telefono ?? null,
-    fechaNacimiento: input.fechaNacimiento ?? null,
-    sexo: input.sexo ?? null,
-    cedula: input.cedula ?? null,
-    permiso: input.permiso ?? null,
-    estatus: input.estatus ?? null,
-  };
+    telefono: input.telefono,
+    fechaNacimiento: input.fechaNacimiento,
+    sexo: input.sexo,
+    cedula: input.cedula,
+    permiso: input.permiso,
+    estatus: input.estatus,
+    avatarKey: input.avatarKey,
+    qrKey: input.qrKey,
+    qrPayload: input.qrPayload,
+  });
 
-  const res = await client.graphql({ query: CreateUser, variables: { input: payload } });
+  const res = await client.graphql({
+    query: CreateUser,
+    variables: { input: payload },
+    authMode: 'userPool',
+  });
   const data = 'data' in res ? (res as any).data : res;
   return data?.createUser ?? null;
 }
@@ -111,31 +146,68 @@ export async function updateCurrentUserAvatar(avatarKey: string) {
   const res = await client.graphql({
     query: UpdateUser,
     variables: { input: { id: userId, avatarKey } },
+    authMode: 'userPool',
   });
   const data = 'data' in res ? (res as any).data : res;
   return data?.updateUser ?? null;
 }
 
-export async function updateCurrentUserProfile(fields: {
-  nombre?: string; apellido?: string; correo?: string; telefono?: string;
-  fechaNacimiento?: string; sexo?: string; cedula?: string;
-  permiso?: string; estatus?: string; avatarKey?: string;
-}) {
+/** Update arbitrary fields on the current user's profile. */
+export async function updateCurrentUserProfile(fields: UpdateUserFields) {
   const { userId } = await getCurrentUser();
+  const payload = pruneUndefined({ id: userId, ...fields });
   const res = await client.graphql({
     query: UpdateUser,
-    variables: { input: { id: userId, ...fields } },
+    variables: { input: payload },
+    authMode: 'userPool',
   });
   const data = 'data' in res ? (res as any).data : res;
   return data?.updateUser ?? null;
 }
 
+/** Save QR fields for the current user. */
 export async function saveCurrentUserQr(qrKey: string, qrPayload: string) {
   const { userId } = await getCurrentUser();
   const res = await client.graphql({
     query: UpdateUser,
     variables: { input: { id: userId, qrKey, qrPayload } },
+    authMode: 'userPool',
   });
   const data = 'data' in res ? (res as any).data : res;
   return data?.updateUser ?? null;
+}
+
+/**
+ * Upsert helper:
+ * - If the profile exists, update it with the provided fields
+ * - If not, create it
+ */
+export async function upsertCurrentUserProfile(input: CreateUserInput) {
+  const existing = await getCurrentUserProfile().catch(() => null);
+  if (existing?.id) {
+    return updateCurrentUserProfile(input);
+  }
+  return createCurrentUserProfile(input);
+}
+
+
+// ⬇️ agrega esto junto a las otras operaciones GraphQL
+const DeleteUser = /* GraphQL */ `
+  mutation DeleteUser($input: DeleteUserInput!) {
+    deleteUser(input: $input) {
+      id
+    }
+  }
+`;
+
+// ⬇️ exporta esta función junto a las demás
+export async function deleteCurrentUserProfile() {
+  const { userId } = await getCurrentUser();
+  const res = await client.graphql({
+    query: DeleteUser,
+    variables: { input: { id: userId } },
+    authMode: 'userPool',
+  });
+  const data = 'data' in res ? (res as any).data : res;
+  return data?.deleteUser ?? null;
 }

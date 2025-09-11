@@ -227,25 +227,59 @@
 
 /* ---- Responsive tweaks ---- */
 
-@media (max-width: 860px) {
-  .profile-card {
-    border-radius: 16px;
+/* --- Make avatar + QR stack on mobile and scale nicely --- */
+@media (max-width: 768px) {
+  .profile__media {
+    flex-direction: column;      /* stack vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  /* Scale avatar a bit on small screens */
+  .profile__avatar {
+    width: clamp(160px, 45vw, 220px);
+    height: clamp(160px, 45vw, 220px);
+  }
+
+  /* Make QR larger than avatar and responsive */
+  .profile__qr {
+    width: clamp(220px, 70vw, 340px);
+    height: clamp(220px, 70vw, 340px);
+    border-radius: 14px;
+  }
+
+  .profile__qr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }
 
-@media (max-width: 640px) {
+/* Optional: slightly smaller layout on very small phones */
+@media (max-width: 420px) {
+  .profile__media { gap: 12px; }
   .profile__avatar {
-    width: 180px;
-    height: 180px;
+    width: clamp(150px, 50vw, 200px);
+    height: clamp(150px, 50vw, 200px);
   }
+  .profile__qr {
+    width: clamp(200px, 78vw, 320px);
+    height: clamp(200px, 78vw, 320px);
+  }
+}
 
-  .profile__details li {
-    grid-template-columns: 1fr; /* stack label above value */
-    gap: 0.25rem;
-    padding: 0.75rem 0;
-  }
 
-  .profile__form {
-    grid-template-columns: 1fr; /* single column form on mobile */
-  }
+/* Botón de peligro */
+.btn.btn--danger {
+  background: #b00020;
+  color: #fff;
+  border: none;
+}
+.btn.btn--danger:hover {
+  background: #8a0019;
+}
+.btn[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
 }

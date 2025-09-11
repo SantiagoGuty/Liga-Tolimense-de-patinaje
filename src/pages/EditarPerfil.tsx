@@ -1,7 +1,14 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
-import { getCurrentUserProfile, updateCurrentUserProfile, updateCurrentUserAvatar } from '../services/userProfile';
+import { signOut } from 'aws-amplify/auth';
+import { deleteUser } from 'aws-amplify/auth';
+import {
+  getCurrentUserProfile,
+  updateCurrentUserProfile,
+  updateCurrentUserAvatar,
+  deleteCurrentUserProfile, // ⬅️ nuevo
+} from '../services/userProfile';
 import { uploadAvatar, getAvatarUrl } from '../services/storageService';
 import { useNavigate } from 'react-router-dom';
 import '../styles/perfil.css'; // reuse styles
@@ -31,9 +38,16 @@ export default function EditarPerfil() {
           avatarKey: p.avatarKey || '',
         });
         if (p.avatarKey) {
-          try { const url = await getAvatarUrl(p.avatarKey); setAvatarUrl(url.toString()); } catch {}
+          try {
+            const url = await getAvatarUrl(p.avatarKey);
+            setAvatarUrl(url.toString());
+          } catch {
+            /* ignore */
+          }
         }
-      } catch (e: any) { setError(e.message || 'No se pudo cargar el perfil'); }
+      } catch (e: any) {
+        setError(e.message || 'No se pudo cargar el perfil');
+      }
     })();
   }, [nav]);
 
@@ -44,6 +58,7 @@ export default function EditarPerfil() {
   async function onPickAvatar() {
     (document.getElementById('edit-avatar-input') as HTMLInputElement)?.click();
   }
+
   async function onAvatarChange(e: React.ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0]; if (!f) return;
     setSaving(true); setError('');
@@ -53,8 +68,12 @@ export default function EditarPerfil() {
       const url = await getAvatarUrl(key);
       setForm((prev: any) => ({ ...prev, avatarKey: key }));
       setAvatarUrl(url.toString());
-    } catch (err: any) { setError(err?.message || 'No se pudo subir la foto'); }
-    finally { setSaving(false); (e.target as HTMLInputElement).value = ''; }
+    } catch (err: any) {
+      setError(err?.message || 'No se pudo subir la foto');
+    } finally {
+      setSaving(false);
+      (e.target as HTMLInputElement).value = '';
+    }
   }
 
   async function onSubmit(e: FormEvent) {
@@ -74,9 +93,37 @@ export default function EditarPerfil() {
         estatus: form.estatus || null,
       });
       nav('/perfil');
-    } catch (err: any) { setError(err?.message || 'No se pudo guardar'); }
-    finally { setSaving(false); }
+    } catch (err: any) {
+      setError(err?.message || 'No se pudo guardar');
+    } finally {
+      setSaving(false);
+    }
   }
+
+  async function onDeleteProfile() {
+  const ok = window.confirm(
+    '¿Eliminar tu perfil y cuenta? Esta acción no se puede deshacer.'
+  );
+  if (!ok) return;
+
+  setSaving(true); setError('');
+  try {
+    // 1) Remove profile row (AppSync/DynamoDB)
+    await deleteCurrentUserProfile().catch(() => { /* ignore if not found */ });
+
+    // 2) Remove Cognito user (this also signs the user out)
+    await deleteUser();
+
+    // 3) Go home
+    nav('/', { replace: true });
+  } catch (err: any) {
+    setError(err?.message || 'No se pudo eliminar la cuenta');
+  } finally {
+    setSaving(false);
+  }
+}
+
+
 
   if (!form) return null;
 
@@ -92,15 +139,27 @@ export default function EditarPerfil() {
           <div className="profile__header">
             <h1 id="edit-title" className="profile__title">Editar perfil</h1>
             <div className="profile__avatar">
-              {avatarUrl ? <img src={avatarUrl} alt="Foto de perfil" /> : <div className="profile__initials">{initials || '🙂'}</div>}
+              {avatarUrl
+                ? <img src={avatarUrl} alt="Foto de perfil" />
+                : <div className="profile__initials">{initials || '🙂'}</div>}
             </div>
-            <input id="edit-avatar-input" type="file" accept="image/*" onChange={onAvatarChange} style={{ display: 'none' }} />
+            <input
+              id="edit-avatar-input"
+              type="file"
+              accept="image/*"
+              onChange={onAvatarChange}
+              style={{ display: 'none' }}
+            />
             <div className="profile__actions">
               <button className="btn btn--primary" type="button" onClick={onPickAvatar} disabled={saving}>
                 Cambiar foto
               </button>
               <button className="btn btn--secondary" type="button" onClick={() => nav('/perfil')}>
                 Cancelar
+              </button>
+              {/* ⬇️ Acción de peligro */}
+              <button className="btn btn--danger" type="button" onClick={onDeleteProfile} disabled={saving}>
+                Eliminar perfil
               </button>
             </div>
             {error && <p style={{ color: 'crimson', margin: 0 }}>{error}</p>}
@@ -140,7 +199,6 @@ export default function EditarPerfil() {
               <label>Cédula</label>
               <input name="cedula" value={form.cedula || ''} onChange={onChange} />
             </div>
-
 
             <div className="profile__actions">
               <button className="btn btn--primary" type="submit" disabled={saving} aria-busy={saving}>

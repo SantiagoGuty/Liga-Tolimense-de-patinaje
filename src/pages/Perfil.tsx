@@ -123,7 +123,7 @@ export default function Perfil() {
                 {avatarUrl ? (
                   <img src={avatarUrl} alt="Foto de perfil" />
                 ) : (
-                  <div className="profile__initials">{initials || '🙂'}</div>
+                  <div className="profile__initials">{initials || ':)'}</div>
                 )}
               </div>
 

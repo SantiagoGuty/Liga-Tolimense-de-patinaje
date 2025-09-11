@@ -9,6 +9,7 @@ import bannerImg from '../assets/img/patinaje-artistico.jpg';
 
 export default function Guias() {
   return (
+    
     <div className="page-wrapper page-with-banner guias-page" id="guias">
       <Menu_bar />
 
