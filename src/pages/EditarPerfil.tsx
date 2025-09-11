@@ -1,7 +1,6 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
-import { signOut } from 'aws-amplify/auth';
 import { deleteUser } from 'aws-amplify/auth';
 import {
   getCurrentUserProfile,
