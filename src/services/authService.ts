@@ -6,27 +6,21 @@ import {
   signOut,
   signInWithRedirect,
   getCurrentUser,
+  fetchAuthSession,
 } from 'aws-amplify/auth';
 
+// Email/password
 export async function signupEmailPassword(params: {
   email: string;
   password: string;
   given_name?: string;
   family_name?: string;
-  phone_number?: string; // E.164 format if you use it later: +573001234567
 }) {
+  const { email, password, ...attrs } = params;
   return signUp({
-    username: params.email,
-    password: params.password,
-    options: {
-      userAttributes: {
-        email: params.email,
-        ...(params.given_name ? { given_name: params.given_name } : {}),
-        ...(params.family_name ? { family_name: params.family_name } : {}),
-        ...(params.phone_number ? { phone_number: params.phone_number } : {}),
-      },
-      autoSignIn: false,
-    },
+    username: email,
+    password,
+    options: { userAttributes: { email, ...attrs } },
   });
 }
 
@@ -38,17 +32,55 @@ export async function signinEmailPassword(email: string, password: string) {
   return signIn({ username: email, password });
 }
 
-export async function signinWithGoogle() {
-  // requires Google provider configured in Cognito Hosted UI
-  return signInWithRedirect({ provider: 'Google' });
+export async function logout() {
+  await signOut();
 }
 
-export async function logout() {
-  return signOut();
+// *** GOOGLE SSO ***
+export async function signinWithGoogle() {
+  // This redirects to your Cognito Hosted UI (with the Google IdP)
+  await signInWithRedirect({ provider: 'Google' });
+}
+
+// Optional helpers you can call on app mount / after redirect:
+export async function ensureSessionLoaded() {
+  // Triggers token exchange after Hosted UI returns with ?code=...
+  // If already signed in, it resolves quickly.
+  try {
+    await fetchAuthSession();
+  } catch {
+    /* ignore */
+  }
+}
+
+export async function getCurrentAmplifyUser() {
+  try {
+    return await getCurrentUser();
+  } catch {
+    return null;
+  }
+}
+
+// Get ID token claims (name, email, picture, etc.) after Hosted UI redirect
+export async function getIdTokenClaims():
+  Promise<Record<string, any> | undefined> {
+  const s = await fetchAuthSession();
+  return s.tokens?.idToken?.payload as any | undefined;
+}
+
+// Quick check if someone is signed in
+export async function isSignedIn(): Promise<boolean> {
+  try {
+    await getCurrentUser();
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function currentUser() {
   try {
+    const { getCurrentUser } = await import('aws-amplify/auth');
     return await getCurrentUser();
   } catch {
     return null;

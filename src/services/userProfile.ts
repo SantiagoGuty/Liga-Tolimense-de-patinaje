@@ -191,7 +191,6 @@ export async function upsertCurrentUserProfile(input: CreateUserInput) {
 }
 
 
-// ⬇️ agrega esto junto a las otras operaciones GraphQL
 const DeleteUser = /* GraphQL */ `
   mutation DeleteUser($input: DeleteUserInput!) {
     deleteUser(input: $input) {

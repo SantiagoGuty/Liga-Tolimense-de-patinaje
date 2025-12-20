@@ -1,5 +1,9 @@
 /* Auth (Inicia Sesión) — page-specific styles */
 
+/* keep auth content clear of the fixed header */
+:root { --header-height: 120px; } 
+
+
 .auth-wrapper {
   min-height: calc(100vh - 120px);
   display: flex;
@@ -75,7 +79,7 @@
   margin-bottom: .4rem;
 }
 
-.auth-field input {
+.auth-field input:not([type="file"]) {
   width: 100%;
   padding: .95rem 1rem;
   border: 2px solid #6a1b1a;
@@ -216,4 +220,11 @@
   grid-column: 1 / -1;
   color: #d22;
   font-weight: 800;
+}
+
+
+/* Hide the native file input completely */
+.auth-file-control input[type="file"],
+input[type="file"].auth-file-input {
+  display: none !important;
 }

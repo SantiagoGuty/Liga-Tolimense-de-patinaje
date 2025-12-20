@@ -1,4 +1,4 @@
-import './amplifyClient.js';                 // ✅ runs config first
+import './amplifyClient';                 // ✅ runs config first
 
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
