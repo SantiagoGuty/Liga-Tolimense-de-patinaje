@@ -99,15 +99,7 @@ export default function IniciaSesion() {
               <a href="/recuperar" className="auth-link">¿Olvidaste tu contraseña?</a>
             </div>
 
-            <div className="auth-divider" role="separator" aria-hidden="true">
-              <span /><em>o</em><span />
-            </div>
 
-            <div className="auth-sso">
-              <button type="button" className="sso-btn" onClick={handleGoogle}>
-                Continuar con Google
-              </button>
-            </div>
           </section>
         </main>
       </div>

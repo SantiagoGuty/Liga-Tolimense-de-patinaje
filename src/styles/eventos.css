@@ -1,7 +1,7 @@
 
 .eventos {
   background-color: white;
-  padding: 2rem 0 1rem 0; /* Reduce top and bottom spacing */
+  padding: 0; /* Reduce top and bottom spacing */
   padding-bottom: 0px;
 }
 
@@ -114,6 +114,7 @@
   transform: translateX(-50%) !important;
   display: flex !important;
   justify-content: center !important;
+  color: #c1903c;
   gap: 12px;
   z-index: 10;
 }

@@ -4,7 +4,7 @@
   display: flex;
   gap: 1rem;
 }
-
+ 
 .menu-desktop a {
   position: relative;
   color: white;
@@ -22,13 +22,13 @@
   height: 2px;
   bottom: -2px;
   left: 0;
-  background-color: #e5b100;
+  background-color: #c1903c;
   transition: width 0.3s ease-in-out;
 }
 
 
 .menu-desktop a:hover{
-  color:#e5b100;
+  color:#c1903c;
 }
 
 
@@ -82,12 +82,12 @@
 
 .menu-mobile a:hover {
   font-style: un !important;
-  color: #f6c200;
+  color: #c1903c;
 }
 
 .menu-desktop a.active,
 .menu-mobile a.active {
-  color: #f6c200;
+  color: #c1903c;
   font-family: 'Barlow Condensed', sans-serif !important;
   letter-spacing: 1px;        /* optional: slight spacing */
 }
@@ -112,7 +112,7 @@
 
 .line {
   fill: none;
-  stroke: #f6c200;
+  stroke: #c1903c;
   stroke-width: 6;
   transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
               stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -183,7 +183,7 @@
 
 .dropdown-content a:hover {
   background-color: #3a0d0c;
-  color: #f6c200;
+  color: #c1903c;
 }
 
 .dropdown:hover .dropdown-content {
@@ -202,7 +202,7 @@
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  border: 3px solid #f6c200; /* gold ring */
+  border: 3px solid #c1903c; /* gold ring f6c200*/
   overflow: hidden;
   background: #fff;
   display: inline-flex;
@@ -312,7 +312,7 @@
   .menu-toggle .bar {
     width: 30px;
     height: 4px;
-    background-color: #f6c200;
+    background-color: #c1903c;
     border-radius: 2px;
   }
 
@@ -338,12 +338,12 @@
 
 
 .menu-mobile summary::after {
-  content: '▶';
+  content: '►';
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #f6c200;
+  color: #c1903c;
   font-size: 16px;
   transition: transform 0.3s ease;
 }
@@ -355,7 +355,7 @@
 }
 
 .menu-mobile details[open] summary {
-  color: #f6c200;
+  color: #c1903c;
 }
 
 
@@ -372,11 +372,11 @@
 }
 
 .menu-mobile details a:hover {
-  color: #f6c200;
+  color: #c1903c;
   background-color: #3a0d0c;
 }
 .menu-mobile summary::marker {
-  color: #f6c200;
+  color: #c1903c;
   font-size: 20px;
 }
 

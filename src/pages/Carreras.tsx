@@ -39,9 +39,6 @@ export default function Carreras() {
           y regionales. ¡Inscríbete y conviértete en velocista sobre ruedas!
         </p>
 
-        <a href="/Registrate">
-          <button className="btn-registrarse carreras-btn">¡Regístrate ahora!</button>
-        </a>
       </section>
 
       <FooterTol />

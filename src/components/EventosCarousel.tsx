@@ -32,9 +32,9 @@ export default function EventosCarousel({
           <CCarouselItem>
             <div className="event-slide">
               <div className="event-text-area">
-                <h5>3er Festibal Departametal de escuelas y novatos</h5>
-                <p>La selección tolimense acaba de terminar una jornada histórica en Medellin...</p>
-                <a href="/Eventos" className="read-more-btn">Leer más</a>
+                <h5>Nacional interclubes 2025 - Ibagué</h5>
+                <p>En el marco del campeonato panamericano de patinaje de velocidad, categoría mayores.</p>
+                <a href="https://fedepatin.org.co/1ibague2025-velocidad-mayores/" className="read-more-btn">Resultados</a>
               </div>
               <div className="event-image-area">
                 <CImage className="noticia-img" src={patinadores_infantiles} alt="Evento 1" />
@@ -45,9 +45,9 @@ export default function EventosCarousel({
           <CCarouselItem>
             <div className="event-slide">
               <div className="event-text-area">
-                <h5>Interligas Ibagué 2025</h5>
-                <p>La selección tolimense se prepara para defender la casa...</p>
-                <a href="/Eventos" className="read-more-btn">Leer más</a>
+                <h5>Nacional interclubes 2025 - Cali</h5>
+                <p>En el marco del grand prix de patinaje de velocidad, categoría mayores.</p>
+                <a href="https://fedepatin.org.co/2valida2024-velocidad-cali/" className="read-more-btn">Resultados</a>
               </div>
               <div className="event-image-area">
                 <CImage className="noticia-img" src={arias_y_ninos} alt="Evento 2" />
@@ -58,9 +58,22 @@ export default function EventosCarousel({
           <CCarouselItem>
             <div className="event-slide">
               <div className="event-text-area">
-                <h5>Contrarreloj Guarne</h5>
-                <p>La selección tolimense acaba de terminar una jornada histórica en Guarne...</p>
-                <a href="/Eventos" className="read-more-btn">Leer más</a>
+                <h5>Nacional interclubes 2025 - Medellín</h5>
+                <p>Válida nacional interclubes 2025, en el marco del grand prix de patinaje de velocidad, categoría mayores.</p>
+                <a href="https://fedepatin.org.co/3valida2025-velocidad-medellin/" className="read-more-btn">Resultados</a>
+              </div>
+              <div className="event-image-area">
+                <CImage className="noticia-img" src={accion_1} alt="Evento 3" />
+              </div>
+            </div>
+          </CCarouselItem>
+
+          <CCarouselItem>
+            <div className="event-slide">
+              <div className="event-text-area">
+                <h5>Nacional interclubes 2025 - Bogotá</h5>
+                <p>Nacional interclubes 2025, categoría mayores.</p>
+                <a href="https://fedepatin.org.co/4valida2025-velocidad-bogota/" className="read-more-btn">Resultados</a>
               </div>
               <div className="event-image-area">
                 <CImage className="noticia-img" src={accion_1} alt="Evento 3" />

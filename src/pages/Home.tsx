@@ -80,6 +80,24 @@ export default function Home() {
       {/* Noticias */}
       <NoticiasSection title="Noticias" limit={3} />
 
+      {/* Registro */}
+      <section className="registro-split">
+
+        <div className="registro-left">
+            
+          <img src={eventosImg} alt="Registro Niños Patinaje" />
+        
+        </div>
+            
+        <div className="registro-right">
+
+          <a href='/registrate'>
+            <button className="registro-btn">¡Regístrate ya!</button>
+          </a>
+        </div>
+
+      </section>
+
 
 
       {/* Cursos */}
@@ -168,34 +186,16 @@ export default function Home() {
       </section>
 
 
-      <section className="registro-split">
-
-        <div className="registro-left">
-            
-          <img src={eventosImg} alt="Registro Niños Patinaje" />
-        
-        </div>
-            
-        <div className="registro-right">
-
-          <a href='/registrate'>
-            <button className="registro-btn">¡Regístrate ya!</button>
-          </a>
-        </div>
-
-      </section>
-
-
-
+    
       {/* Eventos */}
-      <EventosCarousel/>
+      <EventosCarousel variant="page" />
 
 
 
      {/* Links */}
     <section className="links">
       <Link to="/resoluciones" className="resoluciones">Resoluciones</Link>
-      <Link to="/guias" className="guias">Guías</Link>
+      <Link to="/boletines" className="guias">Boletines</Link>
     </section>
     
 

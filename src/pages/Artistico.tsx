@@ -34,9 +34,7 @@ export default function Artistico() {
           en el patinaje artístico. ¡Ven y sé parte de nuestra comunidad!
         </p>
 
-        <a href="/Registrate">
-          <button className="btn-registrarse artistico-btn">¡Regístrate ahora!</button>
-        </a>
+
       </section>
 
       <FooterTol />

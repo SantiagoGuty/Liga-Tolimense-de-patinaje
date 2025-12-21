@@ -20,13 +20,13 @@ export default function FooterTol() {
 
           <p>Contáctanos<br />
             Teléfono: (321) 3979355<br />
-            Dirección: Cl. 93 #5-13, Ibagué, Tolima<br />
+            Dirección: Km1 Via Aeropuerto Perales, Ibagué - Tolima (Col)<br />
             Email: administracion@ligapatinajetolima.com
           </p>
 
         </div>
         
-        <p>Todos los derechos reservados © Tolima 2025</p>
+        <p>Todos los derechos reservados © Liga Tolimense De Patinaje 2025</p>
           
       </footer>
     </div>

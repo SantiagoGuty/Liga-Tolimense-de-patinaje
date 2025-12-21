@@ -38,7 +38,7 @@ export default function Menu_bar() {
         const inits =
           (p?.nombre?.[0] || '').toUpperCase() +
           (p?.apellido?.[0] || '').toUpperCase();
-        setInitials(inits || '🙂');
+        setInitials(inits || 'Sube tu foto');
 
         if (p?.avatarKey) {
           try {
@@ -109,7 +109,11 @@ export default function Menu_bar() {
           <div className="dropdown">
             <Link to="/cursos">Cursos ▾</Link>
             <div className="dropdown-content">
-              <a href="/Registrate">¡Regístrate ya!</a>
+              {!isAuthed && (
+                <>
+                  <a href="/Registrate">¡Regístrate ya!</a>
+                </>
+              )}
               <a href="/novato">Novato</a>
               <a href="/avanzado">Avanzado</a>
               <a href="/adultos">Adultos</a>
@@ -127,7 +131,7 @@ export default function Menu_bar() {
           <Link to="/Noticias">Noticias</Link>
           <Link to="/Eventos">Eventos</Link>
           <Link to="/resoluciones">Resoluciones</Link>
-          <Link to="/guias">Guías</Link>
+          <Link to="/boletines">Boletines</Link>
 
           {/* Auth-aware items (desktop) */}
           {!isAuthed && (
@@ -180,7 +184,7 @@ export default function Menu_bar() {
         <Link to="/Noticias"     onClick={() => setMenuOpen(false)}>Noticias</Link>
         <Link to="/Eventos"      onClick={() => setMenuOpen(false)}>Eventos</Link>
         <Link to="/resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
-        <Link to="/guias"        onClick={() => setMenuOpen(false)}>Guías</Link>
+        <Link to="/boletines" onClick={() => setMenuOpen(false)}>Boletines</Link>
 
         {/* Auth-aware items (mobile) */}
         {!isAuthed && (
@@ -189,9 +193,7 @@ export default function Menu_bar() {
             <Link to="/registrate"   onClick={() => setMenuOpen(false)}>Crear usuario</Link>
           </>
         )}
-        {isAuthed && (
-          <Link to="/perfil" onClick={() => setMenuOpen(false)}>Mi perfil</Link>
-        )}
+
       </nav>
     </>
   );

@@ -11,6 +11,7 @@ import Avanzado from './pages/Avanzado';
 import Adultos from './pages/Adultos';
 import Artistico from './pages/Artistico';
 import Carreras from './pages/Carreras';
+import Boletines from './pages/Boletines';
 import Guias from './pages/Guias';
 import Resoluciones from './pages/Resoluciones';
 import ErrorPage from './pages/ErrorPage';
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
       { path: 'adultos', element: <Adultos /> },
       { path: 'artistico', element: <Artistico /> },
       { path: 'carreras', element: <Carreras /> },
+      { path: 'boletines', element: <Boletines /> },
       { path: 'guias', element: <Guias /> },
       { path: 'resoluciones', element: <Resoluciones /> },
 

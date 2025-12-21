@@ -33,10 +33,17 @@ export default function Novato() {
           que es empezar a patinar con instructores expertos y compañeros entusiastas!
         </p>
 
-        <a href="/Registrate">
-          <button className="btn-registrarse novato-btn">¡Regístrate ahora!</button>
-        </a>
       </section>
+
+
+      <div className="guide-list">
+          <article className="guide-card empty">
+            <div className="guide-info">
+              <h3>Muy pronto</h3>
+              <p>Publicaremos guías descargables y recursos útiles.</p>
+            </div>
+          </article>
+      </div>
 
       <FooterTol />
     </div>

@@ -304,18 +304,6 @@ export default function Registrate() {
         <section className="auth-card">
           <h2 id="register-title">{isFederated ? 'Completa tu perfil' : 'Regístrate'}</h2>
 
-          {!isFederated && (
-            <>
-              <div className="auth-divider" role="separator" aria-hidden="true" style={{ marginTop: 8 }}>
-                <span /><em>o</em><span />
-              </div>
-              <div className="auth-sso" style={{ marginBottom: 12 }}>
-                <button type="button" className="sso-btn" onClick={signinWithGoogle}>
-                  Continuar con Google
-                </button>
-              </div>
-            </>
-          )}
 
           <form className="auth-form two-col" onSubmit={handleSubmit} noValidate>
             {errors.general && (
