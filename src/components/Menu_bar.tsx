@@ -107,7 +107,7 @@ export default function Menu_bar() {
           <Link to="/">Inicio</Link>
 
           <div className="dropdown">
-            <Link to="/cursos">Cursos ▾</Link>
+            <a >Cursos ▾</a>
             <div className="dropdown-content">
               {!isAuthed && (
                 <>
@@ -121,7 +121,7 @@ export default function Menu_bar() {
           </div>
 
           <div className="dropdown">
-            <Link to="/modalidades">Modalidades ▾</Link>
+            <a >Modalidades ▾</a>
             <div className="dropdown-content">
               <a href="/carreras">Carreras</a>
               <a href="/artistico">Artístico</a>

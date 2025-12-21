@@ -241,7 +241,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: #6a1b1a;
+  background-color: white;
   text-align: center;
   padding: 0;          /* Remove padding */
   margin: 0;           /* Remove margin */
@@ -255,7 +255,7 @@ html, body {
 
 
 .cursos h1 {
-  color: white;
+  color: #6a1b1a;
   margin-top: 2rem;
   font-family: 'Karantina', cursive;
   font-size: 80px;
@@ -264,7 +264,7 @@ html, body {
 
 
 .cursos p {
-  color: white;
+  color: #6a1b1a;
   font-size: 30px;
   margin-bottom: 50px;
 }
