@@ -8,7 +8,6 @@ import accion_4 from '../assets/img/accion4.jpg';
 // Auth + profile services
 import {
   signinEmailPassword,
-  signinWithGoogle,
   ensureSessionLoaded,
   isSignedIn,
 } from '../services/authService';
@@ -44,14 +43,7 @@ export default function IniciaSesion() {
     }
   }
 
-  async function handleGoogle() {
-    setError('');
-    try {
-      await signinWithGoogle(); // redirects to Cognito Hosted UI (Google)
-    } catch (err: any) {
-      setError(err?.message || 'No se pudo iniciar con Google');
-    }
-  }
+
 
   return (
     <div className="page-wrapper" id="inicia-sesion">

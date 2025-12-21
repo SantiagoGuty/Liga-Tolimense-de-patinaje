@@ -15,7 +15,6 @@ import {
   ensureSessionLoaded,
   isSignedIn,
   getIdTokenClaims,
-  signinWithGoogle,
 } from '../services/authService';
 import {
   getCurrentUserProfile,
