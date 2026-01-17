@@ -6,6 +6,8 @@ import campeon from '../assets/img/campeon.jpg';
 import accion_2 from '../assets/img/accion2.jpg';
 import accion_4 from '../assets/img/accion4.jpg';
 import artistico1 from '../assets/img/artistico1.jpg';
+import logo_blanco from '../assets/img/logo_liga_blanco.png';
+
 
 
 import Menu_bar from '../components/Menu_bar';
@@ -67,10 +69,13 @@ export default function Home() {
         </div>
 
         <div className="hero-right">
+        <img
+          className="hero-title-img"
+          src={logo_blanco}
+          alt="Liga Tolimense de Patinaje"
+        />
+      </div>
 
-          <h2>Liga Tolimense <br></br>de patinaje</h2>
-
-        </div>
 
       </div>
 

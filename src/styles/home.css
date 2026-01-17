@@ -80,8 +80,6 @@ html, body {
 }
 
 
-
-  
 .home-container {
   width: 100%;
   overflow-x: hidden;
@@ -142,12 +140,17 @@ html, body {
 }
 
 
-.hero-right h2 {
-  color: white;
-  font-family: 'Karantina', cursive;
-  font-size: 3rem;
-  font-size: 100px;
+.hero-title-img{
+  width: min(85%, 520px);  /* scales down on small screens */
+  height: auto;
+  display: block;
+  transition: transform .2s ease;
 }
+  
+.hero-title-img:hover{
+  transform: scale(1.05);
+}
+
 
 @keyframes zoomIn {
   from {
