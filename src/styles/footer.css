@@ -1,41 +1,193 @@
+/* footer.css */
+
 .footer {
-  margin-top: 0px;
-  border-top-width: 0px;
+  margin-top: 0;
+  border-top-width: 0;
   background-color: #2c0c0d !important;
-  color: white !important;
+  color: #ffffff !important;
+
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+
+  /* knobs you can tweak */
+  --wave-h: 167px;
+  --pad-x: 0.5rem;
+
+  /* ridge/trough positioning */
+  --ridge-offset: 0px;   /* logo up */
+  --trough-offset: 45px; /* text down */
+}
+
+/* Wave */
+.footer-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--wave-h);
+  line-height: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Content container */
+.footer-content {
+  position: relative;
+  z-index: 2;
+
+  padding: calc(var(--wave-h) - 70px) var(--pad-x) 0.5rem;
+
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
-  align-items: center;            
-  justify-content: center;
-  padding: 1rem;
-  gap: 2rem;
-  flex-wrap: wrap;
-  text-align: left;
+  gap: 4.5rem;
 }
 
+/* Two-column desktop layout */
+.footer_horizontal {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 11rem;
+  justify-content: center;
+  align-items: start;
+}
 
-.footer_horizontal{
+/* Logo sits on the ridge */
+.footer-logo {
+  transform: translateY(var(--ridge-offset));
+}
+
+.footer-logo img {
+  width: clamp(140px, 18vw, 200px);
+  height: auto;
+  display: block;
+  transition: transform 160ms ease, opacity 160ms ease;
+  opacity: 0.95;
+}
+
+.footer-logo img:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* Contact sits on the trough */
+/* Contact sits on the trough */
+.footer-contact {
+  transform: translateY(67px) translateX(200px);
+  margin: 0;
+  max-width: 520px;
+  text-align: left;
+
+  /* ✅ makes the socials row able to center relative to this block */
   display: flex;
-  flex-direction: row !important;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  gap: 2rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center; /* centers children like the socials row */
+}
+
+/* Keep the text itself left aligned while icons are centered */
+.footer-contact p {
   text-align: left;
-}
-
-
-.footer img {
-  width: 200px;
-}
-
-
-.footer p {
-  margin: 0px;
-  font-size: 0.9rem;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
   font-family: 'Barlow Condensed', sans-serif !important;
-  font-weight: 700 !important; /* bold */
-  text-transform: uppercase; /* optional: makes it look sportier */
-  letter-spacing: 1px;        /* optional: slight spacing */
+  letter-spacing: 1px; 
+}
+
+/* ✅ Center icons under the text */
+.footer-socials {
+  margin-top: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: center; /* THIS centers the icons */
+  gap: 100px;
+  align-items: center;
+}
+
+
+/* Click targets (hover grows slightly) */
+.social-link {
+  display: inline-flex;
+  align-items: left;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform 160ms ease, opacity 160ms ease;
+  opacity: 0.95;
+}
+
+.social-link:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* PNG icons */
+.social-icon-img {
+  transform: translateX(-25px) translateY(-12px);
+  width: 60px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
+}
+
+/* Bottom line ALWAYS centered */
+.footer-bottom {
+  width: 100%;
+  margin: 0;
+  font-size: small;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+}
+
+/* Wave colors */
+.footer-wave .wave-gold { fill: #c1903c; }
+
+.footer-wave .wave-line{
+  fill: none;
+  stroke: #67211f;
+  stroke-width: 12px;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ✅ Mobile / small screens */
+@media (max-width: 768px) {
+  .footer-content {
+    padding: calc(var(--wave-h) - 50px) 1.25rem 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .footer_horizontal {
+    grid-template-columns: 1fr;
+    row-gap: 1rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .footer-logo,
+  .footer-contact {
+    transform: none; /* remove offsets on mobile */
+  }
+
+  .footer-contact {
+    text-align: center;
+    max-width: 34rem;
+  }
+
+  .footer-socials {
+    justify-content: center;
+  }
 }

@@ -12,9 +12,7 @@ import '../styles/registrate.css';
 import {
   signupEmailPassword,
   confirmSignupEmail,
-  ensureSessionLoaded,
-  isSignedIn,
-  getIdTokenClaims,
+
 } from '../services/authService';
 import {
   getCurrentUserProfile,
@@ -50,33 +48,22 @@ export default function Registrate() {
     contrasena: '',
   });
 
-  const [isFederated, setIsFederated] = useState(false);
+  const [isFederated] = useState(false);
   const [fotoFile, setFotoFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [needsConfirm, setNeedsConfirm] = useState(false); // email+password only
   const [code, setCode] = useState('');
   const nav = useNavigate();
+  const [avatarPreviewUrl, setAvatarPreviewUrl] = useState<string | null>(null);
+
 
   // After returning from Google (Hosted UI), we’re already authenticated.
   // Prefill known fields and switch to "complete profile" mode.
   useEffect(() => {
-    (async () => {
-      await ensureSessionLoaded();
-      if (await isSignedIn()) {
-        setIsFederated(true);
-        const claims = await getIdTokenClaims();
-        const fullName = (claims?.name as string) || '';
-        const given = (claims?.given_name as string) || fullName.split(' ')[0] || '';
-        const family = (claims?.family_name as string) || fullName.split(' ').slice(1).join(' ');
-        setForm(prev => ({
-          ...prev,
-          correo: (claims?.email as string) || prev.correo,
-          nombre: prev.nombre || given,
-          apellido: prev.apellido || family,
-        }));
-      }
-    })();
-  }, []);
+    return () => {
+      if (avatarPreviewUrl) URL.revokeObjectURL(avatarPreviewUrl);
+    };
+  }, [avatarPreviewUrl]);
 
   // ---- Validation helpers ---------------------------------------------------
 
@@ -87,16 +74,36 @@ export default function Registrate() {
     return d.toISOString().slice(0, 10);
   }, []);
 
+  // Solo dígitos
+  function digitsOnly(v: string) {
+    return v.replace(/\D/g, '');
+  }
+
   function onChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = e.target;
+
+      // Cédula: solo números y tope 10
+    if (name === 'cedula') {
+      const clean = digitsOnly(value).slice(0, 10);
+      setForm(prev => ({ ...prev, cedula: clean }));
+      setErrors(prev => ({ ...prev, cedula: '' }));
+      return;
+    }
     setForm(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: '' }));
   }
 
-  function onFileChange(e: ChangeEvent<HTMLInputElement>) {
-    const f = e.target.files?.[0] ?? null;
-    setFotoFile(f);
-  }
+function onFileChange(e: ChangeEvent<HTMLInputElement>) {
+  const f = e.target.files?.[0] ?? null;
+  setFotoFile(f);
+
+  // Limpia preview anterior si existía
+  setAvatarPreviewUrl((prev) => {
+    if (prev) URL.revokeObjectURL(prev);
+    return f ? URL.createObjectURL(f) : null;
+  });
+}
+
 
   // Password must have 8+ chars and at least one number
   function validPassword(pw: string) {
@@ -155,8 +162,11 @@ export default function Registrate() {
     else if (!validAge5OrMore(form.fechaNacimiento)) next.fechaNacimiento = 'Debes tener 5 años o más.';
 
     if (!form.sexo) next.sexo = 'Selecciona tu sexo.';
-    if (!form.cedula.trim()) next.cedula = 'Ingresa tu documento.';
-
+    if (!form.cedula.trim()) {
+      next.cedula = 'Ingresa tu documento.';
+    } else if (!/^\d{7,8,9,10}$/.test(form.cedula)) {
+      next.cedula = 'La cédula (NUIP) debe tener entre 7 y 10 dígitos numéricos.';
+    }
     if (!skipPassword) {
       if (!form.contrasena) next.contrasena = 'Crea una contraseña.';
       else if (!validPassword(form.contrasena))
@@ -330,7 +340,7 @@ export default function Registrate() {
 
             {/* Apellido */}
             <label className="auth-field">
-              <span>Apellido</span>
+              <span>Apellidos</span>
               <input
                 id="apellido"
                 name="apellido"

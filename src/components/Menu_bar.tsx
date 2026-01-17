@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import '../styles/menu.css';
-import logo from '../assets/img/logo.png';
+import logo from '../assets/img/logo_solo.png';
 
 // Auth + profile helpers
 import { currentUser } from '../services/authService';           // add .js if NodeNext
