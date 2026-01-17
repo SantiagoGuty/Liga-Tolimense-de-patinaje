@@ -69,6 +69,9 @@ export default function Home() {
         </div>
 
         <div className="hero-right">
+
+        <h1 className="sr-only">Liga Tolimense de Patinaje</h1>
+
         <img
           className="hero-title-img"
           src={logo_blanco}
