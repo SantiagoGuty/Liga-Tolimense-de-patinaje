@@ -143,3 +143,57 @@ export const onDeleteScanEvent = /* GraphQL */ `subscription OnDeleteScanEvent($
   APITypes.OnDeleteScanEventSubscriptionVariables,
   APITypes.OnDeleteScanEventSubscription
 >;
+export const onCreateResolution = /* GraphQL */ `subscription OnCreateResolution(
+  $filter: ModelSubscriptionResolutionFilterInput
+) {
+  onCreateResolution(filter: $filter) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResolutionSubscriptionVariables,
+  APITypes.OnCreateResolutionSubscription
+>;
+export const onUpdateResolution = /* GraphQL */ `subscription OnUpdateResolution(
+  $filter: ModelSubscriptionResolutionFilterInput
+) {
+  onUpdateResolution(filter: $filter) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResolutionSubscriptionVariables,
+  APITypes.OnUpdateResolutionSubscription
+>;
+export const onDeleteResolution = /* GraphQL */ `subscription OnDeleteResolution(
+  $filter: ModelSubscriptionResolutionFilterInput
+) {
+  onDeleteResolution(filter: $filter) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResolutionSubscriptionVariables,
+  APITypes.OnDeleteResolutionSubscription
+>;

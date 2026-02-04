@@ -182,6 +182,53 @@ export type DeleteScanEventInput = {
   id: string,
 };
 
+export type CreateResolutionInput = {
+  id?: string | null,
+  pk: string,
+  date: string,
+  title: string,
+  s3Key: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelResolutionConditionInput = {
+  pk?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelResolutionConditionInput | null > | null,
+  or?: Array< ModelResolutionConditionInput | null > | null,
+  not?: ModelResolutionConditionInput | null,
+};
+
+export type Resolution = {
+  __typename: "Resolution",
+  id: string,
+  pk: string,
+  date: string,
+  title: string,
+  s3Key: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResolutionInput = {
+  id: string,
+  pk?: string | null,
+  date?: string | null,
+  title?: string | null,
+  s3Key?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteResolutionInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   nombre?: ModelStringInput | null,
@@ -227,6 +274,25 @@ export type ModelScanEventFilterInput = {
 export type ModelScanEventConnection = {
   __typename: "ModelScanEventConnection",
   items:  Array<ScanEvent | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResolutionFilterInput = {
+  id?: ModelIDInput | null,
+  pk?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelResolutionFilterInput | null > | null,
+  or?: Array< ModelResolutionFilterInput | null > | null,
+  not?: ModelResolutionFilterInput | null,
+};
+
+export type ModelResolutionConnection = {
+  __typename: "ModelResolutionConnection",
+  items:  Array<Resolution | null >,
   nextToken?: string | null,
 };
 
@@ -308,6 +374,18 @@ export type ModelSubscriptionScanEventFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionScanEventFilterInput | null > | null,
   or?: Array< ModelSubscriptionScanEventFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResolutionFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  pk?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  s3Key?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -448,6 +526,60 @@ export type DeleteScanEventMutation = {
   } | null,
 };
 
+export type CreateResolutionMutationVariables = {
+  input: CreateResolutionInput,
+  condition?: ModelResolutionConditionInput | null,
+};
+
+export type CreateResolutionMutation = {
+  createResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResolutionMutationVariables = {
+  input: UpdateResolutionInput,
+  condition?: ModelResolutionConditionInput | null,
+};
+
+export type UpdateResolutionMutation = {
+  updateResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResolutionMutationVariables = {
+  input: DeleteResolutionInput,
+  condition?: ModelResolutionConditionInput | null,
+};
+
+export type DeleteResolutionMutation = {
+  deleteResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -548,6 +680,46 @@ export type ListScanEventsQuery = {
   } | null,
 };
 
+export type GetResolutionQueryVariables = {
+  id: string,
+};
+
+export type GetResolutionQuery = {
+  getResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResolutionsQueryVariables = {
+  filter?: ModelResolutionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResolutionsQuery = {
+  listResolutions?:  {
+    __typename: "ModelResolutionConnection",
+    items:  Array< {
+      __typename: "Resolution",
+      id: string,
+      pk: string,
+      date: string,
+      title: string,
+      s3Key: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ScanEventsByUserIdAndTimestampQueryVariables = {
   userId: string,
   timestamp?: ModelStringKeyConditionInput | null,
@@ -568,6 +740,32 @@ export type ScanEventsByUserIdAndTimestampQuery = {
       scannerSub?: string | null,
       scannerName?: string | null,
       location?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ResolutionsByPkAndDateQueryVariables = {
+  pk: string,
+  date?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelResolutionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ResolutionsByPkAndDateQuery = {
+  resolutionsByPkAndDate?:  {
+    __typename: "ModelResolutionConnection",
+    items:  Array< {
+      __typename: "Resolution",
+      id: string,
+      pk: string,
+      date: string,
+      title: string,
+      s3Key: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -705,6 +903,57 @@ export type OnDeleteScanEventSubscription = {
     scannerSub?: string | null,
     scannerName?: string | null,
     location?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResolutionSubscriptionVariables = {
+  filter?: ModelSubscriptionResolutionFilterInput | null,
+};
+
+export type OnCreateResolutionSubscription = {
+  onCreateResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResolutionSubscriptionVariables = {
+  filter?: ModelSubscriptionResolutionFilterInput | null,
+};
+
+export type OnUpdateResolutionSubscription = {
+  onUpdateResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResolutionSubscriptionVariables = {
+  filter?: ModelSubscriptionResolutionFilterInput | null,
+};
+
+export type OnDeleteResolutionSubscription = {
+  onDeleteResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
     createdAt: string,
     updatedAt: string,
   } | null,

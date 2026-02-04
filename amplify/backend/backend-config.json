@@ -12,16 +12,7 @@
       ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [
-            {
-              "apiKeyConfig": {
-                "apiKeyExpirationDate": "2025-09-04T13:46:35.395Z",
-                "apiKeyExpirationDays": 50,
-                "description": "tolima-key"
-              },
-              "authenticationType": "API_KEY"
-            }
-          ],
+          "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {

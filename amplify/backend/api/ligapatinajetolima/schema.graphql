@@ -1,3 +1,7 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
 # Users can manage their own record (owner).
 # Coaches/Staff can READ and UPDATE status-related fields.
 # Admins can do everything.
@@ -23,7 +27,7 @@ type User
   qrKey: String
   qrPayload: String
 
-  # ✅ New: S3 key for profile photo
+  # S3 key for profile photo
   avatarKey: String
 }
 
@@ -35,8 +39,27 @@ type ScanEvent
   ]) {
   id: ID!
   userId: ID! @index(name: "byUser", sortKeyFields: ["timestamp"])
-  timestamp: AWSDateTime!        # when the QR was scanned
-  scannerSub: String             # Cognito sub of the staff member
-  scannerName: String            # optional friendly name
-  location: String               # optional "Pista", "Parque Deportivo", etc.
+  timestamp: AWSDateTime!
+  scannerSub: String
+  scannerName: String
+  location: String
+}
+
+type Resolution
+  @model
+  @auth(rules: [
+    { allow: private, operations: [read] },
+    { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
+  ]) {
+  id: ID!
+
+  # constant value like "RESOLUTIONS"
+  pk: String! @index(name: "byPkDate", sortKeyFields: ["date"])
+
+  date: AWSDate!
+  title: String!
+  s3Key: String!
+
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }

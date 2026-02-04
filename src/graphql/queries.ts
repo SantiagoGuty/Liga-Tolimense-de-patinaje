@@ -102,6 +102,46 @@ export const listScanEvents = /* GraphQL */ `query ListScanEvents(
   APITypes.ListScanEventsQueryVariables,
   APITypes.ListScanEventsQuery
 >;
+export const getResolution = /* GraphQL */ `query GetResolution($id: ID!) {
+  getResolution(id: $id) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResolutionQueryVariables,
+  APITypes.GetResolutionQuery
+>;
+export const listResolutions = /* GraphQL */ `query ListResolutions(
+  $filter: ModelResolutionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResolutions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      pk
+      date
+      title
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResolutionsQueryVariables,
+  APITypes.ListResolutionsQuery
+>;
 export const scanEventsByUserIdAndTimestamp = /* GraphQL */ `query ScanEventsByUserIdAndTimestamp(
   $userId: ID!
   $timestamp: ModelStringKeyConditionInput
@@ -136,4 +176,38 @@ export const scanEventsByUserIdAndTimestamp = /* GraphQL */ `query ScanEventsByU
 ` as GeneratedQuery<
   APITypes.ScanEventsByUserIdAndTimestampQueryVariables,
   APITypes.ScanEventsByUserIdAndTimestampQuery
+>;
+export const resolutionsByPkAndDate = /* GraphQL */ `query ResolutionsByPkAndDate(
+  $pk: String!
+  $date: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelResolutionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  resolutionsByPkAndDate(
+    pk: $pk
+    date: $date
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      pk
+      date
+      title
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ResolutionsByPkAndDateQueryVariables,
+  APITypes.ResolutionsByPkAndDateQuery
 >;

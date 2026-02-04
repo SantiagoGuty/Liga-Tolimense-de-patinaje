@@ -152,3 +152,60 @@ export const deleteScanEvent = /* GraphQL */ `mutation DeleteScanEvent(
   APITypes.DeleteScanEventMutationVariables,
   APITypes.DeleteScanEventMutation
 >;
+export const createResolution = /* GraphQL */ `mutation CreateResolution(
+  $input: CreateResolutionInput!
+  $condition: ModelResolutionConditionInput
+) {
+  createResolution(input: $input, condition: $condition) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResolutionMutationVariables,
+  APITypes.CreateResolutionMutation
+>;
+export const updateResolution = /* GraphQL */ `mutation UpdateResolution(
+  $input: UpdateResolutionInput!
+  $condition: ModelResolutionConditionInput
+) {
+  updateResolution(input: $input, condition: $condition) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResolutionMutationVariables,
+  APITypes.UpdateResolutionMutation
+>;
+export const deleteResolution = /* GraphQL */ `mutation DeleteResolution(
+  $input: DeleteResolutionInput!
+  $condition: ModelResolutionConditionInput
+) {
+  deleteResolution(input: $input, condition: $condition) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResolutionMutationVariables,
+  APITypes.DeleteResolutionMutation
+>;

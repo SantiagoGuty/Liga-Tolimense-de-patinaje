@@ -6,14 +6,6 @@
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authligapatinajetolima3bd9e30b"
-    },
-    "additionalAuthTypes": [
-      {
-        "mode": "API_KEY",
-        "expirationTime": 50,
-        "apiKeyExpirationDate": "2025-09-04T13:46:35.395Z",
-        "keyDescription": "tolima-key"
-      }
-    ]
+    }
   }
 }
