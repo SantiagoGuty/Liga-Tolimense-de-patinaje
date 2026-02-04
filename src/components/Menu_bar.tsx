@@ -106,9 +106,9 @@ export default function Menu_bar() {
         <nav className="menu-desktop">
           <Link to="/">Inicio</Link>
 
-          <div className="dropdown">
+          {/*<div className="dropdown">
             <a >Cursos ▾</a>
-            <div className="dropdown-content">
+            * Avatar next to logo when authenticated <div className="dropdown-content">
               {!isAuthed && (
                 <>
                   <a href="/Registrate">¡Regístrate ya!</a>
@@ -118,7 +118,7 @@ export default function Menu_bar() {
               <a href="/avanzado">Avanzado</a>
               <a href="/adultos">Adultos</a>
             </div>
-          </div>
+          </div>*/}
 
           <div className="dropdown">
             <a >Modalidades ▾</a>
@@ -173,13 +173,13 @@ export default function Menu_bar() {
           <Link to="/artistico" onClick={() => setMenuOpen(false)}>Artístico</Link>
         </details>
 
-        <details>
+         {/* <details>
           <summary>Cursos</summary>
           <Link to="/Registrate" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</Link>
           <Link to="/novato"     onClick={() => setMenuOpen(false)}>Novato</Link>
           <Link to="/avanzado"   onClick={() => setMenuOpen(false)}>Avanzado</Link>
           <Link to="/adultos"    onClick={() => setMenuOpen(false)}>Adultos</Link>
-        </details>
+        </details>*/}
 
         <Link to="/Noticias"     onClick={() => setMenuOpen(false)}>Noticias</Link>
         <Link to="/Eventos"      onClick={() => setMenuOpen(false)}>Eventos</Link>
