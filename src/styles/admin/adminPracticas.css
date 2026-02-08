@@ -1,0 +1,36 @@
+/* src/styles/admin/adminPracticas.css */
+
+.admin-practice-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-practice-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Optional “status pill” look */
+.admin-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0,0,0,0.10);
+}
+
+.admin-pill.open {
+  background: rgba(83,181,228,0.15);
+  color: #2c0c0d;
+  border-color: rgba(83,181,228,0.35);
+}
+
+.admin-pill.closed {
+  background: rgba(106,27,26,0.10);
+  color: #6a1b1a;
+  border-color: rgba(106,27,26,0.25);
+}

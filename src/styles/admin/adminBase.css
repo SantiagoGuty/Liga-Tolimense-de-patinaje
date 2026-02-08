@@ -1,0 +1,37 @@
+.admin-header {
+  max-width: 1100px;
+  margin: 2rem auto 1.25rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.admin-title {
+  color: #6a1b1a;
+  font-size: 3rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 0.75rem;
+}
+
+.admin-subtitle {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0 auto;
+  max-width: 900px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Keep content aligned and not full-bleed */
+.admin-page {
+  max-width: 1100px;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .admin-title { font-size: 2rem; }
+  .admin-subtitle { font-size: 1rem; }
+}

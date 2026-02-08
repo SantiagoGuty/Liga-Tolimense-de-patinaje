@@ -5,6 +5,8 @@ import logo from '../assets/img/logo.png';
 // ✅ adjust these paths to where your pngs actually live
 import instagramIcon from '../assets/img/instagram.png';
 import facebookIcon from '../assets/img/facebook.png';
+import whatsappIcon from '../assets/img/whatsapp.png';
+
 
 export default function FooterTol() {
   return (
@@ -68,6 +70,21 @@ export default function FooterTol() {
                   alt="Facebook"
                 />
               </a>
+               <a
+                  className="social-link"
+                  href="https://wa.me/573102102404"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="WhatsApp"
+                  title="WhatsApp"
+                >
+                  <img
+                    className="social-icon-img"
+                    src={whatsappIcon}
+                    alt="WhatsApp"
+                  />
+                </a>
+
             </div>
           </div>
         </div>

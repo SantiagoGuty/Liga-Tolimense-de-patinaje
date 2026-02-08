@@ -83,9 +83,34 @@ export default function Home() {
       </div>
 
 
-
+    {/* Noticias */}
+    <NoticiasSection title="Noticias" limit={2} />
     
-{/* Cursos */}
+
+    {/* Rifa */}
+    <section className="rifa-section">
+      <div className="rifa-content">
+        <h2> 🎉 ¡Gran Rifa de parte de la Liga Tolimense de Patinaje!🎉</h2>
+        <p>
+          Participa llenando el formulario y podrás ganar
+          <strong> dos grandes anchetas</strong>.
+          <br />
+          ¡No pierdas esta oportunidad!
+        </p>
+
+        <a
+          href="https://forms.gle/GCZ55iJuDgbh72NMA"
+          target="_blank"
+          rel="noreferrer"
+          className="rifa-btn"
+        >
+          👉 Llenar formulario y participar 
+        </a>
+      </div>
+    </section>
+
+
+{/* Cursos 
       <section className="cursos">
 
         <div className="cursos_titulos">
@@ -169,8 +194,8 @@ export default function Home() {
         </div>
 
       </section>
-
-      {/* Registro */}
+*/}
+      {/* Registro 
       <section className="registro-split">
 
         <div className="registro-left">
@@ -189,7 +214,7 @@ export default function Home() {
       </section>
 
 
-
+*/}
       
 
 
@@ -205,8 +230,7 @@ export default function Home() {
       <Link to="/boletines" className="guias">Boletines</Link>
     </section>
     
-    {/* Noticias */}
-    <NoticiasSection title="Noticias" limit={3} />
+
 
 
       {/* Aliados */}

@@ -229,6 +229,116 @@ export type DeleteResolutionInput = {
   id: string,
 };
 
+export type CreatePracticeInput = {
+  id?: string | null,
+  title: string,
+  date: string,
+  startTime?: string | null,
+  location?: string | null,
+  notes?: string | null,
+  status?: string | null,
+  qrToken: string,
+};
+
+export type ModelPracticeConditionInput = {
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  startTime?: ModelStringInput | null,
+  location?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  qrToken?: ModelStringInput | null,
+  and?: Array< ModelPracticeConditionInput | null > | null,
+  or?: Array< ModelPracticeConditionInput | null > | null,
+  not?: ModelPracticeConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type Practice = {
+  __typename: "Practice",
+  id: string,
+  title: string,
+  date: string,
+  startTime?: string | null,
+  location?: string | null,
+  notes?: string | null,
+  status?: string | null,
+  qrToken: string,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdatePracticeInput = {
+  id: string,
+  title?: string | null,
+  date?: string | null,
+  startTime?: string | null,
+  location?: string | null,
+  notes?: string | null,
+  status?: string | null,
+  qrToken?: string | null,
+};
+
+export type DeletePracticeInput = {
+  id: string,
+};
+
+export type CreatePracticeCheckInInput = {
+  id?: string | null,
+  practiceId: string,
+  userId: string,
+  timestamp: string,
+  scannerSub?: string | null,
+  scannerName?: string | null,
+  method?: string | null,
+};
+
+export type ModelPracticeCheckInConditionInput = {
+  practiceId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  timestamp?: ModelStringInput | null,
+  scannerSub?: ModelStringInput | null,
+  scannerName?: ModelStringInput | null,
+  method?: ModelStringInput | null,
+  and?: Array< ModelPracticeCheckInConditionInput | null > | null,
+  or?: Array< ModelPracticeCheckInConditionInput | null > | null,
+  not?: ModelPracticeCheckInConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type PracticeCheckIn = {
+  __typename: "PracticeCheckIn",
+  id: string,
+  practiceId: string,
+  userId: string,
+  timestamp: string,
+  scannerSub?: string | null,
+  scannerName?: string | null,
+  method?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  owner?: string | null,
+};
+
+export type UpdatePracticeCheckInInput = {
+  id: string,
+  practiceId?: string | null,
+  userId?: string | null,
+  timestamp?: string | null,
+  scannerSub?: string | null,
+  scannerName?: string | null,
+  method?: string | null,
+};
+
+export type DeletePracticeCheckInInput = {
+  id: string,
+};
+
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
   nombre?: ModelStringInput | null,
@@ -293,6 +403,51 @@ export type ModelResolutionFilterInput = {
 export type ModelResolutionConnection = {
   __typename: "ModelResolutionConnection",
   items:  Array<Resolution | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPracticeFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  startTime?: ModelStringInput | null,
+  location?: ModelStringInput | null,
+  notes?: ModelStringInput | null,
+  status?: ModelStringInput | null,
+  qrToken?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelPracticeFilterInput | null > | null,
+  or?: Array< ModelPracticeFilterInput | null > | null,
+  not?: ModelPracticeFilterInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelPracticeConnection = {
+  __typename: "ModelPracticeConnection",
+  items:  Array<Practice | null >,
+  nextToken?: string | null,
+};
+
+export type ModelPracticeCheckInFilterInput = {
+  id?: ModelIDInput | null,
+  practiceId?: ModelIDInput | null,
+  userId?: ModelIDInput | null,
+  timestamp?: ModelStringInput | null,
+  scannerSub?: ModelStringInput | null,
+  scannerName?: ModelStringInput | null,
+  method?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelPracticeCheckInFilterInput | null > | null,
+  or?: Array< ModelPracticeCheckInFilterInput | null > | null,
+  not?: ModelPracticeCheckInFilterInput | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelPracticeCheckInConnection = {
+  __typename: "ModelPracticeCheckInConnection",
+  items:  Array<PracticeCheckIn | null >,
   nextToken?: string | null,
 };
 
@@ -386,6 +541,37 @@ export type ModelSubscriptionResolutionFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
   or?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
+};
+
+export type ModelSubscriptionPracticeFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  startTime?: ModelSubscriptionStringInput | null,
+  location?: ModelSubscriptionStringInput | null,
+  notes?: ModelSubscriptionStringInput | null,
+  status?: ModelSubscriptionStringInput | null,
+  qrToken?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPracticeFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPracticeFilterInput | null > | null,
+  owner?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionPracticeCheckInFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  practiceId?: ModelSubscriptionIDInput | null,
+  userId?: ModelSubscriptionIDInput | null,
+  timestamp?: ModelSubscriptionStringInput | null,
+  scannerSub?: ModelSubscriptionStringInput | null,
+  scannerName?: ModelSubscriptionStringInput | null,
+  method?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPracticeCheckInFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPracticeCheckInFilterInput | null > | null,
+  owner?: ModelStringInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -580,6 +766,135 @@ export type DeleteResolutionMutation = {
   } | null,
 };
 
+export type CreatePracticeMutationVariables = {
+  input: CreatePracticeInput,
+  condition?: ModelPracticeConditionInput | null,
+};
+
+export type CreatePracticeMutation = {
+  createPractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdatePracticeMutationVariables = {
+  input: UpdatePracticeInput,
+  condition?: ModelPracticeConditionInput | null,
+};
+
+export type UpdatePracticeMutation = {
+  updatePractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeletePracticeMutationVariables = {
+  input: DeletePracticeInput,
+  condition?: ModelPracticeConditionInput | null,
+};
+
+export type DeletePracticeMutation = {
+  deletePractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type CreatePracticeCheckInMutationVariables = {
+  input: CreatePracticeCheckInInput,
+  condition?: ModelPracticeCheckInConditionInput | null,
+};
+
+export type CreatePracticeCheckInMutation = {
+  createPracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type UpdatePracticeCheckInMutationVariables = {
+  input: UpdatePracticeCheckInInput,
+  condition?: ModelPracticeCheckInConditionInput | null,
+};
+
+export type UpdatePracticeCheckInMutation = {
+  updatePracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type DeletePracticeCheckInMutationVariables = {
+  input: DeletePracticeCheckInInput,
+  condition?: ModelPracticeCheckInConditionInput | null,
+};
+
+export type DeletePracticeCheckInMutation = {
+  deletePracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
 export type GetUserQueryVariables = {
   id: string,
 };
@@ -720,6 +1035,100 @@ export type ListResolutionsQuery = {
   } | null,
 };
 
+export type GetPracticeQueryVariables = {
+  id: string,
+};
+
+export type GetPracticeQuery = {
+  getPractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListPracticesQueryVariables = {
+  filter?: ModelPracticeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPracticesQuery = {
+  listPractices?:  {
+    __typename: "ModelPracticeConnection",
+    items:  Array< {
+      __typename: "Practice",
+      id: string,
+      title: string,
+      date: string,
+      startTime?: string | null,
+      location?: string | null,
+      notes?: string | null,
+      status?: string | null,
+      qrToken: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetPracticeCheckInQueryVariables = {
+  id: string,
+};
+
+export type GetPracticeCheckInQuery = {
+  getPracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type ListPracticeCheckInsQueryVariables = {
+  filter?: ModelPracticeCheckInFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPracticeCheckInsQuery = {
+  listPracticeCheckIns?:  {
+    __typename: "ModelPracticeCheckInConnection",
+    items:  Array< {
+      __typename: "PracticeCheckIn",
+      id: string,
+      practiceId: string,
+      userId: string,
+      timestamp: string,
+      scannerSub?: string | null,
+      scannerName?: string | null,
+      method?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ScanEventsByUserIdAndTimestampQueryVariables = {
   userId: string,
   timestamp?: ModelStringKeyConditionInput | null,
@@ -768,6 +1177,93 @@ export type ResolutionsByPkAndDateQuery = {
       s3Key: string,
       createdAt: string,
       updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PracticeByQrTokenQueryVariables = {
+  qrToken: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPracticeFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PracticeByQrTokenQuery = {
+  practiceByQrToken?:  {
+    __typename: "ModelPracticeConnection",
+    items:  Array< {
+      __typename: "Practice",
+      id: string,
+      title: string,
+      date: string,
+      startTime?: string | null,
+      location?: string | null,
+      notes?: string | null,
+      status?: string | null,
+      qrToken: string,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PracticeCheckInsByPracticeIdAndTimestampQueryVariables = {
+  practiceId: string,
+  timestamp?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPracticeCheckInFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PracticeCheckInsByPracticeIdAndTimestampQuery = {
+  practiceCheckInsByPracticeIdAndTimestamp?:  {
+    __typename: "ModelPracticeCheckInConnection",
+    items:  Array< {
+      __typename: "PracticeCheckIn",
+      id: string,
+      practiceId: string,
+      userId: string,
+      timestamp: string,
+      scannerSub?: string | null,
+      scannerName?: string | null,
+      method?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PracticeCheckInsByUserIdAndTimestampQueryVariables = {
+  userId: string,
+  timestamp?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPracticeCheckInFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PracticeCheckInsByUserIdAndTimestampQuery = {
+  practiceCheckInsByUserIdAndTimestamp?:  {
+    __typename: "ModelPracticeCheckInConnection",
+    items:  Array< {
+      __typename: "PracticeCheckIn",
+      id: string,
+      practiceId: string,
+      userId: string,
+      timestamp: string,
+      scannerSub?: string | null,
+      scannerName?: string | null,
+      method?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      owner?: string | null,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -956,5 +1452,134 @@ export type OnDeleteResolutionSubscription = {
     s3Key: string,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePracticeSubscriptionVariables = {
+  filter?: ModelSubscriptionPracticeFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreatePracticeSubscription = {
+  onCreatePractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdatePracticeSubscriptionVariables = {
+  filter?: ModelSubscriptionPracticeFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdatePracticeSubscription = {
+  onUpdatePractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeletePracticeSubscriptionVariables = {
+  filter?: ModelSubscriptionPracticeFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeletePracticeSubscription = {
+  onDeletePractice?:  {
+    __typename: "Practice",
+    id: string,
+    title: string,
+    date: string,
+    startTime?: string | null,
+    location?: string | null,
+    notes?: string | null,
+    status?: string | null,
+    qrToken: string,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnCreatePracticeCheckInSubscriptionVariables = {
+  filter?: ModelSubscriptionPracticeCheckInFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnCreatePracticeCheckInSubscription = {
+  onCreatePracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnUpdatePracticeCheckInSubscriptionVariables = {
+  filter?: ModelSubscriptionPracticeCheckInFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnUpdatePracticeCheckInSubscription = {
+  onUpdatePracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
+  } | null,
+};
+
+export type OnDeletePracticeCheckInSubscriptionVariables = {
+  filter?: ModelSubscriptionPracticeCheckInFilterInput | null,
+  owner?: string | null,
+};
+
+export type OnDeletePracticeCheckInSubscription = {
+  onDeletePracticeCheckIn?:  {
+    __typename: "PracticeCheckIn",
+    id: string,
+    practiceId: string,
+    userId: string,
+    timestamp: string,
+    scannerSub?: string | null,
+    scannerName?: string | null,
+    method?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    owner?: string | null,
   } | null,
 };

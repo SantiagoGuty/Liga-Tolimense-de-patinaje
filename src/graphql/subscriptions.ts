@@ -197,3 +197,138 @@ export const onDeleteResolution = /* GraphQL */ `subscription OnDeleteResolution
   APITypes.OnDeleteResolutionSubscriptionVariables,
   APITypes.OnDeleteResolutionSubscription
 >;
+export const onCreatePractice = /* GraphQL */ `subscription OnCreatePractice(
+  $filter: ModelSubscriptionPracticeFilterInput
+  $owner: String
+) {
+  onCreatePractice(filter: $filter, owner: $owner) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreatePracticeSubscriptionVariables,
+  APITypes.OnCreatePracticeSubscription
+>;
+export const onUpdatePractice = /* GraphQL */ `subscription OnUpdatePractice(
+  $filter: ModelSubscriptionPracticeFilterInput
+  $owner: String
+) {
+  onUpdatePractice(filter: $filter, owner: $owner) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdatePracticeSubscriptionVariables,
+  APITypes.OnUpdatePracticeSubscription
+>;
+export const onDeletePractice = /* GraphQL */ `subscription OnDeletePractice(
+  $filter: ModelSubscriptionPracticeFilterInput
+  $owner: String
+) {
+  onDeletePractice(filter: $filter, owner: $owner) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeletePracticeSubscriptionVariables,
+  APITypes.OnDeletePracticeSubscription
+>;
+export const onCreatePracticeCheckIn = /* GraphQL */ `subscription OnCreatePracticeCheckIn(
+  $filter: ModelSubscriptionPracticeCheckInFilterInput
+  $owner: String
+) {
+  onCreatePracticeCheckIn(filter: $filter, owner: $owner) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreatePracticeCheckInSubscriptionVariables,
+  APITypes.OnCreatePracticeCheckInSubscription
+>;
+export const onUpdatePracticeCheckIn = /* GraphQL */ `subscription OnUpdatePracticeCheckIn(
+  $filter: ModelSubscriptionPracticeCheckInFilterInput
+  $owner: String
+) {
+  onUpdatePracticeCheckIn(filter: $filter, owner: $owner) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdatePracticeCheckInSubscriptionVariables,
+  APITypes.OnUpdatePracticeCheckInSubscription
+>;
+export const onDeletePracticeCheckIn = /* GraphQL */ `subscription OnDeletePracticeCheckIn(
+  $filter: ModelSubscriptionPracticeCheckInFilterInput
+  $owner: String
+) {
+  onDeletePracticeCheckIn(filter: $filter, owner: $owner) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeletePracticeCheckInSubscriptionVariables,
+  APITypes.OnDeletePracticeCheckInSubscription
+>;

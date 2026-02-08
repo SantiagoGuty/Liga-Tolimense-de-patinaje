@@ -4,6 +4,7 @@ import { CCarousel, CCarouselItem, CImage } from '@coreui/react';
 import patinadores_infantiles from '../assets/img/patinadores_infantiles.jpg';
 import arias_y_ninos from '../assets/img/arias_y_ninos_1.jpg';
 import accion_1 from '../assets/img/accion1.jpg';
+import accion_4 from '../assets/img/profe.jpg';
 
 type EventosCarouselProps = {
   variant?: 'home' | 'page';   // controls layout size/styles
@@ -76,7 +77,7 @@ export default function EventosCarousel({
                 <a href="https://fedepatin.org.co/4valida2025-velocidad-bogota/" className="read-more-btn">Resultados</a>
               </div>
               <div className="event-image-area">
-                <CImage className="noticia-img" src={accion_1} alt="Evento 3" />
+                <CImage className="noticia-img" src={accion_4} alt="Evento 3" />
               </div>
             </div>
           </CCarouselItem>

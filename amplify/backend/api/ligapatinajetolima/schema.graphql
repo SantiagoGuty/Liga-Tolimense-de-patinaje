@@ -1,15 +1,11 @@
-# This "input" configures a global authorization rule to enable public access to
-# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
-input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+# REMOVE THIS FOR PROD. Keep only in dev if you insist.
+# input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
 
-# Users can manage their own record (owner).
-# Coaches/Staff can READ and UPDATE status-related fields.
-# Admins can do everything.
 type User
   @model
   @auth(rules: [
-    { allow: owner },
-    { allow: groups, groups: ["Coaches", "Staff"], operations: [read, update] },
+    { allow: owner }, # owner = Cognito username/sub mapping
+    { allow: groups, groups: ["Entrenadores"], operations: [read, update] },
     { allow: groups, groups: ["Admins"], operations: [create, read, update, delete] }
   ]) {
   id: ID!
@@ -23,19 +19,16 @@ type User
   permiso: String
   estatus: String
 
-  # QR metadata
   qrKey: String
   qrPayload: String
 
-  # S3 key for profile photo
   avatarKey: String
 }
 
-# Log scans (who/when/where). Only staff can create logs.
 type ScanEvent
   @model
   @auth(rules: [
-    { allow: groups, groups: ["Coaches", "Staff", "Admins"] }
+    { allow: groups, groups: ["Entrenadores", "Admins"] }
   ]) {
   id: ID!
   userId: ID! @index(name: "byUser", sortKeyFields: ["timestamp"])
@@ -52,14 +45,53 @@ type Resolution
     { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
   ]) {
   id: ID!
-
-  # constant value like "RESOLUTIONS"
   pk: String! @index(name: "byPkDate", sortKeyFields: ["date"])
-
   date: AWSDate!
   title: String!
   s3Key: String!
-
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+}
+
+# NEW: Practice created by Entrenadores/Admins
+type Practice
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admins"], operations: [create, read, update, delete] },
+    { allow: owner, operations: [create, read, update, delete] }, # coach owns their practices
+    { allow: private, operations: [read] } # optional: allow signed-in users to read practice basic info
+  ]) {
+  id: ID!
+
+  title: String!
+  date: AWSDate!
+  startTime: AWSTime
+  location: String
+  notes: String
+  status: String # OPEN / CLOSED
+
+  # QR token that the practice displays
+  qrToken: String! @index(name: "byQrToken", queryField: "practiceByQrToken")
+}
+
+# NEW: Attendance/check-in entries
+type PracticeCheckIn
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admins"], operations: [create, read, update, delete] },
+    { allow: owner, operations: [create, read, update, delete] }, # coach can see their own checkins
+    { allow: private, operations: [create, read] } # optional: allow athlete self-checkin
+  ]) {
+  id: ID!
+
+  practiceId: ID! @index(name: "byPractice", sortKeyFields: ["timestamp"])
+  userId: ID! @index(name: "byUserCheckins", sortKeyFields: ["timestamp"])
+
+  timestamp: AWSDateTime!
+
+  # who performed the check-in action (coach/admin or athlete)
+  scannerSub: String
+  scannerName: String
+
+  method: String # "QR"
 }

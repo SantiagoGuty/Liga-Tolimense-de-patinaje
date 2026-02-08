@@ -19,6 +19,12 @@ import Noticia from './pages/Noticia';
 import ProtectedRoute from './layout/ProtectedRoute';
 import CrearPerfil from './pages/CrearPerfil';
 import EditarPerfil from './pages/EditarPerfil';
+import MisPracticas from './pages/MisPracticas';
+import AdminUsuarios from './pages/admin/AdminUsuarios';
+import AdminPracticas from './pages/admin/AdminPracticas';
+import AdminResoluciones from './pages/admin/AdminResoluciones';
+import AdminBoletines from './pages/admin/AdminBoletines';
+
 
 import Root from './layout/Root'; 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
@@ -79,11 +85,63 @@ const router = createBrowserRouter([
         ),
       },
 
-      // (optional; errorElement already handles unknown routes)
-      { path: '*', element: <ErrorPage /> },
-    ],
+      // Admin-only
+  {
+    path: 'admin/usuarios',
+    element: (
+      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+        <UsersList />
+      </ProtectedRoute>
+    ),
   },
-]);
+
+  // Entrenador-only (Coach)
+  {
+    path: 'entrenador/practicas',
+    element: (
+      <ProtectedRoute requiredGroups={["Coaches"]} forbiddenTo="/">
+        <MisPracticas />
+      </ProtectedRoute>
+    ),
+    },{
+    path: 'admin/usuarios',
+    element: (
+      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+        <AdminUsuarios />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: 'admin/practicas',
+    element: (
+      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+        <AdminPracticas />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: 'admin/resoluciones',
+    element: (
+      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+        <AdminResoluciones />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: 'admin/boletines',
+    element: (
+      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+        <AdminBoletines />
+      </ProtectedRoute>
+    ),
+  },
+
+
+          // (optional; errorElement already handles unknown routes)
+          { path: '*', element: <ErrorPage /> },
+        ],
+      },
+    ]);
 
 export default function App() {
   return <RouterProvider router={router} />;

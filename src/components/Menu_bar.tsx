@@ -6,13 +6,30 @@ import '../styles/menu.css';
 import logo from '../assets/img/logo_solo.png';
 
 // Auth + profile helpers
-import { currentUser } from '../services/authService';           // add .js if NodeNext
-import { getCurrentUserProfile } from '../services/userProfile'; // add .js if NodeNext
-import { getAvatarUrl } from '../services/storageService';       // add .js if NodeNext
+import { currentUser } from '../services/authService';
+import {
+  getCurrentUserProfile,
+  createCurrentUserProfile,
+} from '../services/userProfile';
+import { getAvatarUrl } from '../services/storageService';
+import { getGroups } from '../services/roles';
+
+function deriveNameFromEmail(email: string | undefined) {
+  if (!email) return { nombre: 'Usuario', apellido: 'Liga' };
+  const left = email.split('@')[0] || '';
+  const cleaned = left.replace(/[._-]+/g, ' ').trim();
+  const parts = cleaned.split(' ').filter(Boolean);
+  const nombre = (parts[0] || 'Usuario').slice(0, 40);
+  const apellido = (parts.slice(1).join(' ') || 'Liga').slice(0, 40);
+  return { nombre, apellido };
+}
 
 export default function Menu_bar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isAuthed, setIsAuthed] = useState(false);
+
+  const [isAdminGroup, setIsAdminGroup] = useState(false);
+
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [initials, setInitials] = useState<string>('');
 
@@ -20,7 +37,9 @@ export default function Menu_bar() {
   const mobileMenuRef = useRef<HTMLElement>(null);
   const location = useLocation();
 
-  // Re-check auth + avatar whenever route changes or menu toggles (good after sign-in/out)
+  // prevent repeated create attempts in a single session
+  const createdProfileOnceRef = useRef(false);
+
   useEffect(() => {
     (async () => {
       const u = await currentUser().catch(() => null);
@@ -28,17 +47,55 @@ export default function Menu_bar() {
       setIsAuthed(authed);
 
       if (!authed) {
+        setIsAdminGroup(false);
         setAvatarUrl(null);
         setInitials('');
+        createdProfileOnceRef.current = false;
         return;
       }
 
+      // 1) groups/role
       try {
-        const p = await getCurrentUserProfile();
+        const groups = await getGroups();
+        const admin = groups.includes('Admins');
+        setIsAdminGroup(admin);
+
+        // Debug if you want:
+        // console.log('GROUPS:', groups);
+      } catch {
+        setIsAdminGroup(false);
+      }
+
+      // 2) profile + avatar
+      try {
+        let p = await getCurrentUserProfile();
+
+        // If no profile exists, auto-create one ONCE
+        if (!p && !createdProfileOnceRef.current) {
+          createdProfileOnceRef.current = true;
+
+          // Try to derive from Cognito email (your authService likely returns something)
+          // If not available, it will fallback
+          const emailGuess =
+            (u as any)?.signInDetails?.loginId ||
+            (u as any)?.username ||
+            undefined;
+
+          const { nombre, apellido } = deriveNameFromEmail(emailGuess);
+
+          p = await createCurrentUserProfile({
+            nombre,
+            apellido,
+            correo: typeof emailGuess === 'string' ? emailGuess : '',
+            estatus: 'ACTIVO',
+            permiso: isAdminGroup ? 'ADMIN' : 'USUARIO',
+          }).catch(() => null);
+        }
+
         const inits =
-          (p?.nombre?.[0] || '').toUpperCase() +
-          (p?.apellido?.[0] || '').toUpperCase();
-        setInitials(inits || 'Sube tu foto');
+          ((p?.nombre?.[0] || '').toUpperCase() +
+            (p?.apellido?.[0] || '').toUpperCase()) || 'SG';
+        setInitials(inits);
 
         if (p?.avatarKey) {
           try {
@@ -51,10 +108,12 @@ export default function Menu_bar() {
           setAvatarUrl(null);
         }
       } catch {
-        // ignore profile errors for menu; keep site usable
+        // keep menu usable even if profile fails
+        setAvatarUrl(null);
+        setInitials('SG');
       }
     })();
-  }, [location, menuOpen]);
+  }, [location.pathname, menuOpen]);
 
   // Close mobile when clicking outside
   useEffect(() => {
@@ -96,7 +155,7 @@ export default function Menu_bar() {
               {avatarUrl ? (
                 <img src={avatarUrl} alt="Foto de perfil" />
               ) : (
-                <span className="initials">{initials || ''}</span>
+                <span className="initials">{initials || 'SG'}</span>
               )}
             </Link>
           )}
@@ -106,25 +165,28 @@ export default function Menu_bar() {
         <nav className="menu-desktop">
           <Link to="/">Inicio</Link>
 
-          {/*<div className="dropdown">
-            <a >Cursos ▾</a>
-            * Avatar next to logo when authenticated <div className="dropdown-content">
-              {!isAuthed && (
-                <>
-                  <a href="/Registrate">¡Regístrate ya!</a>
-                </>
-              )}
-              <a href="/novato">Novato</a>
-              <a href="/avanzado">Avanzado</a>
-              <a href="/adultos">Adultos</a>
+          {/* ✅ ADMIN MENU (desktop) */}
+          {isAuthed && isAdminGroup && (
+            <div className="dropdown">
+              <a type="button" className="dropdown-trigger">
+                Admin ▾
+              </a>
+              <div className="dropdown-content">
+                <Link to="/admin/usuarios">Usuarios</Link>
+                <Link to="/admin/practicas">Prácticas</Link>
+                <Link to="/admin/resoluciones">Subir Resoluciones</Link>
+                <Link to="/admin/boletines">Subir Boletines</Link>
+              </div>
             </div>
-          </div>*/}
-
+          )}
+          
           <div className="dropdown">
-            <a >Modalidades ▾</a>
+            <a type="button" className="dropdown-trigger">
+              Modalidades ▾
+            </a>
             <div className="dropdown-content">
-              <a href="/carreras">Carreras</a>
-              <a href="/artistico">Artístico</a>
+              <Link to="/carreras">Carreras</Link>
+              <Link to="/artistico">Artístico</Link>
             </div>
           </div>
 
@@ -133,67 +195,65 @@ export default function Menu_bar() {
           <Link to="/resoluciones">Resoluciones</Link>
           <Link to="/boletines">Boletines</Link>
 
-          {/* Auth-aware items (desktop) */}
+  {/* sign in 
           {!isAuthed && (
             <>
               <Link to="/iniciasesion">Iniciar sesión</Link>
               <Link to="/registrate">Crear usuario</Link>
             </>
-          )}
-          {/* When authed, we DO NOT show "Perfil" here (avatar replaces it) */}
+          )}*/}
         </nav>
 
         {/* Mobile Burger */}
         <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-          <button
+          <a
             className={`menu-button ${menuOpen ? 'opened' : ''}`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Main Menu"
             aria-expanded={menuOpen}
+            type="button"
           >
             <svg width="100" height="100" viewBox="0 0 100 100">
               <path className="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
               <path className="line line2" d="M 20,50 H 80" />
               <path className="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
             </svg>
-          </button>
+          </a>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <nav
-        ref={mobileMenuRef}
-        className={`menu-mobile ${menuOpen ? 'open' : ''}`}
-      >
-        <Link to="/#inicio" onClick={() => setMenuOpen(false)}>Inicio</Link>
+      <nav ref={mobileMenuRef} className={`menu-mobile ${menuOpen ? 'open' : ''}`}>
+        <Link to="/" onClick={() => setMenuOpen(false)}>Inicio</Link>
 
         <details>
           <summary>Modalidades</summary>
-          <Link to="/carreras"  onClick={() => setMenuOpen(false)}>Carreras</Link>
+          <Link to="/carreras" onClick={() => setMenuOpen(false)}>Carreras</Link>
           <Link to="/artistico" onClick={() => setMenuOpen(false)}>Artístico</Link>
         </details>
 
-         {/* <details>
-          <summary>Cursos</summary>
-          <Link to="/Registrate" onClick={() => setMenuOpen(false)}>¡Regístrate ya!</Link>
-          <Link to="/novato"     onClick={() => setMenuOpen(false)}>Novato</Link>
-          <Link to="/avanzado"   onClick={() => setMenuOpen(false)}>Avanzado</Link>
-          <Link to="/adultos"    onClick={() => setMenuOpen(false)}>Adultos</Link>
-        </details>*/}
-
-        <Link to="/Noticias"     onClick={() => setMenuOpen(false)}>Noticias</Link>
-        <Link to="/Eventos"      onClick={() => setMenuOpen(false)}>Eventos</Link>
+        <Link to="/Noticias" onClick={() => setMenuOpen(false)}>Noticias</Link>
+        <Link to="/Eventos" onClick={() => setMenuOpen(false)}>Eventos</Link>
         <Link to="/resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
         <Link to="/boletines" onClick={() => setMenuOpen(false)}>Boletines</Link>
 
-        {/* Auth-aware items (mobile) */}
+        {/* ✅ ADMIN MENU (mobile) */}
+        {isAuthed && isAdminGroup && (
+          <details>
+            <summary>Admin</summary>
+            <Link to="/admin/usuarios" onClick={() => setMenuOpen(false)}>Usuarios</Link>
+            <Link to="/admin/practicas" onClick={() => setMenuOpen(false)}>Prácticas</Link>
+            <Link to="/admin/resoluciones" onClick={() => setMenuOpen(false)}>Subir Resoluciones</Link>
+            <Link to="/admin/boletines" onClick={() => setMenuOpen(false)}>Subir Boletines</Link>
+          </details>
+        )}
+
         {!isAuthed && (
           <>
             <Link to="/iniciasesion" onClick={() => setMenuOpen(false)}>Inicia sesión</Link>
-            <Link to="/registrate"   onClick={() => setMenuOpen(false)}>Crear usuario</Link>
+            <Link to="/registrate" onClick={() => setMenuOpen(false)}>Crear usuario</Link>
           </>
         )}
-
       </nav>
     </>
   );

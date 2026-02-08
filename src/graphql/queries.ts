@@ -142,6 +142,100 @@ export const listResolutions = /* GraphQL */ `query ListResolutions(
   APITypes.ListResolutionsQueryVariables,
   APITypes.ListResolutionsQuery
 >;
+export const getPractice = /* GraphQL */ `query GetPractice($id: ID!) {
+  getPractice(id: $id) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetPracticeQueryVariables,
+  APITypes.GetPracticeQuery
+>;
+export const listPractices = /* GraphQL */ `query ListPractices(
+  $filter: ModelPracticeFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPractices(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      date
+      startTime
+      location
+      notes
+      status
+      qrToken
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListPracticesQueryVariables,
+  APITypes.ListPracticesQuery
+>;
+export const getPracticeCheckIn = /* GraphQL */ `query GetPracticeCheckIn($id: ID!) {
+  getPracticeCheckIn(id: $id) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetPracticeCheckInQueryVariables,
+  APITypes.GetPracticeCheckInQuery
+>;
+export const listPracticeCheckIns = /* GraphQL */ `query ListPracticeCheckIns(
+  $filter: ModelPracticeCheckInFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPracticeCheckIns(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      practiceId
+      userId
+      timestamp
+      scannerSub
+      scannerName
+      method
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListPracticeCheckInsQueryVariables,
+  APITypes.ListPracticeCheckInsQuery
+>;
 export const scanEventsByUserIdAndTimestamp = /* GraphQL */ `query ScanEventsByUserIdAndTimestamp(
   $userId: ID!
   $timestamp: ModelStringKeyConditionInput
@@ -210,4 +304,114 @@ export const resolutionsByPkAndDate = /* GraphQL */ `query ResolutionsByPkAndDat
 ` as GeneratedQuery<
   APITypes.ResolutionsByPkAndDateQueryVariables,
   APITypes.ResolutionsByPkAndDateQuery
+>;
+export const practiceByQrToken = /* GraphQL */ `query PracticeByQrToken(
+  $qrToken: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelPracticeFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  practiceByQrToken(
+    qrToken: $qrToken
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      title
+      date
+      startTime
+      location
+      notes
+      status
+      qrToken
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PracticeByQrTokenQueryVariables,
+  APITypes.PracticeByQrTokenQuery
+>;
+export const practiceCheckInsByPracticeIdAndTimestamp = /* GraphQL */ `query PracticeCheckInsByPracticeIdAndTimestamp(
+  $practiceId: ID!
+  $timestamp: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelPracticeCheckInFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  practiceCheckInsByPracticeIdAndTimestamp(
+    practiceId: $practiceId
+    timestamp: $timestamp
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      practiceId
+      userId
+      timestamp
+      scannerSub
+      scannerName
+      method
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PracticeCheckInsByPracticeIdAndTimestampQueryVariables,
+  APITypes.PracticeCheckInsByPracticeIdAndTimestampQuery
+>;
+export const practiceCheckInsByUserIdAndTimestamp = /* GraphQL */ `query PracticeCheckInsByUserIdAndTimestamp(
+  $userId: ID!
+  $timestamp: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelPracticeCheckInFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  practiceCheckInsByUserIdAndTimestamp(
+    userId: $userId
+    timestamp: $timestamp
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      practiceId
+      userId
+      timestamp
+      scannerSub
+      scannerName
+      method
+      createdAt
+      updatedAt
+      owner
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PracticeCheckInsByUserIdAndTimestampQueryVariables,
+  APITypes.PracticeCheckInsByUserIdAndTimestampQuery
 >;

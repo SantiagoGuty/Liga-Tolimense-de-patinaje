@@ -164,9 +164,10 @@ function onFileChange(e: ChangeEvent<HTMLInputElement>) {
     if (!form.sexo) next.sexo = 'Selecciona tu sexo.';
     if (!form.cedula.trim()) {
       next.cedula = 'Ingresa tu documento.';
-    } else if (!/^\d{7,8,9,10}$/.test(form.cedula)) {
+    } else if (!/^\d{7,10}$/.test(form.cedula)) {
       next.cedula = 'La cédula (NUIP) debe tener entre 7 y 10 dígitos numéricos.';
     }
+
     if (!skipPassword) {
       if (!form.contrasena) next.contrasena = 'Crea una contraseña.';
       else if (!validPassword(form.contrasena))

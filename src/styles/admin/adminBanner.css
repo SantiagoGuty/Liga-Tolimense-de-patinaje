@@ -1,0 +1,10 @@
+/* Make sure banner has height and behaves like Carreras */
+.admin-banner {
+  height: 320px;       /* adjust if your banner.css expects a height */
+  position: relative;
+}
+
+/* Crop tweak */
+.admin-banner .banner-img {
+  object-position: center 35%;
+}

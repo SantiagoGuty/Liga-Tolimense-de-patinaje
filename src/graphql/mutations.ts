@@ -209,3 +209,138 @@ export const deleteResolution = /* GraphQL */ `mutation DeleteResolution(
   APITypes.DeleteResolutionMutationVariables,
   APITypes.DeleteResolutionMutation
 >;
+export const createPractice = /* GraphQL */ `mutation CreatePractice(
+  $input: CreatePracticeInput!
+  $condition: ModelPracticeConditionInput
+) {
+  createPractice(input: $input, condition: $condition) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreatePracticeMutationVariables,
+  APITypes.CreatePracticeMutation
+>;
+export const updatePractice = /* GraphQL */ `mutation UpdatePractice(
+  $input: UpdatePracticeInput!
+  $condition: ModelPracticeConditionInput
+) {
+  updatePractice(input: $input, condition: $condition) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdatePracticeMutationVariables,
+  APITypes.UpdatePracticeMutation
+>;
+export const deletePractice = /* GraphQL */ `mutation DeletePractice(
+  $input: DeletePracticeInput!
+  $condition: ModelPracticeConditionInput
+) {
+  deletePractice(input: $input, condition: $condition) {
+    id
+    title
+    date
+    startTime
+    location
+    notes
+    status
+    qrToken
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeletePracticeMutationVariables,
+  APITypes.DeletePracticeMutation
+>;
+export const createPracticeCheckIn = /* GraphQL */ `mutation CreatePracticeCheckIn(
+  $input: CreatePracticeCheckInInput!
+  $condition: ModelPracticeCheckInConditionInput
+) {
+  createPracticeCheckIn(input: $input, condition: $condition) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreatePracticeCheckInMutationVariables,
+  APITypes.CreatePracticeCheckInMutation
+>;
+export const updatePracticeCheckIn = /* GraphQL */ `mutation UpdatePracticeCheckIn(
+  $input: UpdatePracticeCheckInInput!
+  $condition: ModelPracticeCheckInConditionInput
+) {
+  updatePracticeCheckIn(input: $input, condition: $condition) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdatePracticeCheckInMutationVariables,
+  APITypes.UpdatePracticeCheckInMutation
+>;
+export const deletePracticeCheckIn = /* GraphQL */ `mutation DeletePracticeCheckIn(
+  $input: DeletePracticeCheckInInput!
+  $condition: ModelPracticeCheckInConditionInput
+) {
+  deletePracticeCheckIn(input: $input, condition: $condition) {
+    id
+    practiceId
+    userId
+    timestamp
+    scannerSub
+    scannerName
+    method
+    createdAt
+    updatedAt
+    owner
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeletePracticeCheckInMutationVariables,
+  APITypes.DeletePracticeCheckInMutation
+>;

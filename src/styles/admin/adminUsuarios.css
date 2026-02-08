@@ -1,0 +1,56 @@
+/* src/styles/admin/adminUsuarios.css */
+
+.admin-users-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-users-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.admin-users-search {
+  flex: 1;
+  min-width: 240px;
+}
+
+.admin-users-meta {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Optional table/card styling if you later render user rows here */
+.admin-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+}
+
+.admin-user-row strong {
+  color: #2c0c0d;
+}
+
+.admin-user-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-tag {
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(246,194,0,0.15);
+  color: #6a1b1a;
+  border: 1px solid rgba(246,194,0,0.35);
+}
