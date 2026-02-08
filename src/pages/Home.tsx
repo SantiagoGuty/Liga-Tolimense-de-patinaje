@@ -6,6 +6,8 @@ import campeon from '../assets/img/campeon.jpg';
 import accion_2 from '../assets/img/accion2.jpg';
 import accion_4 from '../assets/img/accion4.jpg';
 import artistico1 from '../assets/img/artistico1.jpg';
+import festibalChicas from '../assets/img/festibal_chicas.jpeg';
+import avanzado from '../assets/img/avanzado-patinaje.jpg';
 import logo_blanco from '../assets/img/logo_liga_blanco.png';
 import eventosVideo from '../assets/video/eventos-febrero-2026.mp4';
 import posterRanking from '../assets/img/poster-ranking-2026.png';
@@ -27,20 +29,20 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
 
-  const heroImages = [accion_4, artistico1, accion_2, campeon];
+  const heroImages = [accion_4, artistico1, accion_2, campeon, festibalChicas, avanzado, ];
   const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
  
   {/* Images automatic slide in home start*/}
   useEffect(() => {
-
     const interval = setInterval(() => {
       setCurrentHeroIndex((prevIndex) =>
         (prevIndex + 1) % heroImages.length
       );
-    }, 10000); // every 8s
+    }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [heroImages.length]);
+
 
 
   return (
@@ -57,10 +59,11 @@ export default function Home() {
 
         <div className="hero-left">
 
-          <div
-              className="hero-slider"
-              style={{ transform: `translateX(-${currentHeroIndex * 100}%)` }}
-            >
+      <div
+        className="hero-slider"
+        style={{ transform: `translateX(-${currentHeroIndex * 100}%)` }}
+      >
+
               {heroImages.map((image, index) => (
                 <img
                   key={index}
