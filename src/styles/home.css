@@ -243,6 +243,10 @@ html, body {
   display: inline-block;
   font-size: 3rem;
   margin-bottom: 1rem;
+  transition: transform 0.35s ease;
+}
+.about-icon:hover{
+  transform: rotate(10deg) scale(1.2);
 }
 
 /* Feature title */

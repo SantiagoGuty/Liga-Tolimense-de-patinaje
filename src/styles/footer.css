@@ -190,4 +190,69 @@
   .footer-socials {
     justify-content: center;
   }
+
+
+   /* Stack everything cleanly */
+  .footer_horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    row-gap: 1.5rem;
+  }
+
+  /* Center logo */
+  .footer-logo {
+    transform: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .footer-logo img {
+    margin: 0 auto;
+  }
+
+  /* Reset contact block positioning */
+  .footer-contact {
+    transform: none;
+    max-width: 100%;
+    padding: 0 1rem;
+    align-items: center;
+  }
+
+  .footer-contact p {
+    text-align: center;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  /* Fix social icons layout */
+  .footer-socials {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  /* Fix button hit areas */
+  .social-link {
+    width: 64px;
+    height: 64px;
+  }
+
+  /* REMOVE icon transforms on mobile */
+  .social-icon-img {
+    transform: none;
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Bottom text spacing */
+  .footer-bottom {
+    margin-top: 1.5rem;
+    padding: 0 1rem;
+    font-size: 14px;
+    text-align: center;
+  }
 }

@@ -167,10 +167,62 @@ html, body {
 }
 
 
-@media (max-width: 768px){
+@media (max-width: 768px) {
+
+  /* Smooth animation */
   .logos-slide {
+    animation: scroll 45s linear infinite;
+    align-items: center;
+  }
+
+  /* Give vertical space so logos are never cut */
+  .logos-slide a {
+    height: 200px;          /* ⬆️ increased */
+    padding: 0 20px;
     display: flex;
-    width: max-content;
-    animation: scroll 10s linear infinite;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Logos scale safely */
+  .logos-slide img {
+    max-height: 180px;       /* instead of fixed height */
+    width: auto;
+    object-fit: contain;
+  }
+
+  /* Soften side fades WITHOUT covering content */
+  .logos-container::before,
+  .logos-container::after {
+    width: 32px;
+    opacity: 0.45;
+    top: 10%;
+    height: 80%;            /* ⬅️ key fix */
+  }
+
+  .logos-container::before {
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0.85),
+      rgba(255,255,255,0)
+    );
+  }
+
+  .logos-container::after {
+    background: linear-gradient(
+      to left,
+      rgba(255,255,255,0.85),
+      rgba(255,255,255,0)
+    );
+  }
+
+  /* No hover scaling on touch */
+  .logos-slide img:hover {
+    transform: none;
+  }
+
+  /* Gentle tap feedback */
+  .logos-slide a:active img {
+    transform: scale(0.96);
   }
 }
