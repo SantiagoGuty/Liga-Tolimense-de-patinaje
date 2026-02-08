@@ -7,6 +7,10 @@ import accion_2 from '../assets/img/accion2.jpg';
 import accion_4 from '../assets/img/accion4.jpg';
 import artistico1 from '../assets/img/artistico1.jpg';
 import logo_blanco from '../assets/img/logo_liga_blanco.png';
+import eventosVideo from '../assets/video/eventos-febrero-2026.mp4';
+import posterRanking from '../assets/img/poster-ranking-2026.png';
+import posterFestival from '../assets/img/poster-festival-2026.png';
+
 
 
 
@@ -80,7 +84,53 @@ export default function Home() {
       </div>
 
 
+    </div>
+    {/* Próximos Eventos Oficiales */}
+    <section className="upcoming-events">
+
+      <h2 className="section-title">Próximos Eventos Oficiales</h2>
+
+      <div className="events-grid">
+
+        {/* Poster — IV Ranking */}
+        <Link
+          to="/resoluciones?id=24+Ene+2026"
+          className="event-card poster-link"
+        >
+          <img
+            src={posterRanking}
+            alt="IV Ranking Departamental 2026"
+          />
+        </Link>
+
+        {/* Video (center, no link) */}
+        <div className="event-card video-card">
+          <video
+            src={eventosVideo}
+            controls
+            preload="metadata"
+            playsInline
+            className="events-video"
+          />
+        </div>
+
+        {/* Poster — Festival Escuelas y Novatos */}
+        <Link
+          to="/resoluciones?id=23+Ene+2026"
+          className="event-card poster-link"
+        >
+          <img
+            src={posterFestival}
+            alt="Festival de Escuelas y Novatos 2026"
+          />
+        </Link>
+
       </div>
+    </section>
+
+
+
+
 
       {/* Qué es la Liga */}
       <section className="about-liga">
@@ -136,7 +186,8 @@ export default function Home() {
         </div>
       </section>
 
-
+    
+      
 
 
 
@@ -282,14 +333,32 @@ export default function Home() {
 
 
 
-     {/* Links */}
-    <section className="links">
-      <Link to="/resoluciones" className="resoluciones">Resoluciones</Link>
-      <Link to="/boletines" className="guias">Boletines</Link>
-    </section>
+      {/* Links */}
+      <section className="links">
+        <Link to="/resoluciones" className="link-card resoluciones">
+          <span className="link-icon">📄</span>
+          <span className="link-text">Resoluciones</span>
+          <span className="link-arrow">→</span>
+        </Link>
+
+        <Link to="/boletines" className="link-card guias">
+          <span className="link-icon">📰</span>
+          <span className="link-text">Boletines</span>
+          <span className="link-arrow">→</span>
+        </Link>
+      </section>
+
     
     {/* Dónde entrenamos */}
     <section className="training-location">
+      <div className="logo-pattern">
+        <span className="logo one"></span>
+        <span className="logo two"></span>
+        <span className="logo three"></span>
+        <span className="logo four"></span>
+      </div>
+
+
       <div className="training-content">
 
         <h2>¿Dónde entrenamos?</h2>

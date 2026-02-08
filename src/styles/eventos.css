@@ -52,15 +52,76 @@
   justify-content: center;
   text-align: center;
 }
+/* =========================
+   CAROUSEL ARROWS – MINIMAL
+========================= */
 
-/* Desktop arrows (if you have special desktop positioning) */
-.eventos-carousel-wrapper .carousel-control-prev {
-  left: 35%;
-}
-.eventos-carousel-wrapper .carousel-control-next {
-  right: 0;
+.carousel-control-prev,
+.carousel-control-next {
+  width: 60px !important;
+  height: 60px !important;
+
+  background: transparent !important; /* ❌ no faded circle */
+  border: none !important;
+  box-shadow: none !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  pointer-events: auto; /* 👈 IMPORTANT */
 }
 
+/* Remove CoreUI default icons */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: none !important;
+}
+
+/* Custom arrows */
+.carousel-control-prev::after,
+.carousel-control-next::after {
+  font-size: 3.6rem;      /* 👈 BIG */
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* Arrow characters */
+.carousel-control-prev::after {
+  content: "‹";
+}
+
+.carousel-control-next::after {
+  content: "›";
+}
+
+/* ✅ HOVER SCALE (this WILL work) */
+.carousel-control-prev:hover::after,
+.carousel-control-next:hover::after {
+  transform: scale(1.5);
+}
+
+
+/* Push LEFT arrow inward */
+.carousel-control-prev {
+  transform: translateX(200px);
+}
+
+/* Keep RIGHT arrow near edge */
+.carousel-control-next {
+  right: 24px !important;
+}
+@media (max-width: 768px) {
+  .carousel-control-prev::after,
+  .carousel-control-next::after {
+    font-size: 2.6rem;
+  }
+}
 
 .event-image-area img,
 .noticia-img {
@@ -155,29 +216,56 @@
 .carousel-indicators > [aria-current="true"]::before {
   background-color: #6a1b1a !important;
 }
-
 .read-more-btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  background-color: #f6c200;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 0.85rem 2.2rem;
+  background: linear-gradient(135deg, #f6c200, #e5b100);
   color: #2c0c0d;
-  font-size: 1.2rem;
-  font-weight: 700;
+
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
   text-transform: uppercase;
-  text-align: center;
+  text-decoration: none;
+
+  border-radius: 14px;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.18),
+    inset 0 0 0 1px rgba(255,255,255,0.35);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    color 0.25s ease;
 }
 
+/* Arrow */
+.read-more-btn::after {
+  content: "→";
+  font-size: 1.6rem;        /* 👈 BIGGER arrow */
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.25s ease;
+}
+
+/* Hover */
 .read-more-btn:hover {
-  background-color: #6a1b1a;
-  color: #fff;
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #6a1b1a, #2c0c0d);
+  color: #f6c200;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
 }
 
+.read-more-btn:hover::after {
+  transform: translateX(6px);
+}
 
 .event-caption-box {
   background-color: rgba(42, 16, 16, 0.85); /* solid semi-dark */
@@ -251,11 +339,7 @@
   object-fit: cover;
 }
 
-.eventos.eventos--page .read-more-btn {
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  border-radius: 10px;
-}
+
 
 /* Optional: remove extra spacing when the internal title is hidden */
 .eventos.eventos--page .eventos-title { display: none; }
@@ -354,29 +438,7 @@
   }
   
 
-  /* 4) True middle for arrows + remove any icon rotation */
-  .eventos-carousel-wrapper .carousel-control-prev,
-  .eventos-carousel-wrapper .carousel-control-next {
-    position: absolute;
-    top: 40% !important;
-    transform: translateY(-50%) !important;
-    width: 36px;
-    height: 36px;
-    background: rgba(0,0,0,0.4);
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    z-index: 5;
-  }
 
-  /* flush to edges */
-  .eventos-carousel-wrapper .carousel-control-prev { left: 0 !important;  }
-  .eventos-carousel-wrapper .carousel-control-next { right:20px !important; }
-  /* un-skew the chevrons */
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    transform: none !important;
-  }
 
   /* 5) Dots just above the “Leer más” button */
   .eventos-carousel-wrapper .carousel-indicators {
@@ -422,4 +484,38 @@
   .eventos-carousel-wrapper .event-text-area { box-sizing: border-box; }
   .eventos-carousel-wrapper .event-image-area { margin-left: -0.5px; } /* hairline guard */
   .eventos-carousel-wrapper .event-image-area img { display: block; }
+}
+/* Move BOTH arrows slightly up */
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 46%;
+  transform: translateY(-50%);
+  width: 60px !important;
+  height: 60px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  z-index: 20;
+}
+@media (min-width: 1025px) {
+  .eventos-carousel-wrapper .carousel-control-prev {
+    left: calc(35% + 24px) !important;  /* 👈 inside image */
+  }
+
+  .eventos-carousel-wrapper .carousel-control-next {
+    right: 24px !important;
+  }
+}
+@media (max-width: 1024px) {
+  .eventos-carousel-wrapper .carousel-control-prev {
+    left: 16px !important;
+    top: 38%;
+  }
+
+  .eventos-carousel-wrapper .carousel-control-next {
+    right: 16px !important;
+    top: 38%;
+  }
 }

@@ -183,8 +183,9 @@ html, body {
 .about-liga {
   width: 100%;
   background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
-  padding: clamp(4rem, 7vw, 6rem) 1.5rem;
   display: flex;
+  padding-bottom: 60px;
+  padding-top: 15px;
   justify-content: center;
 }
 
@@ -665,55 +666,140 @@ html, body {
   color: #f6c200;
   transform: translateY(-4px) scale(1.03);
 }
+/* =========================
+   LINKS SECTION
+========================= */
 
 .links {
   background: #fff;
   width: 100%;
-  padding: clamp(12px, 2vw, 24px);
+  padding: clamp(16px, 3vw, 36px);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(12px, 2vw, 24px);
-  align-items: stretch;
+  gap: clamp(16px, 3vw, 28px);
 }
 
-/* If you're using <Link> or <a> elements, style them as buttons */
-.links a,
-.links .link-btn {
+/* =========================
+   LINK CARD BASE
+========================= */
+
+.link-card {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+
+  padding: clamp(18px, 4vw, 48px);
+  border-radius: 18px;
   text-decoration: none;
-  border: none;
-  border-radius: 12px;
-  padding: clamp(14px, 4vw, 48px);
+
   font-weight: 700;
-  font-size: clamp(1.25rem, 3.2vw, 3rem);  /* scales down on smaller screens */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  font-size: clamp(1.4rem, 3.2vw, 3rem);
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+  overflow: hidden;
   cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* Brand colors + hover states preserved */
+/* Soft background accent */
+.link-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top left,
+    rgba(162, 43, 43, 0.25),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* =========================
+   INNER ELEMENTS
+========================= */
+
+.link-icon {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  opacity: 0.9;
+}
+
+.link-text {
+  flex: 1;
+  text-align: center;
+}
+
+.link-arrow {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  opacity: 0.7;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* =========================
+   RESOLUCIONES
+========================= */
+
 .resoluciones {
-  background-color: #f6c200;
-  color: #fff;
-}
-.resoluciones:hover,
-.resoluciones:focus-visible {
-  background-color: #e5b100;
+  background: linear-gradient(135deg, #f6c200, #e5b100);
   color: #6a1b1a;
-  transform: translateY(-4px);
 }
+
+.resoluciones:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(142, 51, 51, 0.18);
+}
+
+.resoluciones:hover::before {
+  opacity: 1;
+}
+
+.resoluciones:hover .link-arrow {
+  transform: translateX(6px);
+  opacity: 1;
+}
+
+/* =========================
+   BOLETINES
+========================= */
 
 .guias {
-  background-color: #6a1b1a;
+  background: linear-gradient(135deg, #6a1b1a, #2c0c0d);
   color: #fff;
 }
-.guias:hover,
-.guias:focus-visible {
-  background-color: #2c0c0d;
-  color: #f6c200;
-  transform: translateY(-4px);
+
+.guias:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
+.guias:hover::before {
+  opacity: 1;
+}
+
+.guias:hover .link-arrow {
+  transform: translateX(6px);
+  opacity: 1;
+}
+
+/* =========================
+   MOBILE STACK
+========================= */
+
+@media (max-width: 768px) {
+  .links {
+    grid-template-columns: 1fr;
+  }
+
+  .link-card {
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+  }
 }
 
 /* Keyboard focus */
@@ -728,74 +814,254 @@ html, body {
 }
   
 
-
 /* =========================
    TRAINING LOCATION
 ========================= */
 
 .training-location {
   width: 100%;
-  background-color: #f9f9f9;
-  padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+  background: linear-gradient(135deg, #6a1b1a 0%, #4a1212 100%);
+  padding: clamp(4rem, 7vw, 6.5rem) 1.5rem;
   display: flex;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
+
+/* =========================
+   LOGO BACKGROUND PATTERN
+========================= */
+
+.training-location {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pattern container */
+.logo-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* =========================
+   BASE LOGO
+========================= */
+
+.logo-pattern .logo {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+
+  background-image: url("logo_solo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  opacity: 0.12;
+  filter: none;
+
+  animation: logoFloat 42s ease-in-out infinite;
+}
+
+/* =========================
+   DESKTOP POSITIONS (CURATED)
+========================= */
+
+/* Top-left, away from title */
+.logo-pattern .logo.one {
+  top: 0%;
+  left: 5%;
+  width: 700px;
+  transform: rotate(-18deg);
+}
+
+/* Mid-left, behind map but offset */
+.logo-pattern .logo.two {
+  bottom: 0%;
+  left: 5%;
+  width: 700px;
+  transform: rotate(10deg);
+}
+
+/* Top-right, balances title */
+.logo-pattern .logo.three {
+  top: 0%;
+  right: 5%;
+  width: 700px;
+  transform: rotate(-10deg);
+}
+
+/* Bottom-right, anchors section */
+.logo-pattern .logo.four {
+  bottom: 0%;
+  right: 5%;
+  width: 700px;
+  transform: rotate(16deg);
+}
+
+/* =========================
+   FLOAT MOTION
+========================= */
+
+@keyframes logoFloat {
+  0%   { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%  { transform: translateY(-16px) rotate(var(--r, 0deg)); }
+  100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+}
+
+/* =========================
+   MOBILE SIMPLIFICATION
+========================= */
+
+@media (max-width: 768px) {
+
+  /* Hide all logos */
+  .logo-pattern .logo {
+    display: none;
+  }
+
+  /* Show ONE centered logo */
+  .logo-pattern .logo.one {
+    display: block;
+    top: 50%;
+    left: 50%;
+    width: 450px;
+    height: 450px;
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0.14;
+    animation: none;
+  }
+}
+
+/* =========================
+   ENSURE CONTENT ABOVE
+========================= */
+
+.training-content {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
 
 .training-content {
   max-width: 1200px;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .training-content h2 {
   text-align: center;
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3.8rem);
-  color: #6a1b1a;
-  margin-bottom: 2.5rem;
+  font-size: clamp(2.4rem, 5vw, 3.9rem);
+  color: #ffffff;
+  margin-bottom: 3.2rem;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
+
+/* =========================
+   GRID (asymmetric)
+========================= */
 
 .training-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 3.5rem;
   align-items: center;
+}
+
+/* Map pops forward */
+.training-map {
+  transform: translateY(-18px);
 }
 
 .training-map iframe {
   width: 100%;
-  height: 350px;
+  height: 450px;
   border: none;
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+}
+
+/* =========================
+   TEXT VISIBILITY FIX
+========================= */
+
+.training-info {
+  position: relative;
+  padding: 2rem 2.2rem;
+  background: rgba(0, 0, 0, 0.18); /* subtle dark veil */
   border-radius: 18px;
+  backdrop-filter: blur(4px);
 }
 
 .training-info p {
-  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
-  line-height: 1.6;
-  color: #333;
-  margin-bottom: 1rem;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  line-height: 1.7;
+  color: #ffffff !important;
+  margin-bottom: 1.4rem;
 }
 
 .training-info ul {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
 }
 
-.training-info li {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  margin-bottom: 0.6rem;
+.training-info ul li {
+  font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+  margin-bottom: 1rem;
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
+/* Gold emphasis */
 .training-info strong {
-  color: #6a1b1a;
+  color: #f0c36b !important;
+  font-weight: 700;
 }
 
+/* Highlight note */
 .training-note {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
   font-style: italic;
-  color: #555;
+  color: #fff5dc !important;
+  border-left: 4px solid #f0c36b;
+  padding-left: 1.2rem;
 }
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+  .training-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .training-map {
+    transform: none;
+  }
+
+  .training-map iframe {
+    height: 300px;
+  }
+
+  .training-info {
+    padding: 1.8rem;
+  }
+}
+
+
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -975,5 +1241,134 @@ html, body {
   .links .link-btn {
     font-size: clamp(1.25rem, 6vw, 2.2rem);
     padding: clamp(16px, 5vw, 28px);
+  }
+}
+/* =========================
+   Próximos Eventos
+========================= */
+
+.upcoming-events {
+  padding: 3rem 1rem;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* Title */
+.upcoming-events .section-title {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 85px;
+  color: #6a1b1a;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  margin-top: 0px;
+  margin-bottom: 45px;
+}
+
+/* =========================
+   Grid Layout
+========================= */
+
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* =========================
+   Shared Card Base
+========================= */
+
+.event-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 3 / 4.3;
+  background: #ffffff;
+
+  /* 🔑 NO SHADOW by default */
+  box-shadow: none;
+
+  /* Smooth transition */
+  transition: box-shadow 0.3s ease;
+
+  cursor: pointer;
+}
+
+
+
+
+
+/* =========================
+   Posters
+========================= */
+
+.poster-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.poster-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Remove overlay animation */
+.poster-overlay {
+  display: none;
+}
+
+/* =========================
+   Video (Center Card)
+========================= */
+
+.video-card {
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-card:hover {
+  background: #111; /* subtle shade change */
+}
+
+.video-card .events-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* NO cropping */
+  background: #c1903c;
+}
+
+/* =========================
+   Responsive Breakpoints
+========================= */
+
+/* Tablet */
+@media (min-width: 768px) {
+  .events-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .video-card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .events-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .video-card {
+    grid-column: auto;
+  }
+
+  .upcoming-events .section-title {
+    font-size: 95px;
   }
 }

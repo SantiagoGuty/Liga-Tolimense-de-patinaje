@@ -25,6 +25,18 @@ type BoletinMeta = {
 
 //  Replace with your real files (you can keep PDFs in /public/resoluciones/*.pdf)
 const BOLETINES: BoletinMeta[] = [
+  {
+    id: '23 Ene 2026',
+    title: 'Resolución – I Festival de Escuelas y Novatos (14 y 15 de febrero de 2026)',
+    date: '2026-01-23',
+    url: '/resoluciones/RESOLUCION FESTIVAL ESCUELAS Y NOVATOS 14 Y 15 DE FEBERDO DE 2026.pdf',
+  },
+  {
+    id: '24 Ene 2026',
+    title: 'Resolución – IV Ranking Departamental (14 y 15 de febrero de 2026)',
+    date: '2026-01-24',
+    url: '/resoluciones/RESOLUCION IV RANKING DEPARTAMENTAL 14 Y 15 DE FEBRERO DE 2026.pdf',
+  },
   { id: '11 Nov 2025 ', title: 'Resolucion n° 20 - parametros y listado de asistencia a entrenamientos grupo de rendimiento', date: '2025-11-11', url: '/resoluciones/RESOLUCION N° 20 - PARAMETROS Y LISTADO DE ASISTENCIA A ENTRENAMIENTOS GRUPO DE RENDIMIE.pdf' },
   { id: '31 Ago 2025', title: 'Resolucion n° 19 - Resolución de invitación Conversatorio Liga 2025', date: '2025-08-31', url: '/resoluciones/RESOLUCION III RANKING DEPARTAMENTAL 11 Y 12 DE OCTUBRE MELGAR .pdf' },
   { id: '13 Abril 2025', title: 'Resolucion n° 19 - OA', date: '2025-04-13', url: '/resoluciones/RESOLUCION 015  13-04-25.pdf' },
