@@ -14,8 +14,8 @@ import Menu_bar from '../components/Menu_bar';
 import Aliados from '../components/Aliados';
 import FooterTol from '../components/FooterTol';
 import EventosCarousel from '../components/EventosCarousel';
-import NoticiasSection from '../components/NoticiasSection';
-
+import NoticiasSection from "../components/NoticiasSection";
+import "../styles/noticias-section.css";
 
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -166,7 +166,7 @@ export default function Home() {
 
 
     {/* Noticias */}
-    <NoticiasSection title="Noticias" limit={2} />
+    <NoticiasSection />
 
 {/* Cursos 
       <section className="cursos">

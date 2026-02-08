@@ -1,43 +1,59 @@
 import { Link } from "react-router-dom";
-import noticias from "../data/noticias";
 
 type NoticiasSectionProps = {
-  /** Heading above the grid (omit to hide) */
   title?: string;
-  /** How many cards to render; omit to show all */
-  limit?: number;
-  /** If false, render ONLY the grid (no surrounding section/heading) */
   wrap?: boolean;
-  /** Optional id for the outer section */
   id?: string;
-  /** Extra class for the outer wrapper */
   className?: string;
 };
 
 export default function NoticiasSection({
   title = "Noticias",
-  limit,
   wrap = true,
   id = "noticias",
   className = "",
 }: NoticiasSectionProps) {
-    
-  const items = limit ? noticias.slice(0, limit) : noticias;
+
+  // 🔒 Hardcoded: solo Noticias #3 y #4
+const items = [
+  {
+    id: "ene-2025-galardones",
+    title: "Galardones de Honor 2025",
+    excerpt:
+      "La Liga Tolimense de Patinaje rindió homenaje a sus deportistas, exaltando el esfuerzo, la disciplina y los logros obtenidos durante la temporada 2025.",
+    image: "/img/galardones-honor.png", 
+  },
+  {
+    id: "ene-2025-asamblea",
+    title: "Tolima presente en la Asamblea de Fedepatín",
+    excerpt:
+      "La Liga participó en la Asamblea Extraordinaria de Fedepatín, contribuyendo a la toma de decisiones estratégicas del patinaje colombiano.",
+    image: "/img/asamblea-fedepatin.png",
+  },
+];
+
 
   const grid = (
-    <div className="news-cards-container">
-      {items.map(({ slug, title, excerpt, image }) => (
-        <article key={slug} className="news-card">
-          {/* Image also navigates */}
-          <Link to={`/noticias/${slug}`} className="news-card-image" aria-label={title}>
+    <div className="featured-news-grid">
+      {items.map(({ id, title, excerpt, image }) => (
+        <article key={id} className="featured-news-card">
+          <Link
+            to={`/noticias?id=${id}`}
+            className="featured-news-image"
+            aria-label={title}
+          >
             <img src={image} alt={title} />
           </Link>
 
-          <div className="news-card-content">
+          <div className="featured-news-content">
             <h3>{title}</h3>
             <p>{excerpt}</p>
-            <Link to={`/noticias/${slug}`} className="read-more">
-              Leer más
+
+            <Link
+              to={`/noticias?id=${id}`}
+              className="featured-news-link"
+            >
+              Leer noticia →
             </Link>
           </div>
         </article>
@@ -48,8 +64,8 @@ export default function NoticiasSection({
   if (!wrap) return grid;
 
   return (
-    <section className={`noticias ${className}`} id={id}>
-      {title && <h1>{title}</h1>}
+    <section className={`featured-news ${className}`} id={id}>
+      {title && <h2 className="featured-news-title">{title}</h2>}
       {grid}
     </section>
   );

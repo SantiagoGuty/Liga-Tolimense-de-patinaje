@@ -15,7 +15,6 @@ import Boletines from './pages/Boletines';
 import Guias from './pages/Guias';
 import Resoluciones from './pages/Resoluciones';
 import ErrorPage from './pages/ErrorPage';
-import Noticia from './pages/Noticia';
 import ProtectedRoute from './layout/ProtectedRoute';
 import CrearPerfil from './pages/CrearPerfil';
 import EditarPerfil from './pages/EditarPerfil';
@@ -38,7 +37,6 @@ const router = createBrowserRouter([
 
       // Public
       { path: 'noticias', element: <Noticias /> },
-      { path: 'noticias/:slug', element: <Noticia /> },
       { path: 'eventos', element: <Eventos /> },
       { path: 'registrate', element: <Registrate /> },
       { path: 'iniciasesion', element: <IniciaSesion /> },
