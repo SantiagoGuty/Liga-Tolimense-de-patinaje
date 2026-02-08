@@ -172,7 +172,119 @@ html, body {
     transform: scale(1.2);
   }
 }
+/* =========================
+   ABOUT LIGA SECTION
+========================= */
 
+/* =========================
+   ABOUT LIGA – REDESIGNED
+========================= */
+
+.about-liga {
+  width: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
+  padding: clamp(4rem, 7vw, 6rem) 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.about-liga-wrapper {
+  max-width: 1200px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Title */
+.about-liga-wrapper h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  color: #6a1b1a;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Intro paragraph */
+.about-intro {
+  max-width: 900px;
+  margin: 0 auto 3.5rem auto;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  line-height: 1.65;
+  color: #222; /* ✅ strong contrast */
+}
+
+.about-intro strong {
+  color: #6a1b1a;
+}
+
+/* Feature grid */
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* Individual feature cards */
+.about-feature {
+  background: white;
+  border-radius: 22px;
+  padding: 2.2rem 1.8rem;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  animation: floatIn 0.8s ease forwards;
+}
+
+.about-feature:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+}
+
+/* Icon */
+.about-icon {
+  display: inline-block;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Feature title */
+.about-feature h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem;
+  color: #6a1b1a;
+  margin-bottom: 0.8rem;
+}
+
+/* Feature text */
+.about-feature p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: #333; /* ✅ readable */
+}
+
+/* Entrance animation */
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 1024px) {
+  .about-features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .about-features {
+    grid-template-columns: 1fr;
+  }
+}
+ 
 
 .bar {
   width: 130px !important;
@@ -613,6 +725,102 @@ html, body {
   
 
 
+/* =========================
+   TRAINING LOCATION
+========================= */
+
+.training-location {
+  width: 100%;
+  background-color: #f9f9f9;
+  padding: clamp(3rem, 6vw, 5rem) 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.training-content {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.training-content h2 {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  color: #6a1b1a;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+}
+
+.training-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.training-map iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  border-radius: 18px;
+}
+
+.training-info p {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.training-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+.training-info li {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  margin-bottom: 0.6rem;
+}
+
+.training-info strong {
+  color: #6a1b1a;
+}
+
+.training-note {
+  margin-top: 1.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .training-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .training-map iframe {
+    height: 280px;
+  }
+}
+/* =========================
+   TRAINING INFO LIST FIX
+========================= */
+
+.training-info ul li {
+  color: #333; /* readable dark text */
+}
+
+.training-info ul li a {
+  color: #6a1b1a; /* wine color link */
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.training-info ul li a:hover {
+  color: #2c0c0d;
+  text-decoration: underline;
+}
 
 
 

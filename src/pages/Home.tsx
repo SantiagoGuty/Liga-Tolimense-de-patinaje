@@ -1,5 +1,5 @@
 import '../styles/home.css';
-import eventosImg from '../assets/img/festibal1.jpg';
+  {/* import eventosImg from '../assets/img/festibal1.jpg';*/}
 import campeon from '../assets/img/campeon.jpg';
 
 
@@ -82,9 +82,64 @@ export default function Home() {
 
       </div>
 
+      {/* Qué es la Liga */}
+      <section className="about-liga">
+        <div className="about-liga-wrapper">
 
-    {/* Noticias */}
-    <NoticiasSection title="Noticias" limit={2} />
+          <h2>¿Qué es la Liga Tolimense de Patinaje?</h2>
+
+          <p className="about-intro">
+            La <strong>Liga Tolimense de Patinaje</strong> es una organización deportiva
+            comprometida con la formación integral de patinadores, impulsando el
+            talento, la disciplina y la proyección competitiva en el Tolima.
+          </p>
+
+          <div className="about-features">
+
+            <div className="about-feature">
+              <span className="about-icon">🛼</span>
+              <h3>Formación Deportiva</h3>
+              <p>
+                Acompañamos a los atletas desde sus primeros pasos hasta niveles
+                competitivos, respetando los procesos y etapas de desarrollo.
+              </p>
+            </div>
+
+            <div className="about-feature">
+              <span className="about-icon">🏆</span>
+              <h3>Proyección y Competencia</h3>
+              <p>
+                Preparamos patinadores para representar al Tolima en eventos
+                departamentales, nacionales e internacionales.
+              </p>
+            </div>
+
+            <div className="about-feature">
+              <span className="about-icon">🤝</span>
+              <h3>Comunidad y Valores</h3>
+              <p>
+                Fomentamos el respeto, la disciplina y el trabajo en equipo como
+                pilares del crecimiento deportivo y personal.
+              </p>
+            </div>
+
+            <div className="about-feature">
+              <span className="about-icon">📍</span>
+              <h3>Presencia Regional</h3>
+              <p>
+                Trabajamos junto a clubes, entrenadores y familias en Ibagué y
+                diferentes municipios del Tolima.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+
+
+
     
 
     {/* Rifa */}
@@ -109,6 +164,9 @@ export default function Home() {
       </div>
     </section>
 
+
+    {/* Noticias */}
+    <NoticiasSection title="Noticias" limit={2} />
 
 {/* Cursos 
       <section className="cursos">
@@ -230,6 +288,47 @@ export default function Home() {
       <Link to="/boletines" className="guias">Boletines</Link>
     </section>
     
+    {/* Dónde entrenamos */}
+    <section className="training-location">
+      <div className="training-content">
+
+        <h2>¿Dónde entrenamos?</h2>
+
+        <div className="training-grid">
+          
+          {/* Left: Map */}
+          <div className="training-map">
+            <iframe
+              title="Ubicación entrenamientos"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3977.91380258534!2d-75.18776357173918!3d4.427157956526538!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38c53c023ec02f%3A0x146a5207c779b5ea!2sIbague%20Sports%20Park!5e0!3m2!1sen!2sus!4v1770525226759!5m2!1sen!2sus"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
+          {/* Right: Info */}
+          <div className="training-info">
+            <p>
+              Nuestros entrenamientos se realizan en diferentes escenarios deportivos
+              de <strong>Ibagué</strong>, adecuados para cada modalidad.
+            </p>
+
+            <ul>
+              <li><strong>📍 Lugar:</strong> Escenarios deportivos de Ibagué</li>
+              <li><strong>🕒 Horarios:</strong> Según categoría y modalidad</li>
+              <li><strong>👶 Edades:</strong> Niños, jóvenes y adultos</li>
+              <li><strong>🛼 Modalidades:</strong> Carreras, Artístico, Hockey</li>
+            </ul>
+
+            <p className="training-note">
+              Para conocer horarios exactos y puntos de entrenamiento,
+              comunícate con nosotros o regístrate.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
 
 
 
