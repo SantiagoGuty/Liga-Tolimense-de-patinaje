@@ -79,3 +79,44 @@
   .resoluciones-content h2 { font-size: 2rem; }
   .resoluciones-content .intro { font-size: 1rem; }
 }
+.boletines-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-areas: "viewer sidebar";
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto 3rem;
+  padding: 0 1rem;
+}
+
+.boletin-view {
+  grid-area: viewer;
+}
+
+.boletin-sidebar {
+  grid-area: sidebar;
+}
+@media (max-width: 900px) {
+  .boletines-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "viewer"
+      "sidebar";
+  }
+
+  .boletin-sidebar {
+    margin-top: 2rem;
+    background: #fff;
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  }
+
+  .sidebar-head h3 {
+    font-size: 1.5rem;
+  }
+
+  .sidebar-subtitle {
+    font-size: 0.95rem;
+  }
+}

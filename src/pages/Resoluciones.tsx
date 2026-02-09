@@ -36,12 +36,7 @@ const BOLETINES: BoletinMeta[] = [
     title: 'Resolución – IV Ranking Departamental (14 y 15 de febrero de 2026)',
     date: '2026-01-24',
     url: '/resoluciones/RESOLUCION IV RANKING DEPARTAMENTAL 14 Y 15 DE FEBRERO DE 2026.pdf',
-  },
-  { id: '11 Nov 2025 ', title: 'Resolucion n° 20 - parametros y listado de asistencia a entrenamientos grupo de rendimiento', date: '2025-11-11', url: '/resoluciones/RESOLUCION N° 20 - PARAMETROS Y LISTADO DE ASISTENCIA A ENTRENAMIENTOS GRUPO DE RENDIMIE.pdf' },
-  { id: '31 Ago 2025', title: 'Resolucion n° 19 - Resolución de invitación Conversatorio Liga 2025', date: '2025-08-31', url: '/resoluciones/RESOLUCION III RANKING DEPARTAMENTAL 11 Y 12 DE OCTUBRE MELGAR .pdf' },
-  { id: '13 Abril 2025', title: 'Resolucion n° 19 - OA', date: '2025-04-13', url: '/resoluciones/RESOLUCION 015  13-04-25.pdf' },
-  { id: '8 Abril 2025', title: 'Resolucion n° 14 - OA', date: '2025-04-08', url: '/resoluciones/OA-014 ABRIL 08 -25.pdf' },
-  { id: '1 Mar 2025', title: 'Resolucion n° 6 - OA', date: '2025-03-01', url: '/resoluciones/RESOLUCION OA.00 6.pdf' },
+  }
 ];
 
 export default function Resoluciones() {

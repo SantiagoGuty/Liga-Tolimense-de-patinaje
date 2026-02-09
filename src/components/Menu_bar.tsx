@@ -237,7 +237,7 @@ export default function Menu_bar() {
         <Link to="/resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
         <Link to="/boletines" onClick={() => setMenuOpen(false)}>Boletines</Link>
 
-        {/* ✅ ADMIN MENU (mobile) */}
+        {/* ✅ ADMIN MENU (mobile) 
         {isAuthed && isAdminGroup && (
           <details>
             <summary>Admin</summary>
@@ -253,7 +253,7 @@ export default function Menu_bar() {
             <Link to="/iniciasesion" onClick={() => setMenuOpen(false)}>Inicia sesión</Link>
             <Link to="/registrate" onClick={() => setMenuOpen(false)}>Crear usuario</Link>
           </>
-        )}
+        )}*/}
       </nav>
     </>
   );

@@ -12,6 +12,7 @@ import logo_blanco from '../assets/img/logo_liga_blanco.png';
 import eventosVideo from '../assets/video/eventos-febrero-2026.mp4';
 import posterRanking from '../assets/img/poster-ranking-2026.png';
 import posterFestival from '../assets/img/poster-festival-2026.png';
+import logo_texto from '../assets/img/logo_liga_blanco_sin_logotipo.png';  
 
 
 
@@ -79,11 +80,19 @@ export default function Home() {
 
         <h1 className="sr-only">Liga Tolimense de Patinaje</h1>
 
-        <img
-          className="hero-title-img"
-          src={logo_blanco}
-          alt="Liga Tolimense de Patinaje"
-        />
+          {/* Desktop logo (icon + text) */}
+          <img
+            className="hero-title-img hero-logo-desktop"
+            src={logo_blanco}
+            alt="Liga Tolimense de Patinaje"
+          />
+
+          {/* Mobile logo (text only) */}
+          <img
+            className="hero-title-img hero-logo-mobile"
+            src={logo_texto}
+            alt="Liga Tolimense de Patinaje"
+          />
       </div>
 
 
@@ -199,10 +208,11 @@ export default function Home() {
     {/* Rifa */}
     <section className="rifa-section">
       <div className="rifa-content">
-        <h2> 🎉 ¡Gran Rifa de parte de la Liga Tolimense de Patinaje!🎉</h2>
+        <h2> 🎉 ¡Gran sorteo para Padres de Familia! 🎉</h2>
         <p>
-          Participa llenando el formulario y podrás ganar
-          <strong> dos grandes anchetas</strong>.
+        Esta rifa está dirigida exclusivamente a padres y acudientes
+         de los deportistas de la Liga Tolimense de Patinaje.<br />
+         Participa llenando el formulario y podrás ganar<strong> dos grandes anchetas</strong>.
           <br />
           ¡No pierdas esta oportunidad!
         </p>
@@ -382,14 +392,14 @@ export default function Home() {
           <div className="training-info">
             <p>
               Nuestros entrenamientos se realizan en diferentes escenarios deportivos
-              de <strong>Ibagué</strong>, adecuados para cada modalidad.
+              de el departamento del <strong>Tolima</strong>, nuestra sede principal esta ubicada en Ibagué.
             </p>
 
             <ul>
-              <li><strong>📍 Lugar:</strong> Escenarios deportivos de Ibagué</li>
+              <li><strong>📍 Lugar:</strong> Parque deportivo de Ibagué</li>
               <li><strong>🕒 Horarios:</strong> Según categoría y modalidad</li>
               <li><strong>👶 Edades:</strong> Niños, jóvenes y adultos</li>
-              <li><strong>🛼 Modalidades:</strong> Carreras, Artístico, Hockey</li>
+              <li><strong>🛼 Modalidades:</strong> Carreras, Artístico</li>
             </ul>
 
             <p className="training-note">

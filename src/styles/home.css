@@ -172,6 +172,40 @@ html, body {
   transform: scale(1.05);
 }
 
+/* Default: desktop */
+.hero-logo-desktop {
+  display: block;
+}
+
+.hero-logo-mobile {
+  display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .hero-logo-desktop {
+    display: none;
+  }
+
+  .hero-logo-mobile {
+    display: block;
+    width: min(90%, 270px);
+  }
+}
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    height: 320px;
+  }
+
+  .hero-left,
+  .hero-right {
+    width: 100%;
+    height: 50%;
+  }
+}
+
+
 
 @keyframes zoomIn {
   from {
@@ -286,18 +320,53 @@ html, body {
   }
 }
 
-/* Mobile */
-@media (max-width: 1024px) {
+/* =========================
+   MOBILE OPTIMIZATION
+========================= */
+
+@media (max-width: 600px) {
+  .about-liga {
+    padding: 40px 16px 60px;
+  }
+
+  .about-liga-wrapper h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-intro {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    padding: 0 4px;
+  }
+
   .about-features {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about-feature {
+    padding: 1.6rem 1.4rem;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  }
+
+  .about-icon {
+    font-size: 2.4rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .about-feature h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-feature p {
+    font-size: 0.95rem;
+    line-height: 1.55;
   }
 }
 
-@media (max-width: 600px) {
-  .about-features {
-    grid-template-columns: 1fr;
-  }
-}
  
 
 .bar {
@@ -1379,5 +1448,13 @@ html, body {
 
   .upcoming-events .section-title {
     font-size: 95px;
+  }
+}
+
+@media (max-width: 768px) {
+  .upcoming-events .section-title {
+    font-size: 42px;   /* was ~85px */
+    line-height: 1.05;
+    margin-bottom: 1.2rem;
   }
 }
