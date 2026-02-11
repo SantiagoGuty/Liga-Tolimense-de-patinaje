@@ -8,9 +8,8 @@ import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 
 import carrerasBanner from '../assets/img/grupo_tolima.jpg';
-import '../styles/resoluciones.css'; // SAME CSS AS RESOLUCIONES
+import '../styles/resoluciones.css'; // reuse styles
 
-// PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url
@@ -23,7 +22,6 @@ type BoletinMeta = {
   url: string;
 };
 
-// File-based Noticias (structure intentionally mirrors Resoluciones)
 const BOLETINES: BoletinMeta[] = [
   {
     id: 'ene-2025-logo',
@@ -71,14 +69,12 @@ export default function Noticias() {
   const [scale, setScale] = useState<number>(1.1);
   const [useIframe, setUseIframe] = useState<boolean>(false);
 
-  // Keep selected boletín in URL (?id=...)
   useEffect(() => {
     if (currentId) {
       setSearch({ id: currentId }, { replace: true });
     }
   }, [currentId, setSearch]);
 
-  // Fit-to-width behavior (IDENTICAL to Resoluciones)
   const viewportRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const el = viewportRef.current;
@@ -93,7 +89,6 @@ export default function Noticias() {
     return () => obs.disconnect();
   }, []);
 
-  // Reset page when switching noticia
   useEffect(() => {
     setPage(1);
     setUseIframe(false);
@@ -105,18 +100,13 @@ export default function Noticias() {
     <div className="page-wrapper">
       <Menu_bar />
 
-      {/* Banner — SAME STRUCTURE AS RESOLUCIONES */}
       <section className="page-banner carreras-banner">
-        <img
-          src={carrerasBanner}
-          alt="Banner Noticias"
-          className="banner-img"
-        />
+        <img src={carrerasBanner} alt="Banner Noticias" className="banner-img" />
         <h1 className="banner-title">Noticias</h1>
       </section>
 
       <main className="boletines-layout">
-        {/* Center viewer */}
+        {/* DESKTOP PDF VIEWER */}
         <section className="boletin-view">
           <header className="viewer-toolbar">
             <div className="left">
@@ -129,19 +119,10 @@ export default function Noticias() {
             </div>
 
             <div className="tools">
-              <a
-                className="btn"
-                href={current?.url}
-                download={downloadName}
-              >
+              <a className="btn" href={current?.url} download={downloadName}>
                 Descargar
               </a>
-              <a
-                className="btn"
-                href={current?.url}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a className="btn" href={current?.url} target="_blank" rel="noreferrer">
                 Abrir
               </a>
             </div>
@@ -155,12 +136,7 @@ export default function Noticias() {
                 onLoadError={() => setUseIframe(true)}
                 loading={<div className="loading">Cargando PDF…</div>}
               >
-                <Page
-                  pageNumber={page}
-                  scale={scale}
-                  renderAnnotationLayer
-                  renderTextLayer
-                />
+                <Page pageNumber={page} scale={scale} />
               </Document>
             ) : (
               <iframe
@@ -172,22 +148,32 @@ export default function Noticias() {
           </div>
         </section>
 
-        {/* Right menu — SAME CLASSES AS RESOLUCIONES */}
+        {/* SIDEBAR */}
         <aside className="boletin-sidebar">
           <div className="sidebar-head">
             <h3>Noticias</h3>
-            <span className="sidebar-subtitle">
-              Selecciona una noticia:
-            </span>
+            <span className="sidebar-subtitle">Selecciona una noticia:</span>
           </div>
 
+          {/* MOBILE LIST */}
+          <div className="mobile-actions">
+            {BOLETINES.map(b => (
+              <div key={b.id} className="mobile-doc-row">
+                <div className="mobile-doc-title">{b.title}</div>
+                <div className="mobile-doc-buttons">
+                  <a href={b.url} target="_blank">Abrir</a>
+                  <a href={b.url} download>Descargar</a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* DESKTOP LIST */}
           <ul className="boletin-list">
             {BOLETINES.map(b => (
               <li
                 key={b.id}
-                className={`boletin-item ${
-                  b.id === currentId ? 'active' : ''
-                }`}
+                className={`boletin-item ${b.id === currentId ? 'active' : ''}`}
                 onClick={() => setCurrentId(b.id)}
               >
                 <div className="b-title">{b.title}</div>

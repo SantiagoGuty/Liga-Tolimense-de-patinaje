@@ -9,7 +9,6 @@ import FooterTol from '../components/FooterTol';
 import '../styles/resoluciones.css';
 import carrerasBanner from '../assets/img/grupo_tolima.jpg';
 
-
 // PDF.js worker (works great with Vite + ESM)
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -19,11 +18,11 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 type BoletinMeta = {
   id: string;
   title: string;
-  date: string;    // ISO yyyy-mm-dd
-  url: string;     // absolute or /public path
+  date: string; // ISO yyyy-mm-dd
+  url: string;  // absolute or /public path
 };
 
-//  Replace with your real files (you can keep PDFs in /public/resoluciones/*.pdf)
+// Replace with your real files (you can keep PDFs in /public/resoluciones/*.pdf)
 const BOLETINES: BoletinMeta[] = [
   {
     id: '23 Ene 2026',
@@ -36,15 +35,21 @@ const BOLETINES: BoletinMeta[] = [
     title: 'Resolución – IV Ranking Departamental (14 y 15 de febrero de 2026)',
     date: '2026-01-24',
     url: '/resoluciones/RESOLUCION IV RANKING DEPARTAMENTAL 14 Y 15 DE FEBRERO DE 2026.pdf',
-  }
+  },
 ];
 
 export default function Resoluciones() {
   const [search, setSearch] = useSearchParams();
-  const byId = useMemo(() => Object.fromEntries(BOLETINES.map(b => [b.id, b])), []);
-  const initial = search.get('id') && byId[search.get('id') as string]
-    ? (search.get('id') as string)
-    : BOLETINES[0]?.id;
+
+  const byId = useMemo(
+    () => Object.fromEntries(BOLETINES.map((b) => [b.id, b])),
+    []
+  );
+
+  const initial =
+    search.get('id') && byId[search.get('id') as string]
+      ? (search.get('id') as string)
+      : BOLETINES[0]?.id;
 
   const [currentId, setCurrentId] = useState<string>(initial);
   const current = byId[currentId];
@@ -63,11 +68,13 @@ export default function Resoluciones() {
   useEffect(() => {
     const el = viewportRef.current;
     if (!el) return;
+
     const obs = new ResizeObserver(() => {
       const w = el.clientWidth;
       // A simple heuristic to keep it nicely sized on different screens
       setScale(Math.max(0.8, Math.min(1.8, w / 900)));
     });
+
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -86,23 +93,38 @@ export default function Resoluciones() {
 
       {/* Banner */}
       <section className="page-banner carreras-banner">
-        <img src={carrerasBanner} alt="Banner Patinaje Carreras" className="banner-img" />
+        <img
+          src={carrerasBanner}
+          alt="Banner Patinaje Carreras"
+          className="banner-img"
+        />
         <h1 className="banner-title">Resoluciones</h1>
       </section>
 
       <main className="boletines-layout">
-        {/* Center viewer */}
+        {/* Center viewer (DESKTOP/TABLET ONLY; hidden on mobile via CSS) */}
         <section className="boletin-view">
           <header className="viewer-toolbar">
             <div className="left">
               <h2 className="viewer-title">{current?.title}</h2>
               <span className="viewer-date">
-                {new Date(current?.date || '').toLocaleDateString('es-CO', { dateStyle: 'medium' })}
+                {new Date(current?.date || '').toLocaleDateString('es-CO', {
+                  dateStyle: 'medium',
+                })}
               </span>
             </div>
             <div className="tools">
-              <a className="btn" href={current?.url} download={downloadName}>Descargar</a>
-              <a className="btn" href={current?.url} target="_blank" rel="noreferrer">Abrir</a>
+              <a className="btn" href={current?.url} download={downloadName}>
+                Descargar
+              </a>
+              <a
+                className="btn"
+                href={current?.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Abrir
+              </a>
             </div>
           </header>
 
@@ -138,8 +160,26 @@ export default function Resoluciones() {
             <span className="sidebar-subtitle">Selecciona una resolución:</span>
           </div>
 
+          {/* MOBILE ONLY: list + open/download (shown via CSS) */}
+          <div className="mobile-actions">
+            {BOLETINES.map((b) => (
+              <div key={b.id} className="mobile-doc-row">
+                <div className="mobile-doc-title">{b.title}</div>
+                <div className="mobile-doc-buttons">
+                  <a href={b.url} target="_blank" rel="noreferrer">
+                    Abrir
+                  </a>
+                  <a href={b.url} download>
+                    Descargar
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* DESKTOP/TABLET ONLY: clickable list (hidden on mobile via CSS) */}
           <ul className="boletin-list">
-            {BOLETINES.map(b => (
+            {BOLETINES.map((b) => (
               <li
                 key={b.id}
                 className={`boletin-item ${b.id === currentId ? 'active' : ''}`}
@@ -147,13 +187,16 @@ export default function Resoluciones() {
               >
                 <div className="b-title">{b.title}</div>
                 <div className="b-date">
-                  {new Date(b.date).toLocaleDateString('es-CO', { dateStyle: 'medium' })}
+                  {new Date(b.date).toLocaleDateString('es-CO', {
+                    dateStyle: 'medium',
+                  })}
                 </div>
               </li>
             ))}
           </ul>
         </aside>
       </main>
+
       <FooterTol />
     </div>
   );

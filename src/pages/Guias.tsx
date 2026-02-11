@@ -36,6 +36,19 @@ export default function Guias() {
             </div>
           </article>
         </div>
+
+        
+        <div className="mobile-guides">
+          <div className="guide-row">
+            <span>Guía de Competencias 2026.pdf</span>
+
+            <div className="guide-actions">
+              <a href="/docs/guia-competencias-2026.pdf" target="_blank">Abrir</a>
+              <a href="/docs/guia-competencias-2026.pdf" download>Descargar</a>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       <FooterTol />

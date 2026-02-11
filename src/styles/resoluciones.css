@@ -96,27 +96,51 @@
 .boletin-sidebar {
   grid-area: sidebar;
 }
+
+/* default (desktop) */
+.mobile-actions { display: none; }
+
+/* MOBILE */
 @media (max-width: 900px) {
-  .boletines-layout {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "viewer"
-      "sidebar";
+  /* 1) Hide the PDF viewer completely on mobile */
+  .boletines-layout .boletin-view {
+    display: none !important;
   }
 
-  .boletin-sidebar {
-    margin-top: 2rem;
+  /* 2) Hide the desktop selectable list on mobile (so no duplicates) */
+  .boletines-layout .boletin-sidebar .boletin-list {
+    display: none !important;
+  }
+
+  /* 3) Show the mobile simple list */
+  .mobile-actions {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .mobile-doc-row {
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    padding: 12px;
     background: #fff;
-    border-radius: 14px;
-    padding: 1rem;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
   }
 
-  .sidebar-head h3 {
-    font-size: 1.5rem;
+  .mobile-doc-title {
+    font-weight: 700;
+    color: #2c0c0d;
+    margin-bottom: 8px;
   }
 
-  .sidebar-subtitle {
-    font-size: 0.95rem;
+  .mobile-doc-buttons {
+    display: flex;
+    gap: 16px;
+  }
+
+  .mobile-doc-buttons a {
+    text-decoration: none;
+    color: #6a1b1a;
+    font-weight: 700;
   }
 }
