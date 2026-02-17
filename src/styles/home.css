@@ -712,28 +712,70 @@ html, body {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: clamp(2rem, 4.5vw, 3.5rem);
   color: #6a1b1a;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   text-transform: uppercase;
+}
+
+.rifa-meta {
+  margin-bottom: 1.25rem;
+  color: #6a1b1a;
+  font-size: 1.05rem;
 }
 
 .rifa-content p {
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
   color: #333;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   line-height: 1.5;
 }
 
-.rifa-content p strong {
+.rifa-steps {
+  text-align: left;
+  margin: 0 auto 2rem;
+  padding: 1.25rem 1.25rem 1.25rem 2.2rem;
+  max-width: 780px;
+  background: rgba(246, 194, 0, 0.12);
+  border-radius: 16px;
+  border: 1px solid rgba(106, 27, 26, 0.15);
+}
+
+.rifa-steps li {
+  margin-bottom: 1rem;
+  color: #2b2b2b;
+  line-height: 1.55;
+  font-size: 1.05rem;
+}
+
+.rifa-link {
+  display: block;
+  margin-top: 0.4rem;
   color: #6a1b1a;
+  font-weight: 700;
+  word-break: break-word;
+  text-decoration: underline;
+}
+
+.rifa-prices {
+  margin-top: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding-left: 0.25rem;
+}
+
+.rifa-contact {
+  display: grid;
+  gap: 0.9rem;
+  justify-items: center;
 }
 
 .rifa-btn {
   display: inline-block;
   background-color: #6a1b1a;
   color: white;
-  font-size: clamp(1.25rem, 3vw, 2rem);
-  font-weight: 700;
-  padding: 1.2rem 2.8rem;
+  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  font-weight: 800;
+  padding: 1rem 2.2rem;
   border-radius: 14px;
   text-decoration: none;
   transition: all 0.25s ease;
@@ -744,6 +786,27 @@ html, body {
   color: #f6c200;
   transform: translateY(-4px) scale(1.03);
 }
+
+.rifa-btn-outline {
+  background: transparent;
+  color: #6a1b1a;
+  border: 2px solid #6a1b1a;
+}
+
+.rifa-btn-outline:hover {
+  background: #6a1b1a;
+  color: #f6c200;
+}
+
+.rifa-actions {
+  display: flex;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+
 /* =========================
    LINKS SECTION
 ========================= */

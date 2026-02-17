@@ -203,30 +203,73 @@ export default function Home() {
 
 
 
-    
+          
+      {/* Fotos sección */}
+      <section className="rifa-section" id="fotos-oficiales">
+        <div className="rifa-content">
+          <h2>Fotos Festival Departamental y Ranking Ibagué 2026</h2>
 
-    {/* Rifa */}
-    <section className="rifa-section">
-      <div className="rifa-content">
-        <h2> 🎉 ¡Gran sorteo para Padres de Familia! 🎉</h2>
-        <p>
-        Esta rifa está dirigida exclusivamente a padres y acudientes
-         de los deportistas de la Liga Tolimense de Patinaje.<br />
-         Participa llenando el formulario y podrás ganar<strong> dos grandes anchetas</strong>.
-          <br />
-          ¡No pierdas esta oportunidad!
-        </p>
+          <p className="rifa-meta">
+            <strong>Ibagué, Febrero 16 de 2026</strong>
+          </p>
 
-        <a
-          href="https://forms.gle/GCZ55iJuDgbh72NMA"
-          target="_blank"
-          rel="noreferrer"
-          className="rifa-btn"
-        >
-          👉 Llenar formulario y participar 
-        </a>
-      </div>
-    </section>
+          <p>Contáctanos para adquirir tus fotos oficiales. Sigue estos pasos:</p>
+
+          <ol className="rifa-steps">
+            <li>
+              <strong>Ingresa a la galería de fotos</strong> usando el botón al final.
+            </li>
+
+            <li>
+              <strong>Revisa el mosaico</strong> (cada foto tiene un número) y{" "}
+              <strong>anota el número</strong> de la(s) foto(s) que deseas.
+            </li>
+
+            <li>
+              <strong>Realiza el pago</strong> a la cuenta <strong>718-000036-15</strong>{" "}
+              <strong>Bancolombia Ahorros</strong>, a nombre de la{" "}
+              <strong>Liga Tolimense de Patinaje</strong>:
+              <div className="rifa-prices">
+                <span>📌 <strong>$10.000</strong> por cada foto (digital)</span>
+                <span>🖼️ <strong>$15.000</strong> por cada foto (física)</span>
+              </div>
+            </li>
+
+            <li>
+              <strong>Envía el comprobante</strong> por WhatsApp al{" "}
+              <strong>310 210 2404</strong> junto con <strong>el/los número(s)</strong>{" "}
+              de las fotos seleccionadas.
+            </li>
+          </ol>
+
+          <div className="rifa-contact">
+            <p>
+              Para cualquier duda o consulta, no dudes en contactarnos por WhatsApp.
+            </p>
+
+            <div className="rifa-actions">
+              <a
+                href="https://drive.google.com/drive/folders/1A1puGESZYTU09kYToXjDu222hf812uIK?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+                className="rifa-btn"
+              >
+                👉 Abrir galería de fotos
+              </a>
+
+              <a
+                href="https://wa.me/573102102404"
+                target="_blank"
+                rel="noreferrer"
+                className="rifa-btn rifa-btn-outline"
+              >
+                📲 Enviar pago por WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
 
     {/* Noticias */}
