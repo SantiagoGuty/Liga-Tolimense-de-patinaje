@@ -97,14 +97,14 @@ export default function Home() {
 
 
     </div>
-    {/* Próximos Eventos Oficiales */}
+    {/* Próximos Eventos Oficiales 
     <section className="upcoming-events">
 
       <h2 className="section-title">Próximos Eventos Oficiales</h2>
 
       <div className="events-grid">
 
-        {/* Poster — IV Ranking */}
+        {/* Poster — IV Ranking 
         <Link
           to="/resoluciones?id=24+Ene+2026"
           className="event-card poster-link"
@@ -115,7 +115,7 @@ export default function Home() {
           />
         </Link>
 
-        {/* Video (center, no link) */}
+        {/* Video (center, no link) 
         <div className="event-card video-card">
           <video
             src={eventosVideo}
@@ -126,7 +126,7 @@ export default function Home() {
           />
         </div>
 
-        {/* Poster — Festival Escuelas y Novatos */}
+        {/* Poster — Festival Escuelas y Novatos
         <Link
           to="/resoluciones?id=23+Ene+2026"
           className="event-card poster-link"
@@ -139,8 +139,8 @@ export default function Home() {
 
       </div>
     </section>
-
-
+    */}
+ 
 
 
 
