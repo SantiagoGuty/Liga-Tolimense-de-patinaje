@@ -9,9 +9,6 @@ import artistico1 from '../assets/img/artistico1.jpg';
 import festibalChicas from '../assets/img/festibal_chicas.jpeg';
 import avanzado from '../assets/img/avanzado-patinaje.jpg';
 import logo_blanco from '../assets/img/logo_liga_blanco.png';
-import eventosVideo from '../assets/video/eventos-febrero-2026.mp4';
-import posterRanking from '../assets/img/poster-ranking-2026.png';
-import posterFestival from '../assets/img/poster-festival-2026.png';
 import logo_texto from '../assets/img/logo_liga_blanco_sin_logotipo.png';  
 
 
