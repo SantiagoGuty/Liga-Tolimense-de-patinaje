@@ -23,6 +23,12 @@ type BoletinMeta = {
 
 const BOLETINES: BoletinMeta[] = [
   {
+    id: '23 Feb 2026',
+    title: 'Boletín festival y ranking',
+    date: '2026-02-23',
+    url: '/boletines/BOLETIN FESTIVAL Y RANKING 1.pdf',
+  },
+  {
     id: '15 Dic 2025',
     title: 'Boletín de prensa Grand Prix 2025',
     date: '2025-12-15',
