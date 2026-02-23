@@ -12,11 +12,11 @@ Status: Active development (frontend live, backend features in progress)
 
 ## UI
 
-- **Desktop view::**
+- **Desktop view:**
 
 <img width="1900" height="852" alt="image" src="https://github.com/user-attachments/assets/b8f9214a-735c-4e79-a0ec-ef2951d006a0" />
 
-- **Mobile view::**
+- **Mobile view:**
 
 <img width="619" height="749" alt="image" src="https://github.com/user-attachments/assets/d5d88092-1b00-4d70-ba6d-221626ac3ca6" />
 
