@@ -278,6 +278,60 @@ export const deletePractice = /* GraphQL */ `mutation DeletePractice(
   APITypes.DeletePracticeMutationVariables,
   APITypes.DeletePracticeMutation
 >;
+export const createBoletin = /* GraphQL */ `mutation CreateBoletin(
+  $input: CreateBoletinInput!
+  $condition: ModelBoletinConditionInput
+) {
+  createBoletin(input: $input, condition: $condition) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateBoletinMutationVariables,
+  APITypes.CreateBoletinMutation
+>;
+export const updateBoletin = /* GraphQL */ `mutation UpdateBoletin(
+  $input: UpdateBoletinInput!
+  $condition: ModelBoletinConditionInput
+) {
+  updateBoletin(input: $input, condition: $condition) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateBoletinMutationVariables,
+  APITypes.UpdateBoletinMutation
+>;
+export const deleteBoletin = /* GraphQL */ `mutation DeleteBoletin(
+  $input: DeleteBoletinInput!
+  $condition: ModelBoletinConditionInput
+) {
+  deleteBoletin(input: $input, condition: $condition) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteBoletinMutationVariables,
+  APITypes.DeleteBoletinMutation
+>;
 export const createPracticeCheckIn = /* GraphQL */ `mutation CreatePracticeCheckIn(
   $input: CreatePracticeCheckInInput!
   $condition: ModelPracticeCheckInConditionInput

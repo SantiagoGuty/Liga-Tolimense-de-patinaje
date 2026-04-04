@@ -1,37 +1,84 @@
+/* ─── adminBase.css ──────────────────────────────────────────
+   Shared base tokens for every admin page.
+─────────────────────────────────────────────────────────── */
+
+/* ── Header spacing for pages WITHOUT a banner ── */
+/* The fixed header is 120 px tall. Banner pages use .page-with-banner
+   which already adds padding-top via banner.css.
+   Pages without a banner must add this class to the .page-wrapper. */
+.admin-no-banner {
+  padding-top: 120px;
+}
+
+/* ── Page-level title block (below the banner or at the top) ── */
 .admin-header {
-  max-width: 1100px;
-  margin: 2rem auto 1.25rem;
-  padding: 0 1rem;
+  max-width: 960px;
+  margin: 2rem auto 1.5rem;
+  padding: 0 1.25rem;
   text-align: center;
 }
 
 .admin-title {
   color: #6a1b1a;
-  font-size: 3rem;
+  font-size: 2.75rem;
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
 }
 
 .admin-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 1.6;
-  color: #333;
+  color: #555;
   margin: 0 auto;
-  max-width: 900px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  max-width: 700px;
 }
 
-/* Keep content aligned and not full-bleed */
+/* ── Generic content container ── */
 .admin-page {
   max-width: 1100px;
   margin: 2rem auto 3rem;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
+}
+
+/* ── Card wrapper ── */
+.admin-card {
+  background: #fff;
+  border: 1px solid rgba(106, 27, 26, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.admin-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(106, 27, 26, 0.1);
+  background: rgba(106, 27, 26, 0.03);
+}
+
+.admin-card-head h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #6a1b1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.admin-card-body {
+  padding: 1.25rem 1.5rem;
 }
 
 @media (max-width: 768px) {
-  .admin-title { font-size: 2rem; }
+  .admin-title  { font-size: 2rem; }
   .admin-subtitle { font-size: 1rem; }
+  .admin-card-body { padding: 1rem; }
 }

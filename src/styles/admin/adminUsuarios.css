@@ -1,56 +1,341 @@
-/* src/styles/admin/adminUsuarios.css */
+/* ─── adminUsuarios.css ──────────────────────────────────────
+   Admin user list page styles
+─────────────────────────────────────────────────────────── */
 
-.admin-users-grid {
-  display: grid;
-  gap: 16px;
+.admin-usuarios-page {
+  max-width: 960px;
+  margin: 2rem auto 4rem;
+  padding: 0 1.25rem;
 }
 
+/* ── Toolbar: search + count ── */
 .admin-users-toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.admin-users-search-wrap {
+  flex: 1;
+  min-width: 220px;
+  position: relative;
+}
+
+.admin-users-search-wrap svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
 }
 
 .admin-users-search {
-  flex: 1;
-  min-width: 240px;
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #d0d0d0;
+  border-radius: 9px;
+  font-size: 0.9rem;
+  background: #fafafa;
+  color: #1a1a1a;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.admin-users-search:focus {
+  outline: none;
+  border-color: #6a1b1a;
+  background: #fff;
 }
 
 .admin-users-meta {
-  color: #555;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
+  color: #888;
+  white-space: nowrap;
 }
 
-/* Optional table/card styling if you later render user rows here */
-.admin-user-row {
+/* ── User card grid ── */
+.admin-users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+/* ── Individual user card ── */
+.admin-user-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.admin-user-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+  transform: translateY(-1px);
+}
+
+/* ── Avatar circle ── */
+.user-card-avatar {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6a1b1a, #9b2e2c);
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 14px;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 12px;
+  justify-content: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  overflow: hidden;
 }
 
-.admin-user-row strong {
-  color: #2c0c0d;
+.user-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.admin-user-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+/* ── Card text info ── */
+.user-card-info {
+  flex: 1;
+  min-width: 0;
 }
 
-.admin-tag {
+.user-card-name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-card-email {
   font-size: 0.8rem;
-  font-weight: 800;
-  padding: 6px 10px;
+  color: #888;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ── Badges ── */
+.user-badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
   border-radius: 999px;
-  background: rgba(246,194,0,0.15);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.user-badge.activo {
+  background: rgba(22, 130, 60, 0.1);
+  color: #14582a;
+  border: 1px solid rgba(22, 130, 60, 0.25);
+}
+
+.user-badge.inactivo {
+  background: rgba(150, 150, 150, 0.1);
+  color: #555;
+  border: 1px solid rgba(150, 150, 150, 0.25);
+}
+
+.user-badge.suspendido {
+  background: rgba(200, 30, 30, 0.08);
+  color: #9b1c1c;
+  border: 1px solid rgba(200, 30, 30, 0.2);
+}
+
+.user-badge.permiso {
+  background: rgba(193, 144, 60, 0.12);
+  color: #7a5010;
+  border: 1px solid rgba(193, 144, 60, 0.3);
+}
+
+/* ── Empty / loading states ── */
+.admin-users-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #aaa;
+  font-size: 0.95rem;
+  border: 1px dashed #ddd;
+  border-radius: 14px;
+}
+
+/* ── Ver perfil button ── */
+.user-card-view-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
   color: #6a1b1a;
-  border: 1px solid rgba(246,194,0,0.35);
+  background: transparent;
+  border: 1.5px solid rgba(106, 27, 26, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.user-card-view-btn:hover {
+  background: rgba(106, 27, 26, 0.06);
+  border-color: #6a1b1a;
+}
+
+/* ── Modal backdrop ── */
+.user-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+/* ── Modal box ── */
+.user-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 18px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+}
+
+.user-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  color: #888;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  line-height: 1;
+  transition: color 0.15s, background 0.15s;
+}
+
+.user-modal-close:hover {
+  color: #1a1a1a;
+  background: #f0f0f0;
+}
+
+/* ── Modal header ── */
+.user-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.user-modal-avatar {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #6a1b1a, #9b2e2c);
+  color: #fff;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  overflow: hidden;
+}
+
+.user-modal-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-modal-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* ── Field list ── */
+.user-modal-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.user-modal-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.user-modal-field:last-child {
+  border-bottom: none;
+}
+
+.user-modal-field dt {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.user-modal-field dd {
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  margin: 0;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ── Mobile ── */
+@media (max-width: 500px) {
+  .admin-users-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-user-card {
+    padding: 12px;
+  }
+
+  .user-modal {
+    padding: 1.5rem 1.25rem;
+  }
 }

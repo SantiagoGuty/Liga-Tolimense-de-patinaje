@@ -5,39 +5,51 @@ import { Link, useLocation } from 'react-router-dom';
 import '../styles/menu.css';
 import logo from '../assets/img/logo_solo.png';
 
-// Auth + profile helpers
 import { currentUser } from '../services/authService';
-import {
-  getCurrentUserProfile,
-  createCurrentUserProfile,
-} from '../services/userProfile';
+import { getCurrentUserProfile, createCurrentUserProfile } from '../services/userProfile';
 import { getAvatarUrl } from '../services/storageService';
 import { getGroups } from '../services/roles';
+
+// ─── Module-level profile cache ───────────────────────────────────────────────
+// Persists across route changes (page navigations don't unmount+remount this
+// module). Keyed by userId so it auto-invalidates on login/logout.
+type ProfileCache = {
+  userId: string;
+  isAdminGroup: boolean;
+  initials: string;
+  avatarUrl: string | null;
+};
+
+let _profileCache: ProfileCache | null = null;
+
+/** Call this after sign-out so the next mount re-fetches fresh data. */
+export function clearMenuCache() {
+  _profileCache = null;
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function deriveNameFromEmail(email: string | undefined) {
   if (!email) return { nombre: 'Usuario', apellido: 'Liga' };
   const left = email.split('@')[0] || '';
   const cleaned = left.replace(/[._-]+/g, ' ').trim();
   const parts = cleaned.split(' ').filter(Boolean);
-  const nombre = (parts[0] || 'Usuario').slice(0, 40);
-  const apellido = (parts.slice(1).join(' ') || 'Liga').slice(0, 40);
-  return { nombre, apellido };
+  return {
+    nombre:   (parts[0] || 'Usuario').slice(0, 40),
+    apellido: (parts.slice(1).join(' ') || 'Liga').slice(0, 40),
+  };
 }
 
 export default function Menu_bar() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [isAuthed, setIsAuthed] = useState(false);
-
+  const [menuOpen, setMenuOpen]       = useState(false);
+  const [isAuthed, setIsAuthed]       = useState(false);
   const [isAdminGroup, setIsAdminGroup] = useState(false);
+  const [avatarUrl, setAvatarUrl]     = useState<string | null>(null);
+  const [initials, setInitials]       = useState<string>('');
 
-  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [initials, setInitials] = useState<string>('');
-
-  const headerRef = useRef<HTMLDivElement>(null);
+  const headerRef     = useRef<HTMLDivElement>(null);
   const mobileMenuRef = useRef<HTMLElement>(null);
-  const location = useLocation();
+  const location      = useLocation();
 
-  // prevent repeated create attempts in a single session
   const createdProfileOnceRef = useRef(false);
 
   useEffect(() => {
@@ -47,6 +59,8 @@ export default function Menu_bar() {
       setIsAuthed(authed);
 
       if (!authed) {
+        // Clear everything, including the cache
+        _profileCache = null;
         setIsAdminGroup(false);
         setAvatarUrl(null);
         setInitials('');
@@ -54,74 +68,82 @@ export default function Menu_bar() {
         return;
       }
 
-      // 1) groups/role
+      // Stable user identifier
+      const userId: string =
+        (u as any)?.userId ||
+        (u as any)?.username ||
+        (u as any)?.signInDetails?.loginId ||
+        '';
+
+      // ── Cache hit: apply instantly, skip all network calls ──
+      if (_profileCache && _profileCache.userId === userId) {
+        setIsAdminGroup(_profileCache.isAdminGroup);
+        setInitials(_profileCache.initials);
+        setAvatarUrl(_profileCache.avatarUrl);
+        return;
+      }
+
+      // ── Cache miss: fetch everything, then store ──
+      let admin = false;
       try {
         const groups = await getGroups();
-        const admin = groups.includes('Admins');
+        admin = groups.includes('Admins');
         setIsAdminGroup(admin);
-
-        // Debug if you want:
-        // console.log('GROUPS:', groups);
       } catch {
         setIsAdminGroup(false);
       }
 
-      // 2) profile + avatar
+      let inits    = 'SG';
+      let url: string | null = null;
+
       try {
         let p = await getCurrentUserProfile();
 
-        // If no profile exists, auto-create one ONCE
         if (!p && !createdProfileOnceRef.current) {
           createdProfileOnceRef.current = true;
-
-          // Try to derive from Cognito email (your authService likely returns something)
-          // If not available, it will fallback
           const emailGuess =
             (u as any)?.signInDetails?.loginId ||
             (u as any)?.username ||
             undefined;
-
           const { nombre, apellido } = deriveNameFromEmail(emailGuess);
-
           p = await createCurrentUserProfile({
             nombre,
             apellido,
             correo: typeof emailGuess === 'string' ? emailGuess : '',
             estatus: 'ACTIVO',
-            permiso: isAdminGroup ? 'ADMIN' : 'USUARIO',
+            permiso: admin ? 'ADMIN' : 'USUARIO',
           }).catch(() => null);
         }
 
-        const inits =
-          ((p?.nombre?.[0] || '').toUpperCase() +
-            (p?.apellido?.[0] || '').toUpperCase()) || 'SG';
-        setInitials(inits);
+        inits = (
+          (p?.nombre?.[0] || '').toUpperCase() +
+          (p?.apellido?.[0] || '').toUpperCase()
+        ) || 'SG';
 
         if (p?.avatarKey) {
-          try {
-            const url = await getAvatarUrl(p.avatarKey);
-            setAvatarUrl(url.toString());
-          } catch {
-            setAvatarUrl(null);
-          }
-        } else {
-          setAvatarUrl(null);
+          url = await getAvatarUrl(p.avatarKey).then(u => u.toString()).catch(() => null);
         }
       } catch {
-        // keep menu usable even if profile fails
-        setAvatarUrl(null);
-        setInitials('SG');
+        /* keep defaults */
       }
-    })();
-  }, [location.pathname, menuOpen]);
 
-  // Close mobile when clicking outside
+      setInitials(inits);
+      setAvatarUrl(url);
+
+      // Store in cache for all subsequent navigations
+      _profileCache = { userId, isAdminGroup: admin, initials: inits, avatarUrl: url };
+    })();
+  }, [location.pathname]); // menuOpen removed — auth state doesn't change on menu open/close
+
+  // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as Node;
-      const clickedInsideHeader = headerRef.current?.contains(target);
-      const clickedInsideMobile = mobileMenuRef.current?.contains(target);
-      if (menuOpen && !clickedInsideHeader && !clickedInsideMobile) {
+      if (
+        menuOpen &&
+        !headerRef.current?.contains(target) &&
+        !mobileMenuRef.current?.contains(target)
+      ) {
         setMenuOpen(false);
       }
     };
@@ -144,33 +166,23 @@ export default function Menu_bar() {
             <img src={logo} alt="Logo" />
           </Link>
 
-          {/* Avatar next to logo when authenticated */}
           {isAuthed && (
-            <Link
-              to="/perfil"
-              className="profile-thumb"
-              aria-label="Ir a perfil"
-              title="Mi perfil"
-            >
-              {avatarUrl ? (
-                <img src={avatarUrl} alt="Foto de perfil" />
-              ) : (
-                <span className="initials">{initials || 'SG'}</span>
-              )}
+            <Link to="/perfil" className="profile-thumb" aria-label="Ir a perfil" title="Mi perfil">
+              {avatarUrl
+                ? <img src={avatarUrl} alt="Foto de perfil" />
+                : <span className="initials">{initials || 'SG'}</span>
+              }
             </Link>
           )}
         </div>
 
-        {/* Desktop Menu */}
+        {/* Desktop nav */}
         <nav className="menu-desktop">
           <Link to="/">Inicio</Link>
 
-          {/* ✅ ADMIN MENU (desktop) */}
           {isAuthed && isAdminGroup && (
             <div className="dropdown">
-              <a type="button" className="dropdown-trigger">
-                Admin ▾
-              </a>
+              <a type="button" className="dropdown-trigger">Admin ▾</a>
               <div className="dropdown-content">
                 <Link to="/admin/usuarios">Usuarios</Link>
                 <Link to="/admin/practicas">Prácticas</Link>
@@ -179,11 +191,9 @@ export default function Menu_bar() {
               </div>
             </div>
           )}
-          
+
           <div className="dropdown">
-            <a type="button" className="dropdown-trigger">
-              Modalidades ▾
-            </a>
+            <a type="button" className="dropdown-trigger">Modalidades ▾</a>
             <div className="dropdown-content">
               <Link to="/carreras">Carreras</Link>
               <Link to="/artistico">Artístico</Link>
@@ -195,16 +205,15 @@ export default function Menu_bar() {
           <Link to="/resoluciones">Resoluciones</Link>
           <Link to="/boletines">Boletines</Link>
 
-  {/* sign in 
           {!isAuthed && (
             <>
               <Link to="/iniciasesion">Iniciar sesión</Link>
               <Link to="/registrate">Crear usuario</Link>
             </>
-          )}*/}
+          )}
         </nav>
 
-        {/* Mobile Burger */}
+        {/* Mobile burger */}
         <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
           <a
             className={`menu-button ${menuOpen ? 'opened' : ''}`}
@@ -222,7 +231,7 @@ export default function Menu_bar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile nav */}
       <nav ref={mobileMenuRef} className={`menu-mobile ${menuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={() => setMenuOpen(false)}>Inicio</Link>
 
@@ -237,7 +246,6 @@ export default function Menu_bar() {
         <Link to="/resoluciones" onClick={() => setMenuOpen(false)}>Resoluciones</Link>
         <Link to="/boletines" onClick={() => setMenuOpen(false)}>Boletines</Link>
 
-        {/* ✅ ADMIN MENU (mobile) 
         {isAuthed && isAdminGroup && (
           <details>
             <summary>Admin</summary>
@@ -253,7 +261,7 @@ export default function Menu_bar() {
             <Link to="/iniciasesion" onClick={() => setMenuOpen(false)}>Inicia sesión</Link>
             <Link to="/registrate" onClick={() => setMenuOpen(false)}>Crear usuario</Link>
           </>
-        )}*/}
+        )}
       </nav>
     </>
   );

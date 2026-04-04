@@ -266,6 +266,51 @@ export const onDeletePractice = /* GraphQL */ `subscription OnDeletePractice(
   APITypes.OnDeletePracticeSubscriptionVariables,
   APITypes.OnDeletePracticeSubscription
 >;
+export const onCreateBoletin = /* GraphQL */ `subscription OnCreateBoletin($filter: ModelSubscriptionBoletinFilterInput) {
+  onCreateBoletin(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateBoletinSubscriptionVariables,
+  APITypes.OnCreateBoletinSubscription
+>;
+export const onUpdateBoletin = /* GraphQL */ `subscription OnUpdateBoletin($filter: ModelSubscriptionBoletinFilterInput) {
+  onUpdateBoletin(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateBoletinSubscriptionVariables,
+  APITypes.OnUpdateBoletinSubscription
+>;
+export const onDeleteBoletin = /* GraphQL */ `subscription OnDeleteBoletin($filter: ModelSubscriptionBoletinFilterInput) {
+  onDeleteBoletin(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteBoletinSubscriptionVariables,
+  APITypes.OnDeleteBoletinSubscription
+>;
 export const onCreatePracticeCheckIn = /* GraphQL */ `subscription OnCreatePracticeCheckIn(
   $filter: ModelSubscriptionPracticeCheckInFilterInput
   $owner: String

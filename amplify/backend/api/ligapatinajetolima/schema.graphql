@@ -74,6 +74,21 @@ type Practice
   qrToken: String! @index(name: "byQrToken", queryField: "practiceByQrToken")
 }
 
+type Boletin
+  @model
+  @auth(rules: [
+    { allow: private, operations: [read] },
+    { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
+  ]) {
+  id: ID!
+  title: String!
+  date: AWSDate!
+  s3Key: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+
 # NEW: Attendance/check-in entries
 type PracticeCheckIn
   @model

@@ -3,16 +3,28 @@ import { useSearchParams } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/TextLayer.css';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
+import { generateClient } from 'aws-amplify/api';
 
 import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import '../styles/boletin.css';
 import carrerasBanner from '../assets/img/accion_meta.jpg';
+import { getPublicUrl } from '../services/storageService';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url
 ).toString();
+
+const gqlClient = generateClient();
+
+const LIST_BOLETINES = /* GraphQL */ `
+  query ListBoletins {
+    listBoletins(limit: 100) {
+      items { id title date s3Key }
+    }
+  }
+`;
 
 type BoletinMeta = {
   id: string;
@@ -21,47 +33,51 @@ type BoletinMeta = {
   url: string;
 };
 
-const BOLETINES: BoletinMeta[] = [
-  {
-    id: '23 Feb 2026',
-    title: 'Boletín festival y ranking',
-    date: '2026-02-23',
-    url: '/boletines/BOLETIN FESTIVAL Y RANKING 1.pdf',
-  },
-  {
-    id: '15 Dic 2025',
-    title: 'Boletín de prensa Grand Prix 2025',
-    date: '2025-12-15',
-    url: '/boletines/BOLETIN DE PRENSA GRAND PRIX .pdf',
-  },
-  {
-    id: '16 Abril 2025',
-    title: 'Boletín de prensa Interligas 2025',
-    date: '2025-04-16',
-    url: '/boletines/BOLETIN PRENSA INTERLIGAS.pdf',
-  },
-  {
-    id: '23 Febrero 2025',
-    title: 'Boletín de invitación Conversatorio Liga 2025',
-    date: '2025-02-23',
-    url: '/boletines/INVITACION CONVERSATORIO  LIGA.pdf',
-  },
-];
 
 export default function Boletin() {
   const [search, setSearch] = useSearchParams();
+  const [boletines, setBoletines] = useState<BoletinMeta[]>([]);
+  const [loadingBoletines, setLoadingBoletines] = useState(true);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const { data } = (await gqlClient.graphql({ query: LIST_BOLETINES })) as any;
+        const items = data?.listBoletins?.items ?? [];
+        const resolved: BoletinMeta[] = await Promise.all(
+          items.map(async (b: any) => ({
+            id: b.id,
+            title: b.title,
+            date: b.date,
+            url: await getPublicUrl(b.s3Key),
+          }))
+        );
+        setBoletines(resolved.sort((a, b) => b.date.localeCompare(a.date)));
+      } catch {
+        // network/auth error — list stays empty
+      } finally {
+        setLoadingBoletines(false);
+      }
+    })();
+  }, []);
 
   const byId = useMemo(
-    () => Object.fromEntries(BOLETINES.map(b => [b.id, b])),
-    []
+    () => Object.fromEntries(boletines.map((b: BoletinMeta) => [b.id, b])),
+    [boletines]
   );
 
   const initial =
     search.get('id') && byId[search.get('id') as string]
       ? (search.get('id') as string)
-      : BOLETINES[0]?.id;
+      : boletines[0]?.id;
 
   const [currentId, setCurrentId] = useState<string>(initial);
+
+  // Keep currentId in sync if boletines list changes
+  useEffect(() => {
+    if (!byId[currentId] && boletines[0]) setCurrentId(boletines[0].id);
+  }, [boletines, byId, currentId]);
+
   const current = byId[currentId];
 
   const [page, setPage] = useState<number>(1);
@@ -103,86 +119,102 @@ export default function Boletin() {
       </section>
 
       <main className="boletines-layout">
-        {/* DESKTOP VIEWER */}
-        <section className="boletin-view">
-          <header className="viewer-toolbar">
-            <div className="left">
-              <h2 className="viewer-title">{current?.title}</h2>
-              <span className="viewer-date">
-                {new Date(current?.date || '').toLocaleDateString('es-CO', {
-                  dateStyle: 'medium',
-                })}
-              </span>
-            </div>
-
-            <div className="tools">
-              <a className="btn" href={current?.url} download={downloadName}>
-                Descargar
-              </a>
-              <a className="btn" href={current?.url} target="_blank" rel="noreferrer">
-                Abrir
-              </a>
-            </div>
-          </header>
-
-          <div className="viewer-canvas" ref={viewportRef}>
-            {!useIframe ? (
-              <Document
-                file={current?.url}
-                onLoadSuccess={() => setPage(1)}
-                onLoadError={() => setUseIframe(true)}
-                loading={<div className="loading">Cargando PDF…</div>}
-              >
-                <Page pageNumber={page} scale={scale} />
-              </Document>
-            ) : (
-              <iframe
-                className="iframe-fallback"
-                title={current?.title}
-                src={`${current?.url}#view=FitH`}
-              />
-            )}
+        {loadingBoletines && (
+          <div className="loading" style={{ padding: '3rem', textAlign: 'center', width: '100%' }}>
+            Cargando boletines…
           </div>
-        </section>
+        )}
 
-        {/* SIDEBAR */}
-        <aside className="boletin-sidebar">
-          <div className="sidebar-head">
-            <h3>Boletines</h3>
-            <span className="sidebar-subtitle">Selecciona un boletín:</span>
+        {!loadingBoletines && boletines.length === 0 && (
+          <div style={{ padding: '3rem', textAlign: 'center', color: '#aaa', width: '100%' }}>
+            No hay boletines disponibles.
           </div>
+        )}
 
-          {/* MOBILE LIST */}
-          <div className="mobile-actions">
-            {BOLETINES.map(b => (
-              <div key={b.id} className="mobile-doc-row">
-                <div className="mobile-doc-title">{b.title}</div>
-                <div className="mobile-doc-buttons">
-                  <a href={b.url} target="_blank">Abrir</a>
-                  <a href={b.url} download>Descargar</a>
+        {!loadingBoletines && boletines.length > 0 && (
+          <>
+            {/* DESKTOP VIEWER */}
+            <section className="boletin-view">
+              <header className="viewer-toolbar">
+                <div className="left">
+                  <h2 className="viewer-title">{current?.title}</h2>
+                  <span className="viewer-date">
+                    {new Date(current?.date || '').toLocaleDateString('es-CO', {
+                      dateStyle: 'medium',
+                    })}
+                  </span>
                 </div>
+
+                <div className="tools">
+                  <a className="btn" href={current?.url} download={downloadName}>
+                    Descargar
+                  </a>
+                  <a className="btn" href={current?.url} target="_blank" rel="noreferrer">
+                    Abrir
+                  </a>
+                </div>
+              </header>
+
+              <div className="viewer-canvas" ref={viewportRef}>
+                {!useIframe ? (
+                  <Document
+                    file={current?.url}
+                    onLoadSuccess={() => setPage(1)}
+                    onLoadError={() => setUseIframe(true)}
+                    loading={<div className="loading">Cargando PDF…</div>}
+                  >
+                    <Page pageNumber={page} scale={scale} />
+                  </Document>
+                ) : (
+                  <iframe
+                    className="iframe-fallback"
+                    title={current?.title}
+                    src={`${current?.url}#view=FitH`}
+                  />
+                )}
               </div>
-            ))}
-          </div>
+            </section>
 
-          {/* DESKTOP LIST */}
-          <ul className="boletin-list">
-            {BOLETINES.map(b => (
-              <li
-                key={b.id}
-                className={`boletin-item ${b.id === currentId ? 'active' : ''}`}
-                onClick={() => setCurrentId(b.id)}
-              >
-                <div className="b-title">{b.title}</div>
-                <div className="b-date">
-                  {new Date(b.date).toLocaleDateString('es-CO', {
-                    dateStyle: 'medium',
-                  })}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </aside>
+            {/* SIDEBAR */}
+            <aside className="boletin-sidebar">
+              <div className="sidebar-head">
+                <h3>Boletines</h3>
+                <span className="sidebar-subtitle">Selecciona un boletín:</span>
+              </div>
+
+              {/* MOBILE LIST */}
+              <div className="mobile-actions">
+                {boletines.map(b => (
+                  <div key={b.id} className="mobile-doc-row">
+                    <div className="mobile-doc-title">{b.title}</div>
+                    <div className="mobile-doc-buttons">
+                      <a href={b.url} target="_blank">Abrir</a>
+                      <a href={b.url} download>Descargar</a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* DESKTOP LIST */}
+              <ul className="boletin-list">
+                {boletines.map(b => (
+                  <li
+                    key={b.id}
+                    className={`boletin-item ${b.id === currentId ? 'active' : ''}`}
+                    onClick={() => setCurrentId(b.id)}
+                  >
+                    <div className="b-title">{b.title}</div>
+                    <div className="b-date">
+                      {new Date(b.date).toLocaleDateString('es-CO', {
+                        dateStyle: 'medium',
+                      })}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          </>
+        )}
       </main>
 
       <FooterTol />

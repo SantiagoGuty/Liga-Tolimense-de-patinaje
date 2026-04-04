@@ -190,6 +190,44 @@ export const listPractices = /* GraphQL */ `query ListPractices(
   APITypes.ListPracticesQueryVariables,
   APITypes.ListPracticesQuery
 >;
+export const getBoletin = /* GraphQL */ `query GetBoletin($id: ID!) {
+  getBoletin(id: $id) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetBoletinQueryVariables,
+  APITypes.GetBoletinQuery
+>;
+export const listBoletins = /* GraphQL */ `query ListBoletins(
+  $filter: ModelBoletinFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBoletins(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      date
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListBoletinsQueryVariables,
+  APITypes.ListBoletinsQuery
+>;
 export const getPracticeCheckIn = /* GraphQL */ `query GetPracticeCheckIn($id: ID!) {
   getPracticeCheckIn(id: $id) {
     id

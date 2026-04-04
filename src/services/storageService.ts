@@ -1,5 +1,23 @@
 import { uploadData, getUrl } from 'aws-amplify/storage';
 
+export async function uploadPublicPdf(file: File, folder: string): Promise<string> {
+  const key = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2)}.pdf`;
+  await uploadData({
+    key,
+    data: file,
+    options: { accessLevel: 'guest', contentType: 'application/pdf' },
+  }).result;
+  return key;
+}
+
+export async function getPublicUrl(key: string): Promise<string> {
+  const { url } = await getUrl({
+    key,
+    options: { accessLevel: 'guest' },
+  });
+  return url.toString();
+}
+
 export async function uploadAvatar(file: File, key?: string) {
   const ext = file.name.split('.').pop() || 'png';
   const finalKey = key ?? `avatars/${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;

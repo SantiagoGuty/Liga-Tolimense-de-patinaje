@@ -83,56 +83,49 @@ const router = createBrowserRouter([
         ),
       },
 
-      // Admin-only
-  {
-    path: 'admin/usuarios',
-    element: (
-      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
-        <UsersList />
-      </ProtectedRoute>
-    ),
-  },
+      // Entrenador-only (Coach)
+      {
+        path: 'entrenador/practicas',
+        element: (
+          <ProtectedRoute requiredGroups={["Coaches"]} forbiddenTo="/">
+            <MisPracticas />
+          </ProtectedRoute>
+        ),
+      },
 
-  // Entrenador-only (Coach)
-  {
-    path: 'entrenador/practicas',
-    element: (
-      <ProtectedRoute requiredGroups={["Coaches"]} forbiddenTo="/">
-        <MisPracticas />
-      </ProtectedRoute>
-    ),
-    },{
-    path: 'admin/usuarios',
-    element: (
-      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
-        <AdminUsuarios />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'admin/practicas',
-    element: (
-      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
-        <AdminPracticas />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'admin/resoluciones',
-    element: (
-      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
-        <AdminResoluciones />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: 'admin/boletines',
-    element: (
-      <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
-        <AdminBoletines />
-      </ProtectedRoute>
-    ),
-  },
+      // Admin-only
+      {
+        path: 'admin/usuarios',
+        element: (
+          <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+            <AdminUsuarios />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/practicas',
+        element: (
+          <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+            <AdminPracticas />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/resoluciones',
+        element: (
+          <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+            <AdminResoluciones />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/boletines',
+        element: (
+          <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+            <AdminBoletines />
+          </ProtectedRoute>
+        ),
+      },
 
 
           // (optional; errorElement already handles unknown routes)

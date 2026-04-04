@@ -286,6 +286,49 @@ export type DeletePracticeInput = {
   id: string,
 };
 
+export type CreateBoletinInput = {
+  id?: string | null,
+  title: string,
+  date: string,
+  s3Key: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelBoletinConditionInput = {
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelBoletinConditionInput | null > | null,
+  or?: Array< ModelBoletinConditionInput | null > | null,
+  not?: ModelBoletinConditionInput | null,
+};
+
+export type Boletin = {
+  __typename: "Boletin",
+  id: string,
+  title: string,
+  date: string,
+  s3Key: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateBoletinInput = {
+  id: string,
+  title?: string | null,
+  date?: string | null,
+  s3Key?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteBoletinInput = {
+  id: string,
+};
+
 export type CreatePracticeCheckInInput = {
   id?: string | null,
   practiceId: string,
@@ -429,6 +472,24 @@ export type ModelPracticeConnection = {
   nextToken?: string | null,
 };
 
+export type ModelBoletinFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelBoletinFilterInput | null > | null,
+  or?: Array< ModelBoletinFilterInput | null > | null,
+  not?: ModelBoletinFilterInput | null,
+};
+
+export type ModelBoletinConnection = {
+  __typename: "ModelBoletinConnection",
+  items:  Array<Boletin | null >,
+  nextToken?: string | null,
+};
+
 export type ModelPracticeCheckInFilterInput = {
   id?: ModelIDInput | null,
   practiceId?: ModelIDInput | null,
@@ -557,6 +618,17 @@ export type ModelSubscriptionPracticeFilterInput = {
   and?: Array< ModelSubscriptionPracticeFilterInput | null > | null,
   or?: Array< ModelSubscriptionPracticeFilterInput | null > | null,
   owner?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionBoletinFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  s3Key?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionBoletinFilterInput | null > | null,
+  or?: Array< ModelSubscriptionBoletinFilterInput | null > | null,
 };
 
 export type ModelSubscriptionPracticeCheckInFilterInput = {
@@ -832,6 +904,57 @@ export type DeletePracticeMutation = {
   } | null,
 };
 
+export type CreateBoletinMutationVariables = {
+  input: CreateBoletinInput,
+  condition?: ModelBoletinConditionInput | null,
+};
+
+export type CreateBoletinMutation = {
+  createBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateBoletinMutationVariables = {
+  input: UpdateBoletinInput,
+  condition?: ModelBoletinConditionInput | null,
+};
+
+export type UpdateBoletinMutation = {
+  updateBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteBoletinMutationVariables = {
+  input: DeleteBoletinInput,
+  condition?: ModelBoletinConditionInput | null,
+};
+
+export type DeleteBoletinMutation = {
+  deleteBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreatePracticeCheckInMutationVariables = {
   input: CreatePracticeCheckInInput,
   condition?: ModelPracticeCheckInConditionInput | null,
@@ -1078,6 +1201,44 @@ export type ListPracticesQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetBoletinQueryVariables = {
+  id: string,
+};
+
+export type GetBoletinQuery = {
+  getBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListBoletinsQueryVariables = {
+  filter?: ModelBoletinFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBoletinsQuery = {
+  listBoletins?:  {
+    __typename: "ModelBoletinConnection",
+    items:  Array< {
+      __typename: "Boletin",
+      id: string,
+      title: string,
+      date: string,
+      s3Key: string,
+      createdAt: string,
+      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1518,6 +1679,54 @@ export type OnDeletePracticeSubscription = {
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
+  } | null,
+};
+
+export type OnCreateBoletinSubscriptionVariables = {
+  filter?: ModelSubscriptionBoletinFilterInput | null,
+};
+
+export type OnCreateBoletinSubscription = {
+  onCreateBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateBoletinSubscriptionVariables = {
+  filter?: ModelSubscriptionBoletinFilterInput | null,
+};
+
+export type OnUpdateBoletinSubscription = {
+  onUpdateBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteBoletinSubscriptionVariables = {
+  filter?: ModelSubscriptionBoletinFilterInput | null,
+};
+
+export type OnDeleteBoletinSubscription = {
+  onDeleteBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 

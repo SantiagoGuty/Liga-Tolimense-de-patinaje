@@ -1,36 +1,257 @@
-/* src/styles/admin/adminPracticas.css */
+/* ─── adminPracticas.css ─────────────────────────────────────
+   Styles for PracticasPanel (used in both AdminPracticas and
+   the coach's MisPracticas page)
+─────────────────────────────────────────────────────────── */
 
-.admin-practice-grid {
-  display: grid;
-  gap: 16px;
-}
-
-.admin-practice-actions {
+.practicas-panel {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* Optional “status pill” look */
-.admin-pill {
+/* ── Create form card ── */
+.practica-form-card {
+  background: #fff;
+  border: 1px solid rgba(106, 27, 26, 0.15);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.practica-form-card h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6a1b1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 1.25rem;
+}
+
+.practica-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.practica-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.practica-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.practica-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.practica-field input,
+.practica-field textarea {
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fafafa;
+  color: #1a1a1a;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.practica-field input:focus,
+.practica-field textarea:focus {
+  outline: none;
+  border-color: #6a1b1a;
+  background: #fff;
+}
+
+.practica-field textarea {
+  resize: vertical;
+  min-height: 72px;
+}
+
+/* ── Error message ── */
+.practica-error {
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(200, 30, 30, 0.08);
+  color: #9b1c1c;
+  border: 1px solid rgba(200, 30, 30, 0.2);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ── Submit button ── */
+.practica-btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-weight: 800;
-  font-size: 0.85rem;
-  border: 1px solid rgba(0,0,0,0.10);
+  margin-top: 1rem;
+  padding: 11px 28px;
+  background: #6a1b1a;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
 }
 
-.admin-pill.open {
-  background: rgba(83,181,228,0.15);
-  color: #2c0c0d;
-  border-color: rgba(83,181,228,0.35);
+.practica-btn-primary:hover:not(:disabled) {
+  background: #8c2220;
 }
 
-.admin-pill.closed {
-  background: rgba(106,27,26,0.10);
+.practica-btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── List section ── */
+.practicas-list-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.practicas-list-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: #6a1b1a;
-  border-color: rgba(106,27,26,0.25);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.practicas-count {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ── Practice cards ── */
+.practica-card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.practica-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.practica-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.practica-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.practica-card-date {
+  display: inline-block;
+  background: rgba(106, 27, 26, 0.07);
+  color: #6a1b1a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.practica-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.practica-card-meta span strong {
+  color: #333;
+}
+
+.practica-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.practica-checkins-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #333;
+  background: #f4f4f4;
+  border: 1px solid #e0e0e0;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.practica-btn-qr {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  background: transparent;
+  color: #6a1b1a;
+  border: 1.5px solid rgba(106, 27, 26, 0.4);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.practica-btn-qr:hover {
+  background: rgba(106, 27, 26, 0.06);
+  border-color: #6a1b1a;
+}
+
+/* ── Empty state ── */
+.practicas-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #aaa;
+  font-size: 0.95rem;
+  border: 1px dashed #ddd;
+  border-radius: 12px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .practica-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .practica-form-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .practica-card {
+    padding: 1rem;
+  }
 }

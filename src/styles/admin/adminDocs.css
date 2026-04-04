@@ -1,0 +1,252 @@
+/* ─── adminDocs.css ─────────────────────────────────────────
+   Shared styles for document upload admin pages
+   (AdminBoletines, AdminResoluciones)
+─────────────────────────────────────────────────────────── */
+
+/* Page wrapper */
+.admin-docs-page {
+  max-width: 960px;
+  margin: 2.5rem auto 4rem;
+  padding: 0 1.25rem;
+}
+
+/* ── Upload form card ── */
+.doc-upload-card {
+  background: #fff;
+  border: 1px solid rgba(106, 27, 26, 0.15);
+  border-radius: 16px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.doc-upload-card h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #6a1b1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 1.25rem;
+}
+
+/* ── Form fields ── */
+.doc-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.doc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.doc-field.full-width {
+  grid-column: 1 / -1;
+}
+
+.doc-field label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #444;
+  letter-spacing: 0.2px;
+}
+
+.doc-field input[type='text'],
+.doc-field input[type='date'] {
+  padding: 10px 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1a1a1a;
+  background: #fafafa;
+  transition: border-color 0.15s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.doc-field input[type='text']:focus,
+.doc-field input[type='date']:focus {
+  outline: none;
+  border-color: #6a1b1a;
+  background: #fff;
+}
+
+.doc-field input[type='file'] {
+  font-size: 0.9rem;
+  color: #333;
+  padding: 6px 0;
+  cursor: pointer;
+}
+
+/* ── Feedback message ── */
+.doc-msg {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.doc-msg.ok {
+  background: rgba(22, 130, 60, 0.1);
+  color: #14582a;
+  border: 1px solid rgba(22, 130, 60, 0.25);
+}
+
+.doc-msg.error {
+  background: rgba(200, 30, 30, 0.08);
+  color: #9b1c1c;
+  border: 1px solid rgba(200, 30, 30, 0.2);
+}
+
+/* ── Primary button ── */
+.doc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+  padding: 11px 28px;
+  background: #6a1b1a;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+}
+
+.doc-btn-primary:hover:not(:disabled) {
+  background: #8c2220;
+}
+
+.doc-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Section title for list ── */
+.doc-list-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.doc-list-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #6a1b1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.doc-list-count {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* ── Document list ── */
+.doc-list {
+  display: grid;
+  gap: 10px;
+}
+
+.doc-list-item {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  transition: box-shadow 0.15s;
+}
+
+.doc-list-item:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+}
+
+.doc-item-info {
+  min-width: 0;
+}
+
+.doc-item-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-item-date {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.doc-item-date span {
+  display: inline-block;
+  background: rgba(106, 27, 26, 0.07);
+  color: #6a1b1a;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+}
+
+/* ── Delete button ── */
+.doc-btn-delete {
+  padding: 6px 14px;
+  background: transparent;
+  color: #c0392b;
+  border: 1px solid rgba(192, 57, 43, 0.4);
+  border-radius: 7px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.doc-btn-delete:hover {
+  background: rgba(192, 57, 43, 0.07);
+  border-color: #c0392b;
+}
+
+/* ── Empty / loading states ── */
+.doc-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #999;
+  font-size: 0.95rem;
+  border: 1px dashed #d8d8d8;
+  border-radius: 12px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .doc-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .doc-upload-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .doc-list-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .doc-btn-delete {
+    width: fit-content;
+  }
+}
