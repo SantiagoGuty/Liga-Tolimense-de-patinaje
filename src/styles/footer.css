@@ -150,7 +150,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 8px;
   color: #ffffff;
+  flex-wrap: wrap;
+}
+
+.footer-bottom-sep {
+  opacity: 0.4;
+}
+
+.footer-privacy-link {
+  color: #c9a24e;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.footer-privacy-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* Wave colors */

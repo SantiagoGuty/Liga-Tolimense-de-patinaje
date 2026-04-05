@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import ScrollToTop from './ScrollToTop';
+import CookieBanner from '../components/CookieBanner';
 import { ensureSessionLoaded, isSignedIn } from '../services/authService';
 import { getCurrentUserProfile } from '../services/userProfile';
 
@@ -36,6 +37,7 @@ export default function Root() {
     <>
       <ScrollToTop />
       <Outlet />
+      <CookieBanner />
     </>
   );
 }

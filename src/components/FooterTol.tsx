@@ -89,9 +89,11 @@ export default function FooterTol() {
           </div>
         </div>
 
-        <p className="footer-bottom">
-          Todos los derechos reservados © Liga Tolimense De Patinaje 2026
-        </p>
+        <div className="footer-bottom">
+          <span>Todos los derechos reservados © Liga Tolimense De Patinaje 2026</span>
+          <span className="footer-bottom-sep">·</span>
+          <a href="/privacidad" className="footer-privacy-link">Política de Privacidad</a>
+        </div>
       </div>
     </footer>
   );
