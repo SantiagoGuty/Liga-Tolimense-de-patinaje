@@ -190,7 +190,6 @@ export default function Menu_bar() {
               <a type="button" className="dropdown-trigger">Admin ▾</a>
               <div className="dropdown-content">
                 <Link to="/admin/usuarios">Usuarios</Link>
-                <Link to="/admin/practicas">Prácticas</Link>
                 <Link to="/admin/resoluciones">Subir Resoluciones</Link>
                 <Link to="/admin/boletines">Subir Boletines</Link>
               </div>
@@ -257,7 +256,6 @@ export default function Menu_bar() {
           <details>
             <summary>Admin</summary>
             <Link to="/admin/usuarios" onClick={() => setMenuOpen(false)}>Usuarios</Link>
-            <Link to="/admin/practicas" onClick={() => setMenuOpen(false)}>Prácticas</Link>
             <Link to="/admin/resoluciones" onClick={() => setMenuOpen(false)}>Subir Resoluciones</Link>
             <Link to="/admin/boletines" onClick={() => setMenuOpen(false)}>Subir Boletines</Link>
           </details>

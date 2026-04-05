@@ -23,7 +23,8 @@ export default function Perfil() {
     (async () => {
       try {
         const p = await getCurrentUserProfile();
-        if (!p) { nav('/crear-perfil', { replace: true }); return; }
+        const isComplete = p && p.correo?.includes('@') && !!p.cedula;
+        if (!isComplete) { nav('/registrate', { replace: true }); return; }
         setProfile(p);
 
         // Avatar
