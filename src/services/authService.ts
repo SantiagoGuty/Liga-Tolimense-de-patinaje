@@ -1,42 +1,15 @@
 // src/services/authService.ts
 import {
-  signUp,
-  confirmSignUp,
-  signIn,
   signOut,
   signInWithRedirect,
   getCurrentUser,
   fetchAuthSession,
 } from 'aws-amplify/auth';
 
-// Email/password
-export async function signupEmailPassword(params: {
-  email: string;
-  password: string;
-  given_name?: string;
-  family_name?: string;
-}) {
-  const { email, password, ...attrs } = params;
-  return signUp({
-    username: email,
-    password,
-    options: { userAttributes: { email, ...attrs } },
-  });
-}
-
-export async function confirmSignupEmail(email: string, code: string) {
-  return confirmSignUp({ username: email, confirmationCode: code });
-}
-
-export async function signinEmailPassword(email: string, password: string) {
-  return signIn({ username: email, password });
-}
-
 export async function logout() {
   await signOut();
 }
 
-// *** GOOGLE SSO ***
 export async function signinWithGoogle() {
   // This redirects to your Cognito Hosted UI (with the Google IdP)
   await signInWithRedirect({ provider: 'Google' });
@@ -80,9 +53,9 @@ export async function isSignedIn(): Promise<boolean> {
 
 export async function currentUser() {
   try {
-    const { getCurrentUser } = await import('aws-amplify/auth');
     return await getCurrentUser();
   } catch {
     return null;
   }
 }
+

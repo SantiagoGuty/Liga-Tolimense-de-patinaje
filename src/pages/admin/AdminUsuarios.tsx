@@ -1,8 +1,25 @@
 import { useEffect, useState } from 'react';
 import { generateClient } from 'aws-amplify/api';
+import { post } from 'aws-amplify/api';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { listUsers } from '../../graphql/queries';
 import type { User } from '../../API';
 import { getAvatarUrl } from '../../services/storageService';
+
+async function setUserAdminGroup(username: string, makeAdmin: boolean) {
+  const session = await fetchAuthSession();
+  const token = session.tokens?.accessToken?.toString() ?? '';
+  const path = makeAdmin ? '/addUserToGroup' : '/removeUserFromGroup';
+  const op = post({
+    apiName: 'AdminQueries',
+    path,
+    options: {
+      body: { username, groupname: 'Admins' },
+      headers: { Authorization: token },
+    },
+  });
+  await op.response;
+}
 
 import '../../styles/banner.css';
 import '../../styles/admin/adminBanner.css';
@@ -120,6 +137,7 @@ export default function AdminUsuarios() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<User | null>(null);
+  const [togglingId, setTogglingId] = useState<string | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -133,6 +151,26 @@ export default function AdminUsuarios() {
       }
     })();
   }, []);
+
+  async function toggleAdmin(u: User) {
+    const isAdmin = u.permiso === 'ADMIN';
+    const cognitoUsername = u.owner?.split('::')[0] ?? u.id;
+    setTogglingId(u.id);
+    try {
+      await setUserAdminGroup(cognitoUsername, !isAdmin);
+      // Optimistically update local list
+      setUsers(prev => prev.map(x =>
+        x.id === u.id ? { ...x, permiso: isAdmin ? 'USUARIO' : 'ADMIN' } : x
+      ));
+      if (selected?.id === u.id) {
+        setSelected(prev => prev ? { ...prev, permiso: isAdmin ? 'USUARIO' : 'ADMIN' } : null);
+      }
+    } catch (err: any) {
+      alert('No se pudo cambiar el rol. Asegúrate de tener Admin Queries activo.\n\n' + (err?.message ?? err));
+    } finally {
+      setTogglingId(null);
+    }
+  }
 
   const filtered = users.filter(u => {
     const q = search.toLowerCase();
@@ -205,12 +243,23 @@ export default function AdminUsuarios() {
                       <span className="user-badge permiso">{u.permiso}</span>
                     )}
                   </div>
-                  <button
-                    className="user-card-view-btn"
-                    onClick={() => setSelected(u)}
-                  >
-                    Ver perfil
-                  </button>
+                  <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
+                    <button
+                      className="user-card-view-btn"
+                      onClick={() => setSelected(u)}
+                    >
+                      Ver perfil
+                    </button>
+                    <button
+                      className={`user-card-view-btn ${u.permiso === 'ADMIN' ? 'user-card-demote-btn' : 'user-card-promote-btn'}`}
+                      onClick={() => toggleAdmin(u)}
+                      disabled={togglingId === u.id}
+                    >
+                      {togglingId === u.id
+                        ? '…'
+                        : u.permiso === 'ADMIN' ? 'Quitar admin' : 'Hacer admin'}
+                    </button>
+                  </div>
                 </div>
               </div>
             ))}

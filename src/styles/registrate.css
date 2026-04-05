@@ -1,7 +1,4 @@
-/* --- Grid / layout --- */
-
-:root { --header-height: 120px; } 
-
+/* ── Two-column form grid ─────────────────────────────────── */
 .auth-form.two-col {
   display: grid;
   grid-template-columns: 1fr;
@@ -14,49 +11,7 @@
   .auth-form.two-col { grid-template-columns: 1fr 1fr; }
 }
 
-/* Fila: botón + preview */
-.auth-file-row{
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Oculta COMPLETAMENTE el input nativo (adiós barra gris + spinner) */
-.auth-file-input-hidden{
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Preview circular tipo avatar */
-.avatar-preview{
-  width: 150px;
-  height: 150px;
-  border-radius: 999px;
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(0,0,0,0.2);
-  background: rgba(0,0,0,0.04);
-}
-
-.avatar-preview img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.avatar-initials{
-  font-weight: 700;
-  font-size: 0.95rem;
-  opacity: 0.8;
-}
-
-/* --- Make selects match login inputs --- */
+/* ── Select matches login inputs ──────────────────────────── */
 .auth-field select {
   width: 100%;
   padding: .95rem 1rem;
@@ -72,61 +27,89 @@
   box-shadow: 0 0 0 3px rgba(246,194,0,.22);
 }
 
-/* --- Error visuals --- */
+/* ── Field errors ─────────────────────────────────────────── */
 .input-error {
   border-color: #b00020 !important;
   box-shadow: 0 0 0 3px rgba(176,0,32,.12) !important;
 }
 .field-error {
-  color: #ffd1d6;
-  font-weight: 700;
+  color: #c0392b;
+  font-size: 0.8rem;
+  font-weight: 600;
   margin-top: .3rem;
+  display: block;
 }
 
-/* --- Custom file field --- */
-.auth-file-control {
+/* ── Avatar picker ────────────────────────────────────────── */
+.avatar-picker-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.avatar-picker {
+  display: block;
+  position: relative;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid #6a1b1a;
+  background: rgba(106, 27, 26, 0.07);
+  flex-shrink: 0;
+}
+
+.avatar-picker img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-picker-initials {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
-  gap: .75rem;
-  padding: .6rem .75rem;
-  border: 2px solid #6a1b1a;
-  border-radius: 12px;
-  background: #fff;
-}
-
-/* Hide the native file input completely */
-.auth-file-input {
-  /* MUST appear after any generic .auth-field input styles */
-  position: absolute !important;
-  left: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  appearance: none !important;
-}
-
-/* Button */
-.auth-file-btn {
-  background: #f6c200;
-  color: #2c0c0d;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  border-radius: 10px;
-  padding: .5rem 1rem;
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,.15);
-  transition: background .2s, transform .1s;
+  font-size: 2rem;
+  color: #6a1b1a;
+  letter-spacing: 2px;
 }
-.auth-file-btn:hover { background: #e5b100; transform: translateY(-1px); }
 
-/* File name */
-.auth-file-name {
-  flex: 1;
-  min-width: 0;
-  color: #2c0c0d;
+/* Hover overlay */
+.avatar-picker-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  border-radius: 50%;
+}
+
+.avatar-picker:hover .avatar-picker-overlay {
+  opacity: 1;
+}
+
+.avatar-picker-filename {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+  max-width: 160px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.auth-file-name.placeholder { color: #9aa0a6; }

@@ -100,19 +100,24 @@ export default function Menu_bar() {
         let p = await getCurrentUserProfile();
 
         if (!p && !createdProfileOnceRef.current) {
-          createdProfileOnceRef.current = true;
           const emailGuess =
             (u as any)?.signInDetails?.loginId ||
             (u as any)?.username ||
-            undefined;
-          const { nombre, apellido } = deriveNameFromEmail(emailGuess);
-          p = await createCurrentUserProfile({
-            nombre,
-            apellido,
-            correo: typeof emailGuess === 'string' ? emailGuess : '',
-            estatus: 'ACTIVO',
-            permiso: admin ? 'ADMIN' : 'USUARIO',
-          }).catch(() => null);
+            '';
+          // Skip auto-create for federated users (username has no @)
+          // They need to complete their profile via /registrate
+          const isRealEmail = typeof emailGuess === 'string' && emailGuess.includes('@');
+          if (isRealEmail) {
+            createdProfileOnceRef.current = true;
+            const { nombre, apellido } = deriveNameFromEmail(emailGuess);
+            p = await createCurrentUserProfile({
+              nombre,
+              apellido,
+              correo: emailGuess,
+              estatus: 'ACTIVO',
+              permiso: admin ? 'ADMIN' : 'USUARIO',
+            }).catch(() => null);
+          }
         }
 
         inits = (

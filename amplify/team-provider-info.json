@@ -13,13 +13,21 @@
     },
     "categories": {
       "auth": {
-        "ligapatinajetolima3bd9e30b": {}
+        "ligapatinajetolima3bd9e30b": {},
+        "userPoolGroups": {}
       },
       "storage": {
         "avatarStorage": {}
       },
       "api": {
-        "ligapatinajetolima": {}
+        "ligapatinajetolima": {},
+        "AdminQueries": {}
+      },
+      "function": {
+        "AdminQueries601c8554": {
+          "deploymentBucketName": "amplify-ligapatinajetolima-dev-d19c4-deployment",
+          "s3Key": "amplify-builds/AdminQueries601c8554-4a2f7874546a64586a77-build.zip"
+        }
       }
     }
   }

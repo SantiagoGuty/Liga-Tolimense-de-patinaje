@@ -23,6 +23,7 @@ import AdminUsuarios from './pages/admin/AdminUsuarios';
 import AdminPracticas from './pages/admin/AdminPracticas';
 import AdminResoluciones from './pages/admin/AdminResoluciones';
 import AdminBoletines from './pages/admin/AdminBoletines';
+import Privacidad from './pages/Privacidad';
 
 
 import Root from './layout/Root'; 
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
       { path: 'boletines', element: <Boletines /> },
       { path: 'guias', element: <Guias /> },
       { path: 'resoluciones', element: <Resoluciones /> },
+      { path: 'privacidad', element: <Privacidad /> },
 
       // Protected
       {

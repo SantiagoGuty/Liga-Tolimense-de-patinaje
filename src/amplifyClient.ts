@@ -1,22 +1,20 @@
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 
-const domain = import.meta.env.VITE_COGNITO_DOMAIN;
-const redirectSignIn = import.meta.env.VITE_REDIRECT_SIGN_IN ?? 'http://localhost:5173/';
-const redirectSignOut = import.meta.env.VITE_REDIRECT_SIGN_OUT ?? 'http://localhost:5173/';
+// aws-exports.js now contains the full oauth config (domain, redirects, etc.)
+// from the last `amplify pull`. Env vars can override for local dev if needed.
+const redirectSignIn = import.meta.env.VITE_REDIRECT_SIGN_IN;
+const redirectSignOut = import.meta.env.VITE_REDIRECT_SIGN_OUT;
 
 Amplify.configure({
   ...awsExports,
-  // Inject OAuth config from env vars so Google sign-in works.
-  // aws-exports.js ships with oauth:{} (empty); these env vars fill it in.
-  ...(domain
+  // Only override redirects when env vars are explicitly set (local dev single-URL fix)
+  ...(redirectSignIn
     ? {
         oauth: {
-          domain,
-          scope: ['openid', 'email', 'profile'],
+          ...awsExports.oauth,
           redirectSignIn,
-          redirectSignOut,
-          responseType: 'code',
+          redirectSignOut: redirectSignOut ?? redirectSignIn,
         },
       }
     : {}),

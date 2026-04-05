@@ -204,6 +204,29 @@
   border-color: #6a1b1a;
 }
 
+.user-card-promote-btn {
+  color: #14582a;
+  border-color: rgba(22, 130, 60, 0.4);
+}
+.user-card-promote-btn:hover {
+  background: rgba(22, 130, 60, 0.06);
+  border-color: #16823c;
+}
+
+.user-card-demote-btn {
+  color: #9b1c1c;
+  border-color: rgba(200, 30, 30, 0.3);
+}
+.user-card-demote-btn:hover {
+  background: rgba(200, 30, 30, 0.06);
+  border-color: #9b1c1c;
+}
+
+.user-card-view-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ── Modal backdrop ── */
 .user-modal-backdrop {
   position: fixed;
