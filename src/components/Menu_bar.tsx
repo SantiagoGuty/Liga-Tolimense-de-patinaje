@@ -216,6 +216,8 @@ export default function Menu_bar() {
               <Link to="/registrate">Crear usuario</Link>
             </>
           )}
+
+          <Link to="/privacidad" className="nav-legal-link">Privacidad</Link>
         </nav>
 
         {/* Mobile burger */}
@@ -267,6 +269,8 @@ export default function Menu_bar() {
             <Link to="/registrate" onClick={() => setMenuOpen(false)}>Crear usuario</Link>
           </>
         )}
+
+        <Link to="/privacidad" onClick={() => setMenuOpen(false)}>Política de Privacidad</Link>
       </nav>
     </>
   );
