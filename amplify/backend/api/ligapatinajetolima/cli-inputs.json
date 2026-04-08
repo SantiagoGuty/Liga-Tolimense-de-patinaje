@@ -6,6 +6,14 @@
     "defaultAuthType": {
       "mode": "AMAZON_COGNITO_USER_POOLS",
       "cognitoUserPoolId": "authligapatinajetolima3bd9e30b"
-    }
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "API_KEY",
+        "expirationTime": 365,
+        "apiKeyExpirationDate": "2027-04-05T21:46:23.827Z",
+        "keyDescription": "Public read access for noticias, boletines, and resoluciones"
+      }
+    ]
   }
 }

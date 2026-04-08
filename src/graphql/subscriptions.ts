@@ -143,60 +143,6 @@ export const onDeleteScanEvent = /* GraphQL */ `subscription OnDeleteScanEvent($
   APITypes.OnDeleteScanEventSubscriptionVariables,
   APITypes.OnDeleteScanEventSubscription
 >;
-export const onCreateResolution = /* GraphQL */ `subscription OnCreateResolution(
-  $filter: ModelSubscriptionResolutionFilterInput
-) {
-  onCreateResolution(filter: $filter) {
-    id
-    pk
-    date
-    title
-    s3Key
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnCreateResolutionSubscriptionVariables,
-  APITypes.OnCreateResolutionSubscription
->;
-export const onUpdateResolution = /* GraphQL */ `subscription OnUpdateResolution(
-  $filter: ModelSubscriptionResolutionFilterInput
-) {
-  onUpdateResolution(filter: $filter) {
-    id
-    pk
-    date
-    title
-    s3Key
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnUpdateResolutionSubscriptionVariables,
-  APITypes.OnUpdateResolutionSubscription
->;
-export const onDeleteResolution = /* GraphQL */ `subscription OnDeleteResolution(
-  $filter: ModelSubscriptionResolutionFilterInput
-) {
-  onDeleteResolution(filter: $filter) {
-    id
-    pk
-    date
-    title
-    s3Key
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedSubscription<
-  APITypes.OnDeleteResolutionSubscriptionVariables,
-  APITypes.OnDeleteResolutionSubscription
->;
 export const onCreatePractice = /* GraphQL */ `subscription OnCreatePractice(
   $filter: ModelSubscriptionPracticeFilterInput
   $owner: String
@@ -266,50 +212,59 @@ export const onDeletePractice = /* GraphQL */ `subscription OnDeletePractice(
   APITypes.OnDeletePracticeSubscriptionVariables,
   APITypes.OnDeletePracticeSubscription
 >;
-export const onCreateBoletin = /* GraphQL */ `subscription OnCreateBoletin($filter: ModelSubscriptionBoletinFilterInput) {
-  onCreateBoletin(filter: $filter) {
+export const onCreateAdminLog = /* GraphQL */ `subscription OnCreateAdminLog($filter: ModelSubscriptionAdminLogFilterInput) {
+  onCreateAdminLog(filter: $filter) {
     id
-    title
-    date
-    s3Key
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateBoletinSubscriptionVariables,
-  APITypes.OnCreateBoletinSubscription
+  APITypes.OnCreateAdminLogSubscriptionVariables,
+  APITypes.OnCreateAdminLogSubscription
 >;
-export const onUpdateBoletin = /* GraphQL */ `subscription OnUpdateBoletin($filter: ModelSubscriptionBoletinFilterInput) {
-  onUpdateBoletin(filter: $filter) {
+export const onUpdateAdminLog = /* GraphQL */ `subscription OnUpdateAdminLog($filter: ModelSubscriptionAdminLogFilterInput) {
+  onUpdateAdminLog(filter: $filter) {
     id
-    title
-    date
-    s3Key
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateBoletinSubscriptionVariables,
-  APITypes.OnUpdateBoletinSubscription
+  APITypes.OnUpdateAdminLogSubscriptionVariables,
+  APITypes.OnUpdateAdminLogSubscription
 >;
-export const onDeleteBoletin = /* GraphQL */ `subscription OnDeleteBoletin($filter: ModelSubscriptionBoletinFilterInput) {
-  onDeleteBoletin(filter: $filter) {
+export const onDeleteAdminLog = /* GraphQL */ `subscription OnDeleteAdminLog($filter: ModelSubscriptionAdminLogFilterInput) {
+  onDeleteAdminLog(filter: $filter) {
     id
-    title
-    date
-    s3Key
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteBoletinSubscriptionVariables,
-  APITypes.OnDeleteBoletinSubscription
+  APITypes.OnDeleteAdminLogSubscriptionVariables,
+  APITypes.OnDeleteAdminLogSubscription
 >;
 export const onCreatePracticeCheckIn = /* GraphQL */ `subscription OnCreatePracticeCheckIn(
   $filter: ModelSubscriptionPracticeCheckInFilterInput
@@ -376,4 +331,193 @@ export const onDeletePracticeCheckIn = /* GraphQL */ `subscription OnDeletePract
 ` as GeneratedSubscription<
   APITypes.OnDeletePracticeCheckInSubscriptionVariables,
   APITypes.OnDeletePracticeCheckInSubscription
+>;
+export const onCreateResolution = /* GraphQL */ `subscription OnCreateResolution(
+  $filter: ModelSubscriptionResolutionFilterInput
+) {
+  onCreateResolution(filter: $filter) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResolutionSubscriptionVariables,
+  APITypes.OnCreateResolutionSubscription
+>;
+export const onUpdateResolution = /* GraphQL */ `subscription OnUpdateResolution(
+  $filter: ModelSubscriptionResolutionFilterInput
+) {
+  onUpdateResolution(filter: $filter) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResolutionSubscriptionVariables,
+  APITypes.OnUpdateResolutionSubscription
+>;
+export const onDeleteResolution = /* GraphQL */ `subscription OnDeleteResolution(
+  $filter: ModelSubscriptionResolutionFilterInput
+) {
+  onDeleteResolution(filter: $filter) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResolutionSubscriptionVariables,
+  APITypes.OnDeleteResolutionSubscription
+>;
+export const onCreateBoletin = /* GraphQL */ `subscription OnCreateBoletin($filter: ModelSubscriptionBoletinFilterInput) {
+  onCreateBoletin(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateBoletinSubscriptionVariables,
+  APITypes.OnCreateBoletinSubscription
+>;
+export const onUpdateBoletin = /* GraphQL */ `subscription OnUpdateBoletin($filter: ModelSubscriptionBoletinFilterInput) {
+  onUpdateBoletin(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateBoletinSubscriptionVariables,
+  APITypes.OnUpdateBoletinSubscription
+>;
+export const onDeleteBoletin = /* GraphQL */ `subscription OnDeleteBoletin($filter: ModelSubscriptionBoletinFilterInput) {
+  onDeleteBoletin(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteBoletinSubscriptionVariables,
+  APITypes.OnDeleteBoletinSubscription
+>;
+export const onCreateSiteConfig = /* GraphQL */ `subscription OnCreateSiteConfig(
+  $filter: ModelSubscriptionSiteConfigFilterInput
+) {
+  onCreateSiteConfig(filter: $filter) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateSiteConfigSubscriptionVariables,
+  APITypes.OnCreateSiteConfigSubscription
+>;
+export const onUpdateSiteConfig = /* GraphQL */ `subscription OnUpdateSiteConfig(
+  $filter: ModelSubscriptionSiteConfigFilterInput
+) {
+  onUpdateSiteConfig(filter: $filter) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateSiteConfigSubscriptionVariables,
+  APITypes.OnUpdateSiteConfigSubscription
+>;
+export const onDeleteSiteConfig = /* GraphQL */ `subscription OnDeleteSiteConfig(
+  $filter: ModelSubscriptionSiteConfigFilterInput
+) {
+  onDeleteSiteConfig(filter: $filter) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteSiteConfigSubscriptionVariables,
+  APITypes.OnDeleteSiteConfigSubscription
+>;
+export const onCreateNoticia = /* GraphQL */ `subscription OnCreateNoticia($filter: ModelSubscriptionNoticiaFilterInput) {
+  onCreateNoticia(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateNoticiaSubscriptionVariables,
+  APITypes.OnCreateNoticiaSubscription
+>;
+export const onUpdateNoticia = /* GraphQL */ `subscription OnUpdateNoticia($filter: ModelSubscriptionNoticiaFilterInput) {
+  onUpdateNoticia(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateNoticiaSubscriptionVariables,
+  APITypes.OnUpdateNoticiaSubscription
+>;
+export const onDeleteNoticia = /* GraphQL */ `subscription OnDeleteNoticia($filter: ModelSubscriptionNoticiaFilterInput) {
+  onDeleteNoticia(filter: $filter) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteNoticiaSubscriptionVariables,
+  APITypes.OnDeleteNoticiaSubscription
 >;

@@ -23,6 +23,8 @@ import AdminUsuarios from './pages/admin/AdminUsuarios';
 import AdminPracticas from './pages/admin/AdminPracticas';
 import AdminResoluciones from './pages/admin/AdminResoluciones';
 import AdminBoletines from './pages/admin/AdminBoletines';
+import AdminLogs from './pages/admin/AdminLogs';
+import AdminNoticias from './pages/admin/AdminNoticias';
 import Privacidad from './pages/Privacidad';
 
 
@@ -125,6 +127,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
             <AdminBoletines />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/logs',
+        element: (
+          <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+            <AdminLogs />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'admin/noticias',
+        element: (
+          <ProtectedRoute requiredGroups={["Admins"]} forbiddenTo="/">
+            <AdminNoticias />
           </ProtectedRoute>
         ),
       },

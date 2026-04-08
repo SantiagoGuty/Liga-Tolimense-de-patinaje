@@ -3,6 +3,7 @@ import { generateClient } from 'aws-amplify/api';
 import Menu_bar from '../../components/Menu_bar';
 import FooterTol from '../../components/FooterTol';
 import { uploadPublicPdf } from '../../services/storageService';
+import { logAdminAction } from '../../services/adminLogService';
 
 const client = generateClient();
 
@@ -64,6 +65,7 @@ export default function AdminGuias() {
         query: CREATE_GUIA,
         variables: { input: { title, date, s3Key, description: description || undefined } },
       });
+      await logAdminAction({ action: 'CREATE', resourceType: 'GUIA', resourceTitle: title });
       setMsg({ text: 'Guía subida exitosamente.', ok: true });
       setTitle('');
       setDate('');
@@ -82,7 +84,9 @@ export default function AdminGuias() {
   async function handleDelete(id: string) {
     if (!confirm('¿Eliminar esta guía permanentemente?')) return;
     try {
+      const item = guias.find(g => g.id === id);
       await client.graphql({ query: DELETE_GUIA, variables: { input: { id } } });
+      await logAdminAction({ action: 'DELETE', resourceType: 'GUIA', resourceTitle: item?.title });
       setGuias(prev => prev.filter(g => g.id !== id));
     } catch (err: any) {
       alert('Error al eliminar: ' + (err?.message ?? 'desconocido'));

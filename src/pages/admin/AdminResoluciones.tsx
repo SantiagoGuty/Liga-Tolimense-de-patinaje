@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { listResolutions } from '../../graphql/queries';
 import { createResolution, deleteResolution } from '../../graphql/mutations';
+import { logAdminAction } from '../../services/adminLogService';
 
 import Menu_bar from '../../components/Menu_bar';
 import FooterTol from '../../components/FooterTol';
@@ -56,6 +57,7 @@ export default function AdminResoluciones() {
           },
         },
       });
+      await logAdminAction({ action: 'CREATE', resourceType: 'RESOLUCION', resourceTitle: title });
       setMsg({ text: 'Resolución subida exitosamente.', ok: true });
       setTitle('');
       setDate('');
@@ -73,7 +75,9 @@ export default function AdminResoluciones() {
   async function handleDelete(id: string) {
     if (!confirm('¿Eliminar esta resolución permanentemente?')) return;
     try {
+      const item = items.find(r => r.id === id);
       await client.graphql({ query: deleteResolution, variables: { input: { id } } });
+      await logAdminAction({ action: 'DELETE', resourceType: 'RESOLUCION', resourceTitle: item?.title });
       setItems(prev => prev.filter(r => r.id !== id));
     } catch (err: any) {
       alert('Error al eliminar: ' + (err?.message ?? 'desconocido'));

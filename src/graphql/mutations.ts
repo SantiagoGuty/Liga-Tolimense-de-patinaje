@@ -332,6 +332,171 @@ export const deleteBoletin = /* GraphQL */ `mutation DeleteBoletin(
   APITypes.DeleteBoletinMutationVariables,
   APITypes.DeleteBoletinMutation
 >;
+export const createSiteConfig = /* GraphQL */ `mutation CreateSiteConfig(
+  $input: CreateSiteConfigInput!
+  $condition: ModelSiteConfigConditionInput
+) {
+  createSiteConfig(input: $input, condition: $condition) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateSiteConfigMutationVariables,
+  APITypes.CreateSiteConfigMutation
+>;
+export const updateSiteConfig = /* GraphQL */ `mutation UpdateSiteConfig(
+  $input: UpdateSiteConfigInput!
+  $condition: ModelSiteConfigConditionInput
+) {
+  updateSiteConfig(input: $input, condition: $condition) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateSiteConfigMutationVariables,
+  APITypes.UpdateSiteConfigMutation
+>;
+export const deleteSiteConfig = /* GraphQL */ `mutation DeleteSiteConfig(
+  $input: DeleteSiteConfigInput!
+  $condition: ModelSiteConfigConditionInput
+) {
+  deleteSiteConfig(input: $input, condition: $condition) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteSiteConfigMutationVariables,
+  APITypes.DeleteSiteConfigMutation
+>;
+export const createNoticia = /* GraphQL */ `mutation CreateNoticia(
+  $input: CreateNoticiaInput!
+  $condition: ModelNoticiaConditionInput
+) {
+  createNoticia(input: $input, condition: $condition) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateNoticiaMutationVariables,
+  APITypes.CreateNoticiaMutation
+>;
+export const updateNoticia = /* GraphQL */ `mutation UpdateNoticia(
+  $input: UpdateNoticiaInput!
+  $condition: ModelNoticiaConditionInput
+) {
+  updateNoticia(input: $input, condition: $condition) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateNoticiaMutationVariables,
+  APITypes.UpdateNoticiaMutation
+>;
+export const deleteNoticia = /* GraphQL */ `mutation DeleteNoticia(
+  $input: DeleteNoticiaInput!
+  $condition: ModelNoticiaConditionInput
+) {
+  deleteNoticia(input: $input, condition: $condition) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteNoticiaMutationVariables,
+  APITypes.DeleteNoticiaMutation
+>;
+export const createAdminLog = /* GraphQL */ `mutation CreateAdminLog(
+  $input: CreateAdminLogInput!
+  $condition: ModelAdminLogConditionInput
+) {
+  createAdminLog(input: $input, condition: $condition) {
+    id
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateAdminLogMutationVariables,
+  APITypes.CreateAdminLogMutation
+>;
+export const updateAdminLog = /* GraphQL */ `mutation UpdateAdminLog(
+  $input: UpdateAdminLogInput!
+  $condition: ModelAdminLogConditionInput
+) {
+  updateAdminLog(input: $input, condition: $condition) {
+    id
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateAdminLogMutationVariables,
+  APITypes.UpdateAdminLogMutation
+>;
+export const deleteAdminLog = /* GraphQL */ `mutation DeleteAdminLog(
+  $input: DeleteAdminLogInput!
+  $condition: ModelAdminLogConditionInput
+) {
+  deleteAdminLog(input: $input, condition: $condition) {
+    id
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteAdminLogMutationVariables,
+  APITypes.DeleteAdminLogMutation
+>;
 export const createPracticeCheckIn = /* GraphQL */ `mutation CreatePracticeCheckIn(
   $input: CreatePracticeCheckInInput!
   $condition: ModelPracticeCheckInConditionInput

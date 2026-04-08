@@ -9,7 +9,7 @@ import Menu_bar from '../components/Menu_bar';
 import FooterTol from '../components/FooterTol';
 import '../styles/boletin.css';
 import carrerasBanner from '../assets/img/accion_meta.jpg';
-import { getPublicUrl } from '../services/storageService';
+import { buildPublicUrl } from '../services/storageService';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -42,16 +42,14 @@ export default function Boletin() {
   useEffect(() => {
     (async () => {
       try {
-        const { data } = (await gqlClient.graphql({ query: LIST_BOLETINES })) as any;
+        const { data } = (await gqlClient.graphql({ query: LIST_BOLETINES, authMode: 'apiKey' })) as any;
         const items = data?.listBoletins?.items ?? [];
-        const resolved: BoletinMeta[] = await Promise.all(
-          items.map(async (b: any) => ({
-            id: b.id,
-            title: b.title,
-            date: b.date,
-            url: await getPublicUrl(b.s3Key),
-          }))
-        );
+        const resolved: BoletinMeta[] = items.map((b: any) => ({
+          id: b.id,
+          title: b.title,
+          date: b.date,
+          url: buildPublicUrl(b.s3Key),
+        }));
         setBoletines(resolved.sort((a, b) => b.date.localeCompare(a.date)));
       } catch {
         // network/auth error — list stays empty

@@ -102,46 +102,6 @@ export const listScanEvents = /* GraphQL */ `query ListScanEvents(
   APITypes.ListScanEventsQueryVariables,
   APITypes.ListScanEventsQuery
 >;
-export const getResolution = /* GraphQL */ `query GetResolution($id: ID!) {
-  getResolution(id: $id) {
-    id
-    pk
-    date
-    title
-    s3Key
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetResolutionQueryVariables,
-  APITypes.GetResolutionQuery
->;
-export const listResolutions = /* GraphQL */ `query ListResolutions(
-  $filter: ModelResolutionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listResolutions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      pk
-      date
-      title
-      s3Key
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListResolutionsQueryVariables,
-  APITypes.ListResolutionsQuery
->;
 export const getPractice = /* GraphQL */ `query GetPractice($id: ID!) {
   getPractice(id: $id) {
     id
@@ -190,32 +150,38 @@ export const listPractices = /* GraphQL */ `query ListPractices(
   APITypes.ListPracticesQueryVariables,
   APITypes.ListPracticesQuery
 >;
-export const getBoletin = /* GraphQL */ `query GetBoletin($id: ID!) {
-  getBoletin(id: $id) {
+export const getAdminLog = /* GraphQL */ `query GetAdminLog($id: ID!) {
+  getAdminLog(id: $id) {
     id
-    title
-    date
-    s3Key
+    adminSub
+    adminName
+    action
+    resourceType
+    resourceTitle
+    timestamp
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetBoletinQueryVariables,
-  APITypes.GetBoletinQuery
+  APITypes.GetAdminLogQueryVariables,
+  APITypes.GetAdminLogQuery
 >;
-export const listBoletins = /* GraphQL */ `query ListBoletins(
-  $filter: ModelBoletinFilterInput
+export const listAdminLogs = /* GraphQL */ `query ListAdminLogs(
+  $filter: ModelAdminLogFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listBoletins(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listAdminLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      title
-      date
-      s3Key
+      adminSub
+      adminName
+      action
+      resourceType
+      resourceTitle
+      timestamp
       createdAt
       updatedAt
       __typename
@@ -225,8 +191,8 @@ export const listBoletins = /* GraphQL */ `query ListBoletins(
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListBoletinsQueryVariables,
-  APITypes.ListBoletinsQuery
+  APITypes.ListAdminLogsQueryVariables,
+  APITypes.ListAdminLogsQuery
 >;
 export const getPracticeCheckIn = /* GraphQL */ `query GetPracticeCheckIn($id: ID!) {
   getPracticeCheckIn(id: $id) {
@@ -308,40 +274,6 @@ export const scanEventsByUserIdAndTimestamp = /* GraphQL */ `query ScanEventsByU
 ` as GeneratedQuery<
   APITypes.ScanEventsByUserIdAndTimestampQueryVariables,
   APITypes.ScanEventsByUserIdAndTimestampQuery
->;
-export const resolutionsByPkAndDate = /* GraphQL */ `query ResolutionsByPkAndDate(
-  $pk: String!
-  $date: ModelStringKeyConditionInput
-  $sortDirection: ModelSortDirection
-  $filter: ModelResolutionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  resolutionsByPkAndDate(
-    pk: $pk
-    date: $date
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      pk
-      date
-      title
-      s3Key
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ResolutionsByPkAndDateQueryVariables,
-  APITypes.ResolutionsByPkAndDateQuery
 >;
 export const practiceByQrToken = /* GraphQL */ `query PracticeByQrToken(
   $qrToken: String!
@@ -452,4 +384,188 @@ export const practiceCheckInsByUserIdAndTimestamp = /* GraphQL */ `query Practic
 ` as GeneratedQuery<
   APITypes.PracticeCheckInsByUserIdAndTimestampQueryVariables,
   APITypes.PracticeCheckInsByUserIdAndTimestampQuery
+>;
+export const getResolution = /* GraphQL */ `query GetResolution($id: ID!) {
+  getResolution(id: $id) {
+    id
+    pk
+    date
+    title
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResolutionQueryVariables,
+  APITypes.GetResolutionQuery
+>;
+export const listResolutions = /* GraphQL */ `query ListResolutions(
+  $filter: ModelResolutionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResolutions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      pk
+      date
+      title
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResolutionsQueryVariables,
+  APITypes.ListResolutionsQuery
+>;
+export const resolutionsByPkAndDate = /* GraphQL */ `query ResolutionsByPkAndDate(
+  $pk: String!
+  $date: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelResolutionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  resolutionsByPkAndDate(
+    pk: $pk
+    date: $date
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      pk
+      date
+      title
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ResolutionsByPkAndDateQueryVariables,
+  APITypes.ResolutionsByPkAndDateQuery
+>;
+export const getBoletin = /* GraphQL */ `query GetBoletin($id: ID!) {
+  getBoletin(id: $id) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetBoletinQueryVariables,
+  APITypes.GetBoletinQuery
+>;
+export const listBoletins = /* GraphQL */ `query ListBoletins(
+  $filter: ModelBoletinFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listBoletins(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      date
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListBoletinsQueryVariables,
+  APITypes.ListBoletinsQuery
+>;
+export const getSiteConfig = /* GraphQL */ `query GetSiteConfig($id: ID!) {
+  getSiteConfig(id: $id) {
+    id
+    value
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetSiteConfigQueryVariables,
+  APITypes.GetSiteConfigQuery
+>;
+export const listSiteConfigs = /* GraphQL */ `query ListSiteConfigs(
+  $filter: ModelSiteConfigFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listSiteConfigs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      value
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListSiteConfigsQueryVariables,
+  APITypes.ListSiteConfigsQuery
+>;
+export const getNoticia = /* GraphQL */ `query GetNoticia($id: ID!) {
+  getNoticia(id: $id) {
+    id
+    title
+    date
+    s3Key
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetNoticiaQueryVariables,
+  APITypes.GetNoticiaQuery
+>;
+export const listNoticias = /* GraphQL */ `query ListNoticias(
+  $filter: ModelNoticiaFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNoticias(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      date
+      s3Key
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListNoticiasQueryVariables,
+  APITypes.ListNoticiasQuery
 >;

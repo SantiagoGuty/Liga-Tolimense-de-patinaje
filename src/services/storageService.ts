@@ -1,5 +1,17 @@
 import { uploadData, getUrl } from 'aws-amplify/storage';
 
+const S3_BUCKET = 'ligapatinajetolima8e11dd5918ec4ca9b828ffdcb2c0ed19c4-dev';
+const S3_REGION = 'us-east-1';
+
+/**
+ * Returns a direct, public, never-expiring S3 URL for a guest-level file.
+ * Requires the bucket to have a public-read policy on the public/* prefix.
+ * No AWS credentials needed — works for every visitor.
+ */
+export function buildPublicUrl(key: string): string {
+  return `https://${S3_BUCKET}.s3.${S3_REGION}.amazonaws.com/public/${key}`;
+}
+
 export async function uploadPublicPdf(file: File, folder: string): Promise<string> {
   const key = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2)}.pdf`;
   await uploadData({
@@ -13,7 +25,7 @@ export async function uploadPublicPdf(file: File, folder: string): Promise<strin
 export async function getPublicUrl(key: string): Promise<string> {
   const { url } = await getUrl({
     key,
-    options: { accessLevel: 'guest' },
+    options: { accessLevel: 'guest', expiresIn: 3600 },
   });
   return url.toString();
 }

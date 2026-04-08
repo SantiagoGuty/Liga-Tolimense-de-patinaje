@@ -6,7 +6,7 @@ import '../styles/menu.css';
 import logo from '../assets/img/logo_solo.png';
 
 import { currentUser } from '../services/authService';
-import { getCurrentUserProfile, createCurrentUserProfile } from '../services/userProfile';
+import { getCurrentUserProfile, createCurrentUserProfile, updateCurrentUserProfile } from '../services/userProfile';
 import { getAvatarUrl } from '../services/storageService';
 import { getGroups } from '../services/roles';
 
@@ -92,6 +92,17 @@ export default function Menu_bar() {
       } catch {
         setIsAdminGroup(false);
       }
+
+      // Keep permiso field in sync with actual Cognito group
+      try {
+        const existingProfile = await getCurrentUserProfile();
+        if (existingProfile) {
+          const expectedPermiso = admin ? 'ADMIN' : 'USUARIO';
+          if (existingProfile.permiso !== expectedPermiso) {
+            await updateCurrentUserProfile({ permiso: expectedPermiso });
+          }
+        }
+      } catch { /* non-fatal */ }
 
       let inits    = 'SG';
       let url: string | null = null;
@@ -190,8 +201,10 @@ export default function Menu_bar() {
               <a type="button" className="dropdown-trigger">Admin ▾</a>
               <div className="dropdown-content">
                 <Link to="/admin/usuarios">Usuarios</Link>
+                <Link to="/admin/noticias">Subir Noticias</Link>
                 <Link to="/admin/resoluciones">Subir Resoluciones</Link>
                 <Link to="/admin/boletines">Subir Boletines</Link>
+                <Link to="/admin/logs">Registro de actividad</Link>
               </div>
             </div>
           )}
@@ -256,8 +269,10 @@ export default function Menu_bar() {
           <details>
             <summary>Admin</summary>
             <Link to="/admin/usuarios" onClick={() => setMenuOpen(false)}>Usuarios</Link>
+            <Link to="/admin/noticias" onClick={() => setMenuOpen(false)}>Subir Noticias</Link>
             <Link to="/admin/resoluciones" onClick={() => setMenuOpen(false)}>Subir Resoluciones</Link>
             <Link to="/admin/boletines" onClick={() => setMenuOpen(false)}>Subir Boletines</Link>
+            <Link to="/admin/logs" onClick={() => setMenuOpen(false)}>Registro de actividad</Link>
           </details>
         )}
 

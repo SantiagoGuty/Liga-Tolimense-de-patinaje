@@ -329,6 +329,131 @@ export type DeleteBoletinInput = {
   id: string,
 };
 
+export type CreateSiteConfigInput = {
+  id?: string | null,
+  value: string,
+};
+
+export type ModelSiteConfigConditionInput = {
+  value?: ModelStringInput | null,
+  and?: Array< ModelSiteConfigConditionInput | null > | null,
+  or?: Array< ModelSiteConfigConditionInput | null > | null,
+  not?: ModelSiteConfigConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type SiteConfig = {
+  __typename: "SiteConfig",
+  id: string,
+  value: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateSiteConfigInput = {
+  id: string,
+  value?: string | null,
+};
+
+export type DeleteSiteConfigInput = {
+  id: string,
+};
+
+export type CreateNoticiaInput = {
+  id?: string | null,
+  title: string,
+  date: string,
+  s3Key: string,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type ModelNoticiaConditionInput = {
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelNoticiaConditionInput | null > | null,
+  or?: Array< ModelNoticiaConditionInput | null > | null,
+  not?: ModelNoticiaConditionInput | null,
+};
+
+export type Noticia = {
+  __typename: "Noticia",
+  id: string,
+  title: string,
+  date: string,
+  s3Key: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateNoticiaInput = {
+  id: string,
+  title?: string | null,
+  date?: string | null,
+  s3Key?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+};
+
+export type DeleteNoticiaInput = {
+  id: string,
+};
+
+export type CreateAdminLogInput = {
+  id?: string | null,
+  adminSub: string,
+  adminName: string,
+  action: string,
+  resourceType: string,
+  resourceTitle?: string | null,
+  timestamp: string,
+};
+
+export type ModelAdminLogConditionInput = {
+  adminSub?: ModelStringInput | null,
+  adminName?: ModelStringInput | null,
+  action?: ModelStringInput | null,
+  resourceType?: ModelStringInput | null,
+  resourceTitle?: ModelStringInput | null,
+  timestamp?: ModelStringInput | null,
+  and?: Array< ModelAdminLogConditionInput | null > | null,
+  or?: Array< ModelAdminLogConditionInput | null > | null,
+  not?: ModelAdminLogConditionInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+};
+
+export type AdminLog = {
+  __typename: "AdminLog",
+  id: string,
+  adminSub: string,
+  adminName: string,
+  action: string,
+  resourceType: string,
+  resourceTitle?: string | null,
+  timestamp: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateAdminLogInput = {
+  id: string,
+  adminSub?: string | null,
+  adminName?: string | null,
+  action?: string | null,
+  resourceType?: string | null,
+  resourceTitle?: string | null,
+  timestamp?: string | null,
+};
+
+export type DeleteAdminLogInput = {
+  id: string,
+};
+
 export type CreatePracticeCheckInInput = {
   id?: string | null,
   practiceId: string,
@@ -430,25 +555,6 @@ export type ModelScanEventConnection = {
   nextToken?: string | null,
 };
 
-export type ModelResolutionFilterInput = {
-  id?: ModelIDInput | null,
-  pk?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  title?: ModelStringInput | null,
-  s3Key?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelResolutionFilterInput | null > | null,
-  or?: Array< ModelResolutionFilterInput | null > | null,
-  not?: ModelResolutionFilterInput | null,
-};
-
-export type ModelResolutionConnection = {
-  __typename: "ModelResolutionConnection",
-  items:  Array<Resolution | null >,
-  nextToken?: string | null,
-};
-
 export type ModelPracticeFilterInput = {
   id?: ModelIDInput | null,
   title?: ModelStringInput | null,
@@ -472,21 +578,24 @@ export type ModelPracticeConnection = {
   nextToken?: string | null,
 };
 
-export type ModelBoletinFilterInput = {
+export type ModelAdminLogFilterInput = {
   id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  s3Key?: ModelStringInput | null,
+  adminSub?: ModelStringInput | null,
+  adminName?: ModelStringInput | null,
+  action?: ModelStringInput | null,
+  resourceType?: ModelStringInput | null,
+  resourceTitle?: ModelStringInput | null,
+  timestamp?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
-  and?: Array< ModelBoletinFilterInput | null > | null,
-  or?: Array< ModelBoletinFilterInput | null > | null,
-  not?: ModelBoletinFilterInput | null,
+  and?: Array< ModelAdminLogFilterInput | null > | null,
+  or?: Array< ModelAdminLogFilterInput | null > | null,
+  not?: ModelAdminLogFilterInput | null,
 };
 
-export type ModelBoletinConnection = {
-  __typename: "ModelBoletinConnection",
-  items:  Array<Boletin | null >,
+export type ModelAdminLogConnection = {
+  __typename: "ModelAdminLogConnection",
+  items:  Array<AdminLog | null >,
   nextToken?: string | null,
 };
 
@@ -527,6 +636,77 @@ export enum ModelSortDirection {
   DESC = "DESC",
 }
 
+
+export type ModelResolutionFilterInput = {
+  id?: ModelIDInput | null,
+  pk?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  title?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelResolutionFilterInput | null > | null,
+  or?: Array< ModelResolutionFilterInput | null > | null,
+  not?: ModelResolutionFilterInput | null,
+};
+
+export type ModelResolutionConnection = {
+  __typename: "ModelResolutionConnection",
+  items:  Array<Resolution | null >,
+  nextToken?: string | null,
+};
+
+export type ModelBoletinFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelBoletinFilterInput | null > | null,
+  or?: Array< ModelBoletinFilterInput | null > | null,
+  not?: ModelBoletinFilterInput | null,
+};
+
+export type ModelBoletinConnection = {
+  __typename: "ModelBoletinConnection",
+  items:  Array<Boletin | null >,
+  nextToken?: string | null,
+};
+
+export type ModelSiteConfigFilterInput = {
+  id?: ModelIDInput | null,
+  value?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelSiteConfigFilterInput | null > | null,
+  or?: Array< ModelSiteConfigFilterInput | null > | null,
+  not?: ModelSiteConfigFilterInput | null,
+};
+
+export type ModelSiteConfigConnection = {
+  __typename: "ModelSiteConfigConnection",
+  items:  Array<SiteConfig | null >,
+  nextToken?: string | null,
+};
+
+export type ModelNoticiaFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  s3Key?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelNoticiaFilterInput | null > | null,
+  or?: Array< ModelNoticiaFilterInput | null > | null,
+  not?: ModelNoticiaFilterInput | null,
+};
+
+export type ModelNoticiaConnection = {
+  __typename: "ModelNoticiaConnection",
+  items:  Array<Noticia | null >,
+  nextToken?: string | null,
+};
 
 export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
@@ -592,18 +772,6 @@ export type ModelSubscriptionScanEventFilterInput = {
   or?: Array< ModelSubscriptionScanEventFilterInput | null > | null,
 };
 
-export type ModelSubscriptionResolutionFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  pk?: ModelSubscriptionStringInput | null,
-  date?: ModelSubscriptionStringInput | null,
-  title?: ModelSubscriptionStringInput | null,
-  s3Key?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
-  or?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
-};
-
 export type ModelSubscriptionPracticeFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   title?: ModelSubscriptionStringInput | null,
@@ -620,15 +788,18 @@ export type ModelSubscriptionPracticeFilterInput = {
   owner?: ModelStringInput | null,
 };
 
-export type ModelSubscriptionBoletinFilterInput = {
+export type ModelSubscriptionAdminLogFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  title?: ModelSubscriptionStringInput | null,
-  date?: ModelSubscriptionStringInput | null,
-  s3Key?: ModelSubscriptionStringInput | null,
+  adminSub?: ModelSubscriptionStringInput | null,
+  adminName?: ModelSubscriptionStringInput | null,
+  action?: ModelSubscriptionStringInput | null,
+  resourceType?: ModelSubscriptionStringInput | null,
+  resourceTitle?: ModelSubscriptionStringInput | null,
+  timestamp?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionBoletinFilterInput | null > | null,
-  or?: Array< ModelSubscriptionBoletinFilterInput | null > | null,
+  and?: Array< ModelSubscriptionAdminLogFilterInput | null > | null,
+  or?: Array< ModelSubscriptionAdminLogFilterInput | null > | null,
 };
 
 export type ModelSubscriptionPracticeCheckInFilterInput = {
@@ -644,6 +815,49 @@ export type ModelSubscriptionPracticeCheckInFilterInput = {
   and?: Array< ModelSubscriptionPracticeCheckInFilterInput | null > | null,
   or?: Array< ModelSubscriptionPracticeCheckInFilterInput | null > | null,
   owner?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionResolutionFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  pk?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  s3Key?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResolutionFilterInput | null > | null,
+};
+
+export type ModelSubscriptionBoletinFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  s3Key?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionBoletinFilterInput | null > | null,
+  or?: Array< ModelSubscriptionBoletinFilterInput | null > | null,
+};
+
+export type ModelSubscriptionSiteConfigFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  value?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionSiteConfigFilterInput | null > | null,
+  or?: Array< ModelSubscriptionSiteConfigFilterInput | null > | null,
+};
+
+export type ModelSubscriptionNoticiaFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  date?: ModelSubscriptionStringInput | null,
+  s3Key?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionNoticiaFilterInput | null > | null,
+  or?: Array< ModelSubscriptionNoticiaFilterInput | null > | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -955,6 +1169,162 @@ export type DeleteBoletinMutation = {
   } | null,
 };
 
+export type CreateSiteConfigMutationVariables = {
+  input: CreateSiteConfigInput,
+  condition?: ModelSiteConfigConditionInput | null,
+};
+
+export type CreateSiteConfigMutation = {
+  createSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateSiteConfigMutationVariables = {
+  input: UpdateSiteConfigInput,
+  condition?: ModelSiteConfigConditionInput | null,
+};
+
+export type UpdateSiteConfigMutation = {
+  updateSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteSiteConfigMutationVariables = {
+  input: DeleteSiteConfigInput,
+  condition?: ModelSiteConfigConditionInput | null,
+};
+
+export type DeleteSiteConfigMutation = {
+  deleteSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateNoticiaMutationVariables = {
+  input: CreateNoticiaInput,
+  condition?: ModelNoticiaConditionInput | null,
+};
+
+export type CreateNoticiaMutation = {
+  createNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateNoticiaMutationVariables = {
+  input: UpdateNoticiaInput,
+  condition?: ModelNoticiaConditionInput | null,
+};
+
+export type UpdateNoticiaMutation = {
+  updateNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteNoticiaMutationVariables = {
+  input: DeleteNoticiaInput,
+  condition?: ModelNoticiaConditionInput | null,
+};
+
+export type DeleteNoticiaMutation = {
+  deleteNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateAdminLogMutationVariables = {
+  input: CreateAdminLogInput,
+  condition?: ModelAdminLogConditionInput | null,
+};
+
+export type CreateAdminLogMutation = {
+  createAdminLog?:  {
+    __typename: "AdminLog",
+    id: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateAdminLogMutationVariables = {
+  input: UpdateAdminLogInput,
+  condition?: ModelAdminLogConditionInput | null,
+};
+
+export type UpdateAdminLogMutation = {
+  updateAdminLog?:  {
+    __typename: "AdminLog",
+    id: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteAdminLogMutationVariables = {
+  input: DeleteAdminLogInput,
+  condition?: ModelAdminLogConditionInput | null,
+};
+
+export type DeleteAdminLogMutation = {
+  deleteAdminLog?:  {
+    __typename: "AdminLog",
+    id: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type CreatePracticeCheckInMutationVariables = {
   input: CreatePracticeCheckInInput,
   condition?: ModelPracticeCheckInConditionInput | null,
@@ -1118,46 +1488,6 @@ export type ListScanEventsQuery = {
   } | null,
 };
 
-export type GetResolutionQueryVariables = {
-  id: string,
-};
-
-export type GetResolutionQuery = {
-  getResolution?:  {
-    __typename: "Resolution",
-    id: string,
-    pk: string,
-    date: string,
-    title: string,
-    s3Key: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListResolutionsQueryVariables = {
-  filter?: ModelResolutionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListResolutionsQuery = {
-  listResolutions?:  {
-    __typename: "ModelResolutionConnection",
-    items:  Array< {
-      __typename: "Resolution",
-      id: string,
-      pk: string,
-      date: string,
-      title: string,
-      s3Key: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type GetPracticeQueryVariables = {
   id: string,
 };
@@ -1206,37 +1536,43 @@ export type ListPracticesQuery = {
   } | null,
 };
 
-export type GetBoletinQueryVariables = {
+export type GetAdminLogQueryVariables = {
   id: string,
 };
 
-export type GetBoletinQuery = {
-  getBoletin?:  {
-    __typename: "Boletin",
+export type GetAdminLogQuery = {
+  getAdminLog?:  {
+    __typename: "AdminLog",
     id: string,
-    title: string,
-    date: string,
-    s3Key: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListBoletinsQueryVariables = {
-  filter?: ModelBoletinFilterInput | null,
+export type ListAdminLogsQueryVariables = {
+  filter?: ModelAdminLogFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListBoletinsQuery = {
-  listBoletins?:  {
-    __typename: "ModelBoletinConnection",
+export type ListAdminLogsQuery = {
+  listAdminLogs?:  {
+    __typename: "ModelAdminLogConnection",
     items:  Array< {
-      __typename: "Boletin",
+      __typename: "AdminLog",
       id: string,
-      title: string,
-      date: string,
-      s3Key: string,
+      adminSub: string,
+      adminName: string,
+      action: string,
+      resourceType: string,
+      resourceTitle?: string | null,
+      timestamp: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1310,32 +1646,6 @@ export type ScanEventsByUserIdAndTimestampQuery = {
       scannerSub?: string | null,
       scannerName?: string | null,
       location?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ResolutionsByPkAndDateQueryVariables = {
-  pk: string,
-  date?: ModelStringKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelResolutionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ResolutionsByPkAndDateQuery = {
-  resolutionsByPkAndDate?:  {
-    __typename: "ModelResolutionConnection",
-    items:  Array< {
-      __typename: "Resolution",
-      id: string,
-      pk: string,
-      date: string,
-      title: string,
-      s3Key: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1425,6 +1735,182 @@ export type PracticeCheckInsByUserIdAndTimestampQuery = {
       createdAt: string,
       updatedAt: string,
       owner?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResolutionQueryVariables = {
+  id: string,
+};
+
+export type GetResolutionQuery = {
+  getResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResolutionsQueryVariables = {
+  filter?: ModelResolutionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResolutionsQuery = {
+  listResolutions?:  {
+    __typename: "ModelResolutionConnection",
+    items:  Array< {
+      __typename: "Resolution",
+      id: string,
+      pk: string,
+      date: string,
+      title: string,
+      s3Key: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ResolutionsByPkAndDateQueryVariables = {
+  pk: string,
+  date?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelResolutionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ResolutionsByPkAndDateQuery = {
+  resolutionsByPkAndDate?:  {
+    __typename: "ModelResolutionConnection",
+    items:  Array< {
+      __typename: "Resolution",
+      id: string,
+      pk: string,
+      date: string,
+      title: string,
+      s3Key: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetBoletinQueryVariables = {
+  id: string,
+};
+
+export type GetBoletinQuery = {
+  getBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListBoletinsQueryVariables = {
+  filter?: ModelBoletinFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBoletinsQuery = {
+  listBoletins?:  {
+    __typename: "ModelBoletinConnection",
+    items:  Array< {
+      __typename: "Boletin",
+      id: string,
+      title: string,
+      date: string,
+      s3Key: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetSiteConfigQueryVariables = {
+  id: string,
+};
+
+export type GetSiteConfigQuery = {
+  getSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListSiteConfigsQueryVariables = {
+  filter?: ModelSiteConfigFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListSiteConfigsQuery = {
+  listSiteConfigs?:  {
+    __typename: "ModelSiteConfigConnection",
+    items:  Array< {
+      __typename: "SiteConfig",
+      id: string,
+      value: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetNoticiaQueryVariables = {
+  id: string,
+};
+
+export type GetNoticiaQuery = {
+  getNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListNoticiasQueryVariables = {
+  filter?: ModelNoticiaFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListNoticiasQuery = {
+  listNoticias?:  {
+    __typename: "ModelNoticiaConnection",
+    items:  Array< {
+      __typename: "Noticia",
+      id: string,
+      title: string,
+      date: string,
+      s3Key: string,
+      createdAt: string,
+      updatedAt: string,
     } | null >,
     nextToken?: string | null,
   } | null,
@@ -1565,57 +2051,6 @@ export type OnDeleteScanEventSubscription = {
   } | null,
 };
 
-export type OnCreateResolutionSubscriptionVariables = {
-  filter?: ModelSubscriptionResolutionFilterInput | null,
-};
-
-export type OnCreateResolutionSubscription = {
-  onCreateResolution?:  {
-    __typename: "Resolution",
-    id: string,
-    pk: string,
-    date: string,
-    title: string,
-    s3Key: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateResolutionSubscriptionVariables = {
-  filter?: ModelSubscriptionResolutionFilterInput | null,
-};
-
-export type OnUpdateResolutionSubscription = {
-  onUpdateResolution?:  {
-    __typename: "Resolution",
-    id: string,
-    pk: string,
-    date: string,
-    title: string,
-    s3Key: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteResolutionSubscriptionVariables = {
-  filter?: ModelSubscriptionResolutionFilterInput | null,
-};
-
-export type OnDeleteResolutionSubscription = {
-  onDeleteResolution?:  {
-    __typename: "Resolution",
-    id: string,
-    pk: string,
-    date: string,
-    title: string,
-    s3Key: string,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type OnCreatePracticeSubscriptionVariables = {
   filter?: ModelSubscriptionPracticeFilterInput | null,
   owner?: string | null,
@@ -1682,49 +2117,58 @@ export type OnDeletePracticeSubscription = {
   } | null,
 };
 
-export type OnCreateBoletinSubscriptionVariables = {
-  filter?: ModelSubscriptionBoletinFilterInput | null,
+export type OnCreateAdminLogSubscriptionVariables = {
+  filter?: ModelSubscriptionAdminLogFilterInput | null,
 };
 
-export type OnCreateBoletinSubscription = {
-  onCreateBoletin?:  {
-    __typename: "Boletin",
+export type OnCreateAdminLogSubscription = {
+  onCreateAdminLog?:  {
+    __typename: "AdminLog",
     id: string,
-    title: string,
-    date: string,
-    s3Key: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateBoletinSubscriptionVariables = {
-  filter?: ModelSubscriptionBoletinFilterInput | null,
+export type OnUpdateAdminLogSubscriptionVariables = {
+  filter?: ModelSubscriptionAdminLogFilterInput | null,
 };
 
-export type OnUpdateBoletinSubscription = {
-  onUpdateBoletin?:  {
-    __typename: "Boletin",
+export type OnUpdateAdminLogSubscription = {
+  onUpdateAdminLog?:  {
+    __typename: "AdminLog",
     id: string,
-    title: string,
-    date: string,
-    s3Key: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteBoletinSubscriptionVariables = {
-  filter?: ModelSubscriptionBoletinFilterInput | null,
+export type OnDeleteAdminLogSubscriptionVariables = {
+  filter?: ModelSubscriptionAdminLogFilterInput | null,
 };
 
-export type OnDeleteBoletinSubscription = {
-  onDeleteBoletin?:  {
-    __typename: "Boletin",
+export type OnDeleteAdminLogSubscription = {
+  onDeleteAdminLog?:  {
+    __typename: "AdminLog",
     id: string,
-    title: string,
-    date: string,
-    s3Key: string,
+    adminSub: string,
+    adminName: string,
+    action: string,
+    resourceType: string,
+    resourceTitle?: string | null,
+    timestamp: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1790,5 +2234,194 @@ export type OnDeletePracticeCheckInSubscription = {
     createdAt: string,
     updatedAt: string,
     owner?: string | null,
+  } | null,
+};
+
+export type OnCreateResolutionSubscriptionVariables = {
+  filter?: ModelSubscriptionResolutionFilterInput | null,
+};
+
+export type OnCreateResolutionSubscription = {
+  onCreateResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResolutionSubscriptionVariables = {
+  filter?: ModelSubscriptionResolutionFilterInput | null,
+};
+
+export type OnUpdateResolutionSubscription = {
+  onUpdateResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResolutionSubscriptionVariables = {
+  filter?: ModelSubscriptionResolutionFilterInput | null,
+};
+
+export type OnDeleteResolutionSubscription = {
+  onDeleteResolution?:  {
+    __typename: "Resolution",
+    id: string,
+    pk: string,
+    date: string,
+    title: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateBoletinSubscriptionVariables = {
+  filter?: ModelSubscriptionBoletinFilterInput | null,
+};
+
+export type OnCreateBoletinSubscription = {
+  onCreateBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateBoletinSubscriptionVariables = {
+  filter?: ModelSubscriptionBoletinFilterInput | null,
+};
+
+export type OnUpdateBoletinSubscription = {
+  onUpdateBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteBoletinSubscriptionVariables = {
+  filter?: ModelSubscriptionBoletinFilterInput | null,
+};
+
+export type OnDeleteBoletinSubscription = {
+  onDeleteBoletin?:  {
+    __typename: "Boletin",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateSiteConfigSubscriptionVariables = {
+  filter?: ModelSubscriptionSiteConfigFilterInput | null,
+};
+
+export type OnCreateSiteConfigSubscription = {
+  onCreateSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateSiteConfigSubscriptionVariables = {
+  filter?: ModelSubscriptionSiteConfigFilterInput | null,
+};
+
+export type OnUpdateSiteConfigSubscription = {
+  onUpdateSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteSiteConfigSubscriptionVariables = {
+  filter?: ModelSubscriptionSiteConfigFilterInput | null,
+};
+
+export type OnDeleteSiteConfigSubscription = {
+  onDeleteSiteConfig?:  {
+    __typename: "SiteConfig",
+    id: string,
+    value: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateNoticiaSubscriptionVariables = {
+  filter?: ModelSubscriptionNoticiaFilterInput | null,
+};
+
+export type OnCreateNoticiaSubscription = {
+  onCreateNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateNoticiaSubscriptionVariables = {
+  filter?: ModelSubscriptionNoticiaFilterInput | null,
+};
+
+export type OnUpdateNoticiaSubscription = {
+  onUpdateNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteNoticiaSubscriptionVariables = {
+  filter?: ModelSubscriptionNoticiaFilterInput | null,
+};
+
+export type OnDeleteNoticiaSubscription = {
+  onDeleteNoticia?:  {
+    __typename: "Noticia",
+    id: string,
+    title: string,
+    date: string,
+    s3Key: string,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };

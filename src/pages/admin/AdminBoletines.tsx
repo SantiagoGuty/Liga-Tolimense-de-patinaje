@@ -3,6 +3,7 @@ import { generateClient } from 'aws-amplify/api';
 import Menu_bar from '../../components/Menu_bar';
 import FooterTol from '../../components/FooterTol';
 import { uploadPublicPdf, getPublicUrl } from '../../services/storageService';
+import { logAdminAction } from '../../services/adminLogService';
 
 import '../../styles/admin/adminBase.css';
 import '../../styles/admin/adminDocs.css';
@@ -66,6 +67,7 @@ export default function AdminBoletines() {
         query: CREATE_BOLETIN,
         variables: { input: { title, date, s3Key } },
       });
+      await logAdminAction({ action: 'CREATE', resourceType: 'BOLETIN', resourceTitle: title });
       setMsg({ text: 'Boletín subido exitosamente.', ok: true });
       setTitle('');
       setDate('');
@@ -83,7 +85,9 @@ export default function AdminBoletines() {
   async function handleDelete(id: string) {
     if (!confirm('¿Eliminar este boletín permanentemente?')) return;
     try {
+      const item = boletines.find(b => b.id === id);
       await client.graphql({ query: DELETE_BOLETIN, variables: { input: { id } } });
+      await logAdminAction({ action: 'DELETE', resourceType: 'BOLETIN', resourceTitle: item?.title });
       setBoletines(prev => prev.filter(b => b.id !== id));
     } catch (err: any) {
       alert('Error al eliminar: ' + (err?.message ?? 'desconocido'));

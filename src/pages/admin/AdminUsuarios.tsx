@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { generateClient } from 'aws-amplify/api';
 import { post } from 'aws-amplify/api';
 import { fetchAuthSession } from 'aws-amplify/auth';
+import { logAdminAction } from '../../services/adminLogService';
 import { listUsers } from '../../graphql/queries';
 import type { User } from '../../API';
 import { getAvatarUrl } from '../../services/storageService';
@@ -158,6 +159,11 @@ export default function AdminUsuarios() {
     setTogglingId(u.id);
     try {
       await setUserAdminGroup(cognitoUsername, !isAdmin);
+      await logAdminAction({
+        action: isAdmin ? 'DEMOTE' : 'PROMOTE',
+        resourceType: 'USER',
+        resourceTitle: `${u.nombre} ${u.apellido} (${u.correo})`,
+      });
       // Optimistically update local list
       setUsers(prev => prev.map(x =>
         x.id === u.id ? { ...x, permiso: isAdmin ? 'USUARIO' : 'ADMIN' } : x

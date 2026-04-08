@@ -41,6 +41,7 @@ type ScanEvent
 type Resolution
   @model
   @auth(rules: [
+    { allow: public, operations: [read] },
     { allow: private, operations: [read] },
     { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
   ]) {
@@ -77,6 +78,7 @@ type Practice
 type Boletin
   @model
   @auth(rules: [
+    { allow: public, operations: [read] },
     { allow: private, operations: [read] },
     { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
   ]) {
@@ -88,6 +90,48 @@ type Boletin
   updatedAt: AWSDateTime!
 }
 
+
+# Stores arbitrary site-wide config as key/value pairs (e.g. featured noticias)
+type SiteConfig
+  @model
+  @auth(rules: [
+    { allow: public, operations: [read] },
+    { allow: private, operations: [read] },
+    { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
+  ]) {
+  id: ID!      # fixed key, e.g. "FEATURED_NOTICIAS"
+  value: String! # JSON value
+}
+
+type Noticia
+  @model
+  @auth(rules: [
+    { allow: public, operations: [read] },
+    { allow: private, operations: [read] },
+    { allow: groups, groups: ["Admins"], operations: [create, update, delete] }
+  ]) {
+  id: ID!
+  title: String!
+  date: AWSDate!
+  s3Key: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+# Admin audit log — tracks every create/delete/promote/demote action
+type AdminLog
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admins"], operations: [create, read] }
+  ]) {
+  id: ID!
+  adminSub: String!
+  adminName: String!
+  action: String!        # CREATE | DELETE | PROMOTE | DEMOTE
+  resourceType: String!  # BOLETIN | RESOLUCION | GUIA | USER
+  resourceTitle: String
+  timestamp: AWSDateTime!
+}
 
 # NEW: Attendance/check-in entries
 type PracticeCheckIn
