@@ -234,7 +234,7 @@ export default function Home() {
 
             <li>
               <strong>Envía el soporte de pago</strong> por WhatsApp al{" "}
-              <strong>310 210 2407</strong> indicando cuáles fotos deseas.
+              <strong>310 210 2404</strong> indicando cuáles fotos deseas.
               Una vez verificado el pago te las enviamos en alta calidad.
             </li>
           </ol>
