@@ -204,58 +204,58 @@ export default function Home() {
       {/* Fotos sección */}
       <section className="rifa-section" id="fotos-oficiales">
         <div className="rifa-content">
-          <h2>Fotos Festival Departamental y Ranking Ibagué 2026</h2>
+          <h2>Fotos II Festival de Escuelas y Novatos + I Departamental</h2>
 
           <p className="rifa-meta">
-            <strong>Ibagué, Febrero 16 de 2026</strong>
+            <strong>Ibagué, 2 y 3 de mayo de 2026</strong>
           </p>
 
-          <p>Contáctanos para adquirir tus fotos oficiales. Sigue estos pasos:</p>
+          <p>Adquiere tus fotos oficiales siguiendo estos pasos:</p>
 
           <ol className="rifa-steps">
             <li>
-              <strong>Ingresa a la galería de fotos</strong> usando el botón al final.
+              <strong>Ingresa a la galería de fotos</strong> usando el botón al final
+              y selecciona las que quieres.
             </li>
 
             <li>
-              <strong>Revisa el mosaico</strong> (cada foto tiene un número) y{" "}
-              <strong>anota el número</strong> de la(s) foto(s) que deseas.
-            </li>
-
-            <li>
-              <strong>Realiza el pago</strong> a la cuenta <strong>718-000036-15</strong>{" "}
-              <strong>Bancolombia Ahorros</strong>, a nombre de la{" "}
-              <strong>Liga Tolimense de Patinaje</strong>:
+              <strong>Elige tu paquete:</strong>
               <div className="rifa-prices">
-                <span>📌 <strong>$10.000</strong> por cada foto (digital)</span>
-                <span>🖼️ <strong>$15.000</strong> por cada foto (física)</span>
+                <span>📌 <strong>2 fotos</strong> por $18.000</span>
+                <span>📌 <strong>5 fotos</strong> por $40.000</span>
               </div>
             </li>
 
             <li>
-              <strong>Envía el comprobante</strong> por WhatsApp al{" "}
-              <strong>310 210 2404</strong> junto con <strong>el/los número(s)</strong>{" "}
-              de las fotos seleccionadas.
+              <strong>Realiza el pago</strong> a{" "}
+              <strong>Bancolombia Ahorros 718-000036-15</strong>, a nombre de la{" "}
+              <strong>Liga Tolimense de Patinaje</strong>.
+            </li>
+
+            <li>
+              <strong>Envía el soporte de pago</strong> por WhatsApp al{" "}
+              <strong>310 210 2407</strong> indicando cuáles fotos deseas.
+              Una vez verificado el pago te las enviamos en alta calidad.
             </li>
           </ol>
 
           <div className="rifa-contact">
             <p>
-              Para cualquier duda o consulta, no dudes en contactarnos por WhatsApp.
+              ¡Gracias por apoyar y conservar los mejores momentos de nuestros deportistas! 🏆
             </p>
 
             <div className="rifa-actions">
               <a
-                href="https://drive.google.com/drive/folders/1A1puGESZYTU09kYToXjDu222hf812uIK?usp=sharing"
+                href="https://drive.google.com/drive/folders/1cxI9cwxMasrv_4l4ViGnZeX7tZ-KbU15?usp=sharing"
                 target="_blank"
                 rel="noreferrer"
                 className="rifa-btn"
               >
-                👉 Abrir galería de fotos
+                📸 Abrir galería de fotos
               </a>
 
               <a
-                href="https://wa.me/573102102404"
+                href="https://wa.me/573102102407"
                 target="_blank"
                 rel="noreferrer"
                 className="rifa-btn rifa-btn-outline"
