@@ -19,6 +19,7 @@ import Aliados from '../components/Aliados';
 import FooterTol from '../components/FooterTol';
 import EventosCarousel from '../components/EventosCarousel';
 import NoticiasSection from "../components/NoticiasSection";
+import GestionSection from "../components/GestionSection";
 import "../styles/noticias-section.css";
 
 import { useEffect, useState } from 'react';
@@ -195,13 +196,13 @@ export default function Home() {
         </div>
       </section>
 
-    
-      
+      {/* Gestión 2025 - Videos */}
+      <GestionSection />
 
 
-
+      {/*   
           
-      {/* Fotos sección */}
+      {/* Fotos sección *
       <section className="rifa-section" id="fotos-oficiales">
         <div className="rifa-content">
           <h2>Fotos II Festival de Escuelas y Novatos + I Departamental</h2>
@@ -265,7 +266,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section>/}*/}
 
 
 
